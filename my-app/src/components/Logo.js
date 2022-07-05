@@ -4,15 +4,15 @@ import { Container, Row, Col } from 'react-bootstrap'
 
 const Logo = () => {
 	return (
-		<footer>
+		<>
 			<Container>
 				<Row>
 					<Col className='text-center'>
-						<img src={logoImage} width={350} alt='' />
+						<img src={logoImage} width={300} alt='' />
 					</Col>
 				</Row>
 			</Container>
-		</footer>
+		</>
 	)
 }
 

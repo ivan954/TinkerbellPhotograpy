@@ -56,20 +56,27 @@ const ContactScreen = () => {
 									className='text-center m-3 p-5'
 									placeholder='הודעה'
 								/>
-								
+
 								<Row className='justify-content-center'>
 									<Button type='submit' className='m-4 btn btn-primary w-25 '>
 										שלח
 									</Button>
-									<Alert show={show} variant='success' className='text-center m-3'>
-									<Alert.Heading>ההודעה נשלחה בהצלחה</Alert.Heading>								
-								</Alert>
+									<Alert
+										show={show}
+										variant='success'
+										className='text-center m-3'
+									>
+										<Alert.Heading>ההודעה נשלחה בהצלחה</Alert.Heading>
+									</Alert>
 								</Row>
 							</Form>
 						</Container>
 					</Col>
 					<Col>
-						<Container>
+						<Container
+							className='border border-dark border-2 p-5'
+							style={{ backgroundColor: '#fff0f5', opacity: '70%' }}
+						>
 							<h1 className='text-center text-dark p-3'>טינקרבל סטודיו</h1>
 							<h3 className='text-center text-dark'>תמי מזור - 0504230342</h3>
 							<h3 className='text-center text-dark'>כתובת - מבצע נחשון 23</h3>

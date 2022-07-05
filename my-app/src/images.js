@@ -1,6 +1,6 @@
-const logoImage = '/images/logo/1.png'
+const logoImage = '/images/Logo/1.png'
 
-const aboutImage = '/images/about/1.jpeg'
+const aboutImage = '/images/About/1.jpeg'
 const CarouselImages = [
 	{
 		_id: '1',
@@ -46,27 +46,27 @@ const CarouselImages = [
 const RecommendationsImages = [
 	{
 		_id: '1',
-		img: '/images/recommendations/1.jpeg',
+		img: '/images/Recommendations/1.jpeg',
 	},
 	{
 		_id: '2',
-		img: '/images/recommendations/2.jpeg',
+		img: '/images/Recommendations/2.jpeg',
 	},
 	{
 		_id: '3',
-		img: '/images/recommendations/3.jpeg',
+		img: '/images/Recommendations/3.jpeg',
 	},
 	{
 		_id: '4',
-		img: '/images/recommendations/4.jpeg',
+		img: '/images/Recommendations/4.jpeg',
 	},
 	{
 		_id: '5',
-		img: '/images/recommendations/5.jpeg',
+		img: '/images/Recommendations/5.jpeg',
 	},
 	{
 		_id: '6',
-		img: '/images/recommendations/6.jpeg',
+		img: '/images/Recommendations/6.jpeg',
 	},
 ]
 const GalleryImages = [
