@@ -27,7 +27,7 @@ const HomeScreen = () => {
 			<Container>
 				<Container>
 					<h1 className='text-center'>ברוכים הבאים לטינקרבל סטודיו</h1>
-					<h1 className='text-center'>קצת על עצי ועל הסטודיו שלי</h1>
+					<h2 className='text-center'>קצת על עצי ועל הסטודיו שלי</h2>
 				</Container>
 				<Container>
 					<Row xl={2} xxl={2} md={2} sm={1} xs={1}>
@@ -46,6 +46,7 @@ const HomeScreen = () => {
 						)}
 
 						<Col>
+						<br/><br/>
 							<p className='text-center text-dark'>
 								היי, שמי תמי מזור, גרה במודיעין מכבים רעות ואני צלמת מגיל קטן.
 								היום בעלת סטודיו בוטיק לצילומי ניו בורן, צילומי הריון, צילומי
