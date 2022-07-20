@@ -5,7 +5,7 @@ import { Container } from 'react-bootstrap'
 import HomeScreen from './screens/HomeScreen'
 import GalleryScreen from './screens/GalleryScreen'
 import ContactScreen from './screens/ContactScreen'
-import Login from './screens/Login'
+import LoginScreen from './screens/LoginScreen'
 import Children from './gallery/Children'
 import Family from './gallery/Family'
 import NewBorn from './gallery/NewBorn'
@@ -34,7 +34,7 @@ function App() {
 						<Routes>
 							<Route exact path='/' element={<HomeScreen />}></Route>
 							<Route exact path='/gallery' element={<GalleryScreen />}></Route>
-							<Route exact path='/login' element={<Login />}></Route>
+							<Route exact path='/login' element={<LoginScreen />}></Route>
 							<Route exact path='/contact' element={<ContactScreen />}></Route>
 							<Route
 								exact

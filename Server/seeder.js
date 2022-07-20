@@ -3,7 +3,7 @@ import mongoose from 'mongoose'
 import detenv from 'dotenv'
 import colors from 'colors'
 
-import AdminUser from './data/AdminUser.js'
+import Users from './data/Users.js'
 import AboutImage from './data/AboutImage.js'
 import CarouselImages from './data/CarouselImages.js'
 import ChildrenImages from './data/ChildrenImages.js'
@@ -16,7 +16,7 @@ import PregnancyImages from './data/PregnancyImages.js'
 import PurimImages from './data/PurimImages.js'
 import RecommendationsImages from './data/RecommendationsImages.js'
 
-import AdminUserModel from './models/AdminUserModel.js'
+import UsersModel from './models/UsersModel.js'
 import AboutImageModel from './models/AboutImageModel.js'
 import CarouselImagesModel from './models/CarouselImagesModel.js'
 import ChildrenImagesModel from './models/ChildrenImagesModel.js'
@@ -35,7 +35,7 @@ connectDB()
 
 const importData = async () => {
 	try {
-		await AdminUserModel.deleteMany()
+		await UsersModel.deleteMany()
 		await AboutImageModel.deleteMany()
 		await CarouselImagesModel.deleteMany()
 		await ChildrenImagesModel.deleteMany()
@@ -48,7 +48,7 @@ const importData = async () => {
 		await PurimImagesModel.deleteMany()
 		await RecommendationsImagesModel.deleteMany()
 
-		await AdminUserModel.insertMany(AdminUser)
+		await UsersModel.insertMany(Users)
 		await AboutImageModel.insertMany(AboutImage)
 		await CarouselImagesModel.insertMany(CarouselImages)
 		await ChildrenImagesModel.insertMany(ChildrenImages)
@@ -70,7 +70,7 @@ const importData = async () => {
 }
 const destroyData = async () => {
 	try {
-		await AdminUserModel.deleteMany()
+		await UsersModel.deleteMany()
 		await AboutImageModel.deleteMany()
 		await CarouselImagesModel.deleteMany()
 		await ChildrenImagesModel.deleteMany()
