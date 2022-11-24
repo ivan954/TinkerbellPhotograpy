@@ -24,6 +24,7 @@ const ImagesScreen = () => {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   const getRelevantImages = async () => {
+    setImages([]);
     try {
       switch (path[2]) {
         case "children":
@@ -37,6 +38,7 @@ const ImagesScreen = () => {
                 setImages((prev) => [...prev, url]);
               });
             });
+            window.scrollTo(0, 0);
             setLoading(false);
           });
 
@@ -52,6 +54,7 @@ const ImagesScreen = () => {
                 setImages((prev) => [...prev, url]);
               });
             });
+            window.scrollTo(0, 0);
             setLoading(false);
           });
           break;
@@ -66,6 +69,7 @@ const ImagesScreen = () => {
                 setImages((prev) => [...prev, url]);
               });
             });
+            window.scrollTo(0, 0);
             setLoading(false);
           });
           break;
@@ -81,6 +85,7 @@ const ImagesScreen = () => {
               });
             });
           });
+          window.scrollTo(0, 0);
           setLoading(true);
           break;
         case "pregnancy":
@@ -94,6 +99,7 @@ const ImagesScreen = () => {
                 setImages((prev) => [...prev, url]);
               });
             });
+            window.scrollTo(0, 0);
             setLoading(false);
           });
           break;
@@ -108,6 +114,7 @@ const ImagesScreen = () => {
                 setImages((prev) => [...prev, url]);
               });
             });
+            window.scrollTo(0, 0);
             setLoading(false);
           });
           break;
@@ -124,7 +131,7 @@ const ImagesScreen = () => {
 
   useEffect(() => {
     getRelevantImages();
-  }, []);
+  }, [currentPage]);
 
   return (
     <Container fluid style={{ marginTop: "100px" }}>

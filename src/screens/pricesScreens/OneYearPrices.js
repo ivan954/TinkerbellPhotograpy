@@ -77,7 +77,7 @@ const OneYearPrices = () => {
 
                           <Card.Body className="text-center">
                             <Card.Title>חבילה פרימיום</Card.Title>
-                            <Card.Text>ש"ח 1,400</Card.Text>
+                            <Card.Text>ש"ח 1,350</Card.Text>
                           </Card.Body>
                           <Card.Footer>
                             <ul dir="rtl" className="text-muted">
@@ -87,7 +87,7 @@ const OneYearPrices = () => {
                               <li>כל התמונות מיום הצילומים בערכיה בסיסית</li>
                               <li>צילומי משפחה</li>
                               <li>קנבס 30*40</li>
-                              <li>אלבום דיגטילי פרמיום 30*30</li>
+                              <li>אלבום דיגטילי רגיל 30*30</li>
                               <li>עוגה מעוצבת (בתוספת של 200 ש"ח)</li>
                               <li>כל שעה נוספת 250 ש"ח</li>
                             </ul>

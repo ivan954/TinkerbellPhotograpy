@@ -65,14 +65,14 @@ const FirstClassPrices = () => {
                           <Card.Img variant="top" src={image.url} />
                           <Card.Body className="text-center">
                             <Card.Title>חבילה פרמיום</Card.Title>
-                            <Card.Text>550 ש"ח</Card.Text>
+                            <Card.Text>450 ש"ח</Card.Text>
                           </Card.Body>
                           <Card.Footer>
                             <ul dir="rtl" className="text-muted">
                               <li>עד שעה צילומים</li>
                               <li>צילומי משפחה וילדים</li>
                               <li>כל התמונות מקבלים במייל</li>
-                              <li>7 תמונות ערוכות בפוטושופ</li>
+                              <li>5 תמונות ערוכות בפוטושופ</li>
                               <li>
                                 מקבלים 2 מגנטים בגודל A5 או 1 בלוק עץ בגודל
                                 10X15 במתנה
@@ -94,13 +94,13 @@ const FirstClassPrices = () => {
                           <Card.Img variant="top" src={image.url} />
                           <Card.Body className="text-center">
                             <Card.Title>חבילה בסיסית</Card.Title>
-                            <Card.Text>350 ש"ח</Card.Text>
+                            <Card.Text>300 ש"ח</Card.Text>
                           </Card.Body>
                           <Card.Footer>
                             <ul dir="rtl" className="text-muted">
                               <li>עד חצי שעה צילומים</li>
                               <li>את כל התמונות מקבלים במייל</li>
-                              <li>5 תמונות ערוכות בפוטושופ</li>
+                              <li>2 תמונות ערוכות בפוטושופ</li>
                               <li>מקבלים מגנט בגודל A5 מתנה</li>
                               <li>כל שעה נוספת 250 ש"ח</li>
                             </ul>

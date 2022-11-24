@@ -16,7 +16,6 @@ const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
             <Button
               onClick={() => {
                 paginate(number);
-                window.scrollTo(0, 0);
               }}
               className="page-link"
             >
