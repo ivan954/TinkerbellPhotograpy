@@ -17,6 +17,7 @@ const Pagination = ({ postsPerPage, totalPosts, paginate, currentPage }) => {
               active={number === currentPage}
               onClick={() => {
                 paginate(number);
+                window.scrollTo(0, 0);
               }}
               className="page-link"
             >

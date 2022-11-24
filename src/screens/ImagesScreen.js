@@ -1,10 +1,12 @@
 import { getDownloadURL, listAll, ref } from "firebase/storage";
 import React, { useEffect, useState } from "react";
-import { Card, Col, Container, Row } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import Pagination from "../components/Pagination";
 import { storage } from "../firebase-config";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
 const ImagesScreen = () => {
   const [loading, setLoading] = useState(true);
@@ -24,7 +26,6 @@ const ImagesScreen = () => {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   const getRelevantImages = async () => {
-    setImages([]);
     try {
       switch (path[2]) {
         case "children":
@@ -131,7 +132,7 @@ const ImagesScreen = () => {
 
   useEffect(() => {
     getRelevantImages();
-  }, [currentPage]);
+  }, []);
 
   return (
     <Container fluid style={{ marginTop: "100px" }}>
@@ -141,17 +142,23 @@ const ImagesScreen = () => {
         <Message variant="danger">{error}</Message>
       ) : (
         <Container>
-          <Row>
+          <Row sm={1} md={1} lg={1} xl={2}>
             {images
               .slice(indexOfFirstPost, indexOfLastPost)
-              .map((galery, index) => (
-                <Col xs={6} md={6} key={index}>
-                  <Card className="bg-dark text-white shadow rounded m-2">
-                    <Card.Img src={galery} alt="Card image" />
-                  </Card>
+              .map((gallery, index) => (
+                <Col key={index}>
+                  <LazyLoadImage
+                    width={500}
+                    src={gallery}
+                    effect="blur"
+                    placeholderSrc={gallery}
+                  />
                 </Col>
               ))}
           </Row>
+          <br />
+          <br />
+          <br />
           <Pagination
             postsPerPage={postsPerPage}
             totalPosts={images.length}
