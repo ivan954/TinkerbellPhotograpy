@@ -156,6 +156,7 @@ const ImagesScreen = () => {
             postsPerPage={postsPerPage}
             totalPosts={images.length}
             paginate={paginate}
+            currentPage={currentPage}
           />
         </Container>
       )}
