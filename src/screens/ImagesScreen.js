@@ -1,11 +1,10 @@
 import { getDownloadURL, listAll, ref } from "firebase/storage";
 import React, { useEffect, useState } from "react";
-import { Col, Container, Row } from "react-bootstrap";
-import { LazyLoadImage } from "react-lazy-load-image-component";
-import Pagination from "../components/Pagination";
+import { Container } from "react-bootstrap";
 import { storage } from "../firebase-config";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 
 const ImagesScreen = () => {
@@ -15,15 +14,16 @@ const ImagesScreen = () => {
   const [images, setImages] = useState([]);
   const path = window.location.pathname.split("/");
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage] = useState(12);
-
-  // Get current posts
-  const indexOfLastPost = currentPage * postsPerPage;
-  const indexOfFirstPost = indexOfLastPost - postsPerPage;
-
-  // Change page
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const loadImages = async (imagesRef) => {
+    await listAll(imagesRef).then((response) => {
+      response.items.forEach((item) => {
+        getDownloadURL(item).then((url) => {
+          setImages((prev) => [...prev, url]);
+        });
+      });
+      setLoading(false);
+    });
+  };
 
   const getRelevantImages = async () => {
     try {
@@ -33,93 +33,43 @@ const ImagesScreen = () => {
             storage,
             "gs://tinkerbellphotograpy.appspot.com/Gallery/Children/"
           );
-          const children = await listAll(childrenRef).then((response) => {
-            response.items.forEach((item) => {
-              getDownloadURL(item).then((url) => {
-                setImages((prev) => [...prev, url]);
-              });
-            });
-            window.scrollTo(0, 0);
-            setLoading(false);
-          });
-
+          loadImages(childrenRef);
           break;
         case "family":
           const familyRef = ref(
             storage,
             "gs://tinkerbellphotograpy.appspot.com/Gallery/Family/"
           );
-          const family = await listAll(familyRef).then((response) => {
-            response.items.forEach((item) => {
-              getDownloadURL(item).then((url) => {
-                setImages((prev) => [...prev, url]);
-              });
-            });
-            window.scrollTo(0, 0);
-            setLoading(false);
-          });
+          loadImages(familyRef);
           break;
         case "newBorn":
           const newBornRef = ref(
             storage,
             "gs://tinkerbellphotograpy.appspot.com/Gallery/NewBorn/"
           );
-          const newBorn = await listAll(newBornRef).then((response) => {
-            response.items.forEach((item) => {
-              getDownloadURL(item).then((url) => {
-                setImages((prev) => [...prev, url]);
-              });
-            });
-            window.scrollTo(0, 0);
-            setLoading(false);
-          });
+          loadImages(newBornRef);
           break;
         case "oneYearOld":
           const oneYearOldRef = ref(
             storage,
             "gs://tinkerbellphotograpy.appspot.com/Gallery/OneYearOld/"
           );
-          const oneYearOld = await listAll(oneYearOldRef).then((response) => {
-            response.items.forEach((item) => {
-              getDownloadURL(item).then((url) => {
-                setImages((prev) => [...prev, url]);
-              });
-            });
-          });
-          window.scrollTo(0, 0);
-          setLoading(true);
+          loadImages(oneYearOldRef);
           break;
         case "pregnancy":
           const pregnancyRef = ref(
             storage,
             "gs://tinkerbellphotograpy.appspot.com/Gallery/Pregnancy/"
           );
-          const pregnancy = await listAll(pregnancyRef).then((response) => {
-            response.items.forEach((item) => {
-              getDownloadURL(item).then((url) => {
-                setImages((prev) => [...prev, url]);
-              });
-            });
-            window.scrollTo(0, 0);
-            setLoading(false);
-          });
+          loadImages(pregnancyRef);
           break;
         case "purim":
           const purimRef = ref(
             storage,
             "gs://tinkerbellphotograpy.appspot.com/Gallery/Purim/"
           );
-          const purim = await listAll(purimRef).then((response) => {
-            response.items.forEach((item) => {
-              getDownloadURL(item).then((url) => {
-                setImages((prev) => [...prev, url]);
-              });
-            });
-            window.scrollTo(0, 0);
-            setLoading(false);
-          });
+          loadImages(purimRef);
           break;
-
         default:
           break;
       }
@@ -129,43 +79,29 @@ const ImagesScreen = () => {
         : setError(error.message);
     }
   };
-
   useEffect(() => {
     getRelevantImages();
   }, []);
 
   return (
-    <Container fluid style={{ marginTop: "100px" }}>
+    <Container style={{ marginTop: "100px" }}>
       {loading ? (
         <Loader />
       ) : error ? (
         <Message variant="danger">{error}</Message>
       ) : (
-        <Container>
-          <Row sm={1} md={1} lg={1} xl={2}>
-            {images
-              .slice(indexOfFirstPost, indexOfLastPost)
-              .map((gallery, index) => (
-                <Col key={index}>
-                  <LazyLoadImage
-                    width={500}
-                    src={gallery}
-                    effect="blur"
-                    placeholderSrc={gallery}
-                  />
-                </Col>
-              ))}
-          </Row>
-          <br />
-          <br />
-          <br />
-          <Pagination
-            postsPerPage={postsPerPage}
-            totalPosts={images.length}
-            paginate={paginate}
-            currentPage={currentPage}
-          />
-        </Container>
+        <div>
+          {images.map((gallery) => (
+            <LazyLoadImage
+              width="400px"
+              height="500px"
+              key={gallery}
+              src={gallery}
+              effect="blur"
+              placeholderSrc={gallery}
+            />
+          ))}
+        </div>
       )}
     </Container>
   );

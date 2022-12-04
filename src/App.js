@@ -23,7 +23,7 @@ function App() {
       <Router>
         <Header />
         <main className="py-3">
-          <Container fluid>
+          <div>
             <Routes>
               <Route exact path="/" element={<HomeScreen />}></Route>
               <Route exact path="/gallery" element={<GalleryScreen />}></Route>
@@ -86,7 +86,7 @@ function App() {
                 element={<TadmitPrices />}
               ></Route>
             </Routes>
-          </Container>
+          </div>
         </main>
         <Footer />
       </Router>
