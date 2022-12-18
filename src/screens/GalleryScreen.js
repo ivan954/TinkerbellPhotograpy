@@ -68,7 +68,7 @@ const GalleryScreen = () => {
                     <Card.Title className="text-center">פורים</Card.Title>
                   )}
 
-                  <Card.Img src={image.url} alt="Card image" />
+                  <Card.Img src={image.url} loading="lazy" alt="Card image" />
                   {isHovering === index ? (
                     <Card.ImgOverlay
                       style={{ backgroundColor: "white", opacity: "60%" }}

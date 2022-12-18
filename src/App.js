@@ -27,9 +27,7 @@ function App() {
             <Routes>
               <Route exact path="/" element={<HomeScreen />}></Route>
               <Route exact path="/gallery" element={<GalleryScreen />}></Route>
-
               <Route exact path="/contact" element={<ContactScreen />}></Route>
-
               <Route
                 exact
                 path="/imagescreen/:name"

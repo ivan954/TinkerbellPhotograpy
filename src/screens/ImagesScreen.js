@@ -1,11 +1,11 @@
 import { getDownloadURL, listAll, ref } from "firebase/storage";
 import React, { useEffect, useState } from "react";
-import { Container } from "react-bootstrap";
+import { Container, Row, Col, Image } from "react-bootstrap";
 import { storage } from "../firebase-config";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
-import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
+import "../index.css";
 
 const ImagesScreen = () => {
   const [loading, setLoading] = useState(true);
@@ -90,18 +90,20 @@ const ImagesScreen = () => {
       ) : error ? (
         <Message variant="danger">{error}</Message>
       ) : (
-        <div>
+        <Row>
           {images.map((gallery) => (
-            <LazyLoadImage
-              width="400px"
-              height="500px"
-              key={gallery}
-              src={gallery}
-              effect="blur"
-              placeholderSrc={gallery}
-            />
+            <Col>
+              <Image
+                className="image"
+                key={gallery}
+                src={gallery}
+                loading="lazy"
+                width={500}
+                height={500}
+              ></Image>
+            </Col>
           ))}
-        </div>
+        </Row>
       )}
     </Container>
   );
