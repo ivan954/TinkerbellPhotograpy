@@ -16,7 +16,7 @@ const GalleryScreen = () => {
     "gs://tinkerbellphotograpy.appspot.com/Gallery/GalleryImages/"
   );
 
-  useEffect(() => {
+  const fetchGallery = () => {
     try {
       listAll(galleryRef).then((response) => {
         response.items.forEach((item) => {
@@ -33,6 +33,10 @@ const GalleryScreen = () => {
         ? setError(error.response.data.message)
         : setError(error.message);
     }
+  };
+
+  useEffect(() => {
+    fetchGallery();
   }, []);
 
   return (
@@ -43,46 +47,44 @@ const GalleryScreen = () => {
         <Message variant="danger">{error}</Message>
       ) : (
         <Row xs={1} md={3}>
-          {images
-            ?.sort((a, b) => a.name - b.name)
-            .map((image, index) => (
-              <Col key={index}>
-                <Card
-                  className="bg-dark text-white shadow rounded m-2"
-                  onMouseEnter={() => setIsHovering(index)}
-                  onMouseLeave={() => setIsHovering(-1)}
-                >
-                  {image.name === "children" ? (
-                    <Card.Title className="text-center">ילדים</Card.Title>
-                  ) : image.name === "family" ? (
-                    <Card.Title className="text-center">משפחה</Card.Title>
-                  ) : image.name === "firstClass" ? (
-                    <Card.Title className="text-center">'כיתה א</Card.Title>
-                  ) : image.name === "newBorn" ? (
-                    <Card.Title className="text-center">ניו-בורן</Card.Title>
-                  ) : image.name === "oneYearOld" ? (
-                    <Card.Title className="text-center">בן שנה</Card.Title>
-                  ) : image.name === "pregnancy" ? (
-                    <Card.Title className="text-center">הריון</Card.Title>
-                  ) : (
-                    <Card.Title className="text-center">פורים</Card.Title>
-                  )}
+          {images.map((image, index) => (
+            <Col key={index}>
+              <Card
+                className="bg-dark text-white shadow rounded m-2"
+                onMouseEnter={() => setIsHovering(index)}
+                onMouseLeave={() => setIsHovering(-1)}
+              >
+                {image.name === "children" ? (
+                  <Card.Title className="text-center">ילדים</Card.Title>
+                ) : image.name === "family" ? (
+                  <Card.Title className="text-center">משפחה</Card.Title>
+                ) : image.name === "firstClass" ? (
+                  <Card.Title className="text-center">'כיתה א</Card.Title>
+                ) : image.name === "newBorn" ? (
+                  <Card.Title className="text-center">ניו-בורן</Card.Title>
+                ) : image.name === "oneYearOld" ? (
+                  <Card.Title className="text-center">בן שנה</Card.Title>
+                ) : image.name === "pregnancy" ? (
+                  <Card.Title className="text-center">הריון</Card.Title>
+                ) : (
+                  <Card.Title className="text-center">פורים</Card.Title>
+                )}
 
-                  <Card.Img src={image.url} loading="lazy" alt="Card image" />
-                  {isHovering === index ? (
-                    <Card.ImgOverlay
-                      style={{ backgroundColor: "white", opacity: "60%" }}
-                    >
-                      <Button
-                        variant="outline-light"
-                        className="w-100 h-100 d-flex justify-content-center"
-                        href={`imagescreen/${image.name}`}
-                      ></Button>
-                    </Card.ImgOverlay>
-                  ) : null}
-                </Card>
-              </Col>
-            ))}
+                <Card.Img src={image.url} loading="lazy" alt="Card-image" />
+                {isHovering === index ? (
+                  <Card.ImgOverlay
+                    style={{ backgroundColor: "white", opacity: "50%" }}
+                  >
+                    <Button
+                      variant="outline-light"
+                      className="w-100 h-100 d-flex justify-content-center"
+                      href={`imagescreen/${image.name}`}
+                    ></Button>
+                  </Card.ImgOverlay>
+                ) : null}
+              </Card>
+            </Col>
+          ))}
         </Row>
       )}
     </Container>

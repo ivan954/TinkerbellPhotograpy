@@ -14,8 +14,8 @@ const ImagesScreen = () => {
   const [images, setImages] = useState([]);
   const path = window.location.pathname.split("/");
 
-  const loadImages = async (imagesRef) => {
-    await listAll(imagesRef).then((response) => {
+  const loadImages = (imagesRef) => {
+    listAll(imagesRef).then((response) => {
       response.items.forEach((item) => {
         getDownloadURL(item).then((url) => {
           setImages((prev) => [...prev, url]);
@@ -98,9 +98,8 @@ const ImagesScreen = () => {
                 key={gallery}
                 src={gallery}
                 loading="lazy"
-                width={500}
-                height={500}
-              ></Image>
+                width={400}
+              />
             </Col>
           ))}
         </Row>

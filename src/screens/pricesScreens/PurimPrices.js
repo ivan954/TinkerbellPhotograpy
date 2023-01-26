@@ -65,7 +65,7 @@ const PurimPrices = () => {
                           <Card.Img variant="top" src={image.url} />
                           <Card.Body className="text-center">
                             <Card.Title>חבילה פרמיום</Card.Title>
-                            <Card.Text>450 ש"ח</Card.Text>
+                            <Card.Text>500 ש"ח</Card.Text>
                           </Card.Body>
                           <Card.Footer>
                             <ul dir="rtl" className="text-muted">
@@ -74,7 +74,7 @@ const PurimPrices = () => {
                               <li>כל התמונות מקבלים במייל</li>
                               <li>5 תמונות ערוכות בפוטושופ</li>
                               <li>מקבלים אקורדיון עם 6 תמונות במתנה</li>
-                              <li>כל שעה נוספת 250 ש"ח</li>
+                              <li>כל חצי שעה נוספת 150 ש"ח</li>
                             </ul>
                           </Card.Footer>
                         </Card>
@@ -101,7 +101,7 @@ const PurimPrices = () => {
                               <li>2 תמונות ערוכות בפוטושופ</li>
                               <li>מקבלים מגנט בגודל A5 מתנה</li>
                               <li>ילד נוסף בתוספת של 50 ש"ח</li>
-                              <li>כל שעה נוספת 250 ש"ח</li>
+                              <li>כל חצי שעה נוספת 150 ש"ח</li>
                             </ul>
                           </Card.Footer>
                         </Card>
