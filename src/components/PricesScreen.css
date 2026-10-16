@@ -3,6 +3,7 @@
   padding: 3rem 0;
   position: relative;
   direction: rtl;
+  overflow: hidden;
 }
 
 .prices-container::before,

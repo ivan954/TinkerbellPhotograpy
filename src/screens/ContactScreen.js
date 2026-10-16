@@ -32,7 +32,7 @@ const ContactScreen = () => {
   };
 
   return (
-    <Container className="mt-5" fluid>
+    <Container className="mt-3" fluid>
       <Logo />
       <Container>
         <Row>

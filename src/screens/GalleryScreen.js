@@ -24,7 +24,7 @@ const GalleryScreen = () => {
       try {
         const galleryImages = galleryCategories.map((category) => ({
           name: category.name,
-          url: `${process.env.PUBLIC_URL}/images/Gallery/${category.path}/GalleryFaceCard/image.jpg`,
+          url: `${process.env.PUBLIC_URL}/images/thumbs/Gallery/${category.path}/GalleryFaceCard/image.jpg`,
         }));
 
         setImages(galleryImages);

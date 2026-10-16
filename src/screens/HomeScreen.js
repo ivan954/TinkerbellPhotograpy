@@ -10,7 +10,7 @@ import "./HomeScreen.css";
 const HomeScreen = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const aboutImagePath = `${process.env.PUBLIC_URL}/images/About/About.jpeg`;
+  const aboutImagePath = `${process.env.PUBLIC_URL}/images/thumbs/About/About.jpeg`;
   const { welcome } = homeData;
 
   const handleImageLoad = () => {
@@ -23,7 +23,7 @@ const HomeScreen = () => {
   };
 
   return (
-    <div className="home-container" style={{ marginTop: "76px" }}>
+    <div className="home-container">
       <Container fluid>
         <ImagesCarousel />
       </Container>

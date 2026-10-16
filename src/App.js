@@ -1,28 +1,58 @@
+import { lazy, Suspense, useEffect } from "react";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Loader from "./components/Loader";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  useLocation,
+} from "react-router-dom";
 import HomeScreen from "./screens/HomeScreen";
-import GalleryScreen from "./screens/GalleryScreen";
-import ContactScreen from "./screens/ContactScreen";
-import ImagesScreen from "./screens/ImagesScreen";
-import PregnancyPrices from "./screens/pricesScreens/PregnancyPrices";
-import NewBornPrices from "./screens/pricesScreens/NewBornPrices";
-import OneYearPrices from "./screens/pricesScreens/OneYearPrices";
-import HalakePrices from "./screens/pricesScreens/HalakePrices";
-import ChildrenPrices from "./screens/pricesScreens/ChildrenPrices";
-import FamilyPrices from "./screens/pricesScreens/FamilyPrices";
-import PurimPrices from "./screens/pricesScreens/PurimPrices";
-import ShavuotPrices from "./screens/pricesScreens/ShavuotPrices";
-import FirstClassPrices from "./screens/pricesScreens/FirstClassPrices";
-import TadmitPrices from "./screens/pricesScreens/TadmitPrices";
+
+const GalleryScreen = lazy(() => import("./screens/GalleryScreen"));
+const ContactScreen = lazy(() => import("./screens/ContactScreen"));
+const ImagesScreen = lazy(() => import("./screens/ImagesScreen"));
+const PregnancyPrices = lazy(() =>
+  import("./screens/pricesScreens/PregnancyPrices")
+);
+const NewBornPrices = lazy(() =>
+  import("./screens/pricesScreens/NewBornPrices")
+);
+const OneYearPrices = lazy(() =>
+  import("./screens/pricesScreens/OneYearPrices")
+);
+const HalakePrices = lazy(() => import("./screens/pricesScreens/HalakePrices"));
+const ChildrenPrices = lazy(() =>
+  import("./screens/pricesScreens/ChildrenPrices")
+);
+const FamilyPrices = lazy(() => import("./screens/pricesScreens/FamilyPrices"));
+const PurimPrices = lazy(() => import("./screens/pricesScreens/PurimPrices"));
+const ShavuotPrices = lazy(() =>
+  import("./screens/pricesScreens/ShavuotPrices")
+);
+const FirstClassPrices = lazy(() =>
+  import("./screens/pricesScreens/FirstClassPrices")
+);
+const TadmitPrices = lazy(() => import("./screens/pricesScreens/TadmitPrices"));
+
+// Start every page at the top, like a normal page load.
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+};
 
 function App() {
   return (
     <>
       <Router basename={process.env.PUBLIC_URL}>
+        <ScrollToTop />
         <Header />
-        <main className="py-3">
-          <div>
+        <main className="pb-3">
+          <Suspense fallback={<Loader />}>
             <Routes>
               <Route path="/" element={<HomeScreen />} />
               <Route path="/gallery" element={<GalleryScreen />} />
@@ -39,7 +69,7 @@ function App() {
               <Route path="/FirstClassPrices" element={<FirstClassPrices />} />
               <Route path="/TadmitPrices" element={<TadmitPrices />} />
             </Routes>
-          </div>
+          </Suspense>
         </main>
         <Footer />
       </Router>

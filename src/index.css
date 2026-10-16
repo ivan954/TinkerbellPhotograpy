@@ -14,6 +14,14 @@ code {
 }
 main {
   min-height: 80vh;
+  /* Room for the fixed-top header (taller below lg, where the menu collapses) */
+  padding-top: calc(105px + 1rem);
+}
+
+@media (min-width: 992px) {
+  main {
+    padding-top: calc(87px + 1rem);
+  }
 }
 .container {
   width: 80%;
@@ -22,12 +30,5 @@ main {
 @media (max-width: 768px) {
   .container {
     width: 100%;
-  }
-  .row > * {
-    padding-left: 0%;
-  }
-  .image {
-    width: 400px;
-    height: 400px;
   }
 }
