@@ -12,7 +12,7 @@ const ImagesCarousel = () => {
           <Carousel.Item key={index}>
             <img
               className="d-block w-100 rounded"
-              src={image.path}
+              src={`${process.env.PUBLIC_URL}${image.path}`}
               alt={image.alt}
               onError={(e) => {
                 e.target.onerror = null;

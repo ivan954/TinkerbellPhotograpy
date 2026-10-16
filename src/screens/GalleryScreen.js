@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Container, Button, Card, Row, Col } from "react-bootstrap";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import "./GalleryScreen.css";
 
 const GalleryScreen = () => {
@@ -23,7 +24,7 @@ const GalleryScreen = () => {
       try {
         const galleryImages = galleryCategories.map((category) => ({
           name: category.name,
-          url: `/images/Gallery/${category.path}/GalleryFaceCard/image.jpg`,
+          url: `${process.env.PUBLIC_URL}/images/Gallery/${category.path}/GalleryFaceCard/image.jpg`,
         }));
 
         setImages(galleryImages);
@@ -81,7 +82,8 @@ const GalleryScreen = () => {
                     <div className="gallery-overlay">
                       <Button
                         className="gallery-button"
-                        href={`imagescreen/${image.name}`}
+                        as={Link}
+                        to={`/imagescreen/${image.name}`}
                       >
                         צפה בגלריה
                       </Button>

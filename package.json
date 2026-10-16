@@ -1,6 +1,6 @@
 {
   "name": "tinkerbell-photography",
-  "homepage": "http://tinkerbell-studio.com/",
+  "homepage": "https://ivan954.github.io/TinkerbellPhotograpy",
   "version": "1.0.0",
   "private": true,
   "dependencies": {
@@ -26,6 +26,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "predeploy": "npm run build && node -e \"require('fs').copyFileSync('build/index.html', 'build/404.html')\"",
+    "deploy": "gh-pages -d build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -46,5 +48,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "gh-pages": "^6.3.0"
   }
 }

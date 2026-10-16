@@ -12,7 +12,7 @@ const Logo = ({ width }) => {
       <Row>
         <Col className="text-center">
           <img
-            src={logo?.path}
+            src={`${process.env.PUBLIC_URL}${logo?.path}`}
             alt={logo?.alt}
             width={logoWidth}
             style={{ maxWidth: "100%", height: "auto" }}

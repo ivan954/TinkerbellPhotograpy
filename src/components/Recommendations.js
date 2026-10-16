@@ -10,7 +10,7 @@ const Recommendations = () => {
   const [loadedImages, setLoadedImages] = useState([]);
 
   const recommendations = Array.from({ length: 6 }, (_, index) => ({
-    path: `/images/Recommendations/${index + 1}.jpeg`,
+    path: `${process.env.PUBLIC_URL}/images/Recommendations/${index + 1}.jpeg`,
     alt: `המלצה ${index + 1}`,
   }));
 

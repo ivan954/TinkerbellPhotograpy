@@ -69,7 +69,7 @@ const PricePackage = ({ packageType }) => {
                 <div className="card-image-container">
                   <img
                     className="card-img-top"
-                    src={`/images/Gallery/${directoryName}/1.jpg`}
+                    src={`${process.env.PUBLIC_URL}/images/Gallery/${directoryName}/1.jpg`}
                     alt={`${packageData.packageTitles.premium} Package`}
                     onError={() => handleImageError("premium")}
                   />
@@ -94,7 +94,7 @@ const PricePackage = ({ packageType }) => {
                 <div className="card-image-container">
                   <img
                     className="card-img-top"
-                    src={`/images/Gallery/${directoryName}/2.jpg`}
+                    src={`${process.env.PUBLIC_URL}/images/Gallery/${directoryName}/2.jpg`}
                     alt={`${packageData.packageTitles.extra} Package`}
                     onError={() => handleImageError("extra")}
                   />
@@ -119,7 +119,7 @@ const PricePackage = ({ packageType }) => {
                 <div className="card-image-container">
                   <img
                     className="card-img-top"
-                    src={`/images/Gallery/${directoryName}/3.jpg`}
+                    src={`${process.env.PUBLIC_URL}/images/Gallery/${directoryName}/3.jpg`}
                     alt={`${packageData.packageTitles.basic} Package`}
                     onError={() => handleImageError("basic")}
                   />

@@ -10,7 +10,7 @@ import "./HomeScreen.css";
 const HomeScreen = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const aboutImagePath = "/images/About/About.jpeg";
+  const aboutImagePath = `${process.env.PUBLIC_URL}/images/About/About.jpeg`;
   const { welcome } = homeData;
 
   const handleImageLoad = () => {

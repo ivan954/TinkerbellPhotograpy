@@ -19,7 +19,7 @@ import TadmitPrices from "./screens/pricesScreens/TadmitPrices";
 function App() {
   return (
     <>
-      <Router>
+      <Router basename={process.env.PUBLIC_URL}>
         <Header />
         <main className="py-3">
           <div>
