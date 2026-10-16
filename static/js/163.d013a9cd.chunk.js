@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunktinkerbell_photography=self.webpackChunktinkerbell_photography||[]).push([[163],{6394:(e,a,p)=>{p.r(a),p.d(a,{default:()=>l});p(5043);var h=p(6822),k=p(579);const l=()=>(0,k.jsx)(h.A,{packageType:"halake"})}}]);
+//# sourceMappingURL=163.d013a9cd.chunk.js.map
