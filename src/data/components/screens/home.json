@@ -1,0 +1,25 @@
+{
+  "welcome": {
+    "title": "ברוכים הבאים לטינקרבל סטודיו",
+    "about": {
+      "title": "קצת על עצמי ועל הסטודיו שלי",
+      "text": "היי, אני מאיה צלמת ילדים ומשפחות. אני מאמינה שכל רגע בחיים הוא מיוחד ושווה להנציח אותו. אני אוהבת לצלם ילדים ומשפחות בצורה טבעית וכיפית, ולתפוס את הרגעים המיוחדים שלהם. אני מצלמת בסטודיו שלי או בלוקיישן חיצוני, ומתאימה את הצילום לאופי ולרצונות שלכם. אשמח להנציח גם את הרגעים המיוחדים שלכם!"
+    }
+  },
+  "carousel": {
+    "interval": 3000,
+    "images": [
+      { "path": "/images/Carousel/1.jpg", "alt": "תמונת קרוסלה 1" },
+      { "path": "/images/Carousel/2.jpg", "alt": "תמונת קרוסלה 2" },
+      { "path": "/images/Carousel/3.jpg", "alt": "תמונת קרוסלה 3" },
+      { "path": "/images/Carousel/4.jpg", "alt": "תמונת קרוסלה 4" },
+      { "path": "/images/Carousel/5.jpg", "alt": "תמונת קרוסלה 5" },
+      { "path": "/images/Carousel/6.jpg", "alt": "תמונת קרוסלה 6" },
+      { "path": "/images/Carousel/7.jpg", "alt": "תמונת קרוסלה 7" },
+      { "path": "/images/Carousel/8.jpg", "alt": "תמונת קרוסלה 8" },
+      { "path": "/images/Carousel/9.jpg", "alt": "תמונת קרוסלה 9" },
+      { "path": "/images/Carousel/10.jpg", "alt": "תמונת קרוסלה 10" },
+      { "path": "/images/Carousel/11.jpg", "alt": "תמונת קרוסלה 11" }
+    ]
+  }
+}

@@ -1,0 +1,63 @@
+.extras-container {
+  margin: 2rem auto;
+  max-width: 1200px;
+  padding: 0 1rem;
+}
+
+.extras-container .card {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.extras-container .card-header {
+  background-color: #fff0f5;
+  padding: 1rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.extras-container .card-header h1 {
+  margin: 0;
+  font-size: 2rem;
+  color: #333;
+}
+
+.extras-container .list-group-item {
+  padding: 1rem;
+  font-size: 1.1rem;
+  text-align: right;
+  direction: rtl;
+}
+
+.extras-container table {
+  margin: 1rem 0;
+  width: 100%;
+}
+
+.extras-container th {
+  background-color: #fff0f5;
+  text-align: center;
+  padding: 1rem;
+  font-weight: bold;
+}
+
+.extras-container td {
+  text-align: center;
+  padding: 0.75rem;
+}
+
+.extras-container .table-striped tbody tr:nth-of-type(odd) {
+  background-color: rgba(255, 240, 245, 0.3);
+}
+
+.extras-container h4 {
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.extras-container p {
+  line-height: 1.6;
+  margin-bottom: 0;
+  text-align: right;
+  direction: rtl;
+}

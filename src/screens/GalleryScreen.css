@@ -1,0 +1,167 @@
+.gallery-container {
+  padding: 2rem 0;
+  min-height: 100vh;
+}
+
+.gallery-grid {
+  margin-top: 2rem;
+}
+
+.gallery-col {
+  perspective: 1000px;
+}
+
+.gallery-card {
+  position: relative;
+  border: none;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  background: white;
+  height: 400px;
+}
+
+.gallery-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+.gallery-card-title {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 1.2rem;
+  color: #333;
+  z-index: 2;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  font-weight: bold;
+}
+
+.gallery-image {
+  height: 100%;
+  width: 100%;
+  margin-bottom: 0px !important;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.gallery-card:hover .gallery-image {
+  transform: scale(1.05);
+}
+
+.gallery-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+  height: 50%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 2rem;
+  opacity: 0;
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+.gallery-card:hover .gallery-overlay {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.gallery-button {
+  background: white !important;
+  color: #333 !important;
+  border: none !important;
+  padding: 10px 25px !important;
+  font-size: 1.1rem !important;
+  border-radius: 25px !important;
+  transition: all 0.3s ease !important;
+  font-weight: bold !important;
+  text-decoration: none !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
+  display: inline-block !important;
+  position: relative !important;
+  z-index: 10 !important;
+  cursor: pointer !important;
+  pointer-events: all !important;
+}
+
+.gallery-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3) !important;
+  background: #f8f9fa !important;
+  color: #333 !important;
+  text-decoration: none !important;
+}
+
+.gallery-loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+}
+
+.gallery-loader .spinner-border {
+  width: 3rem;
+  height: 3rem;
+  color: #6c757d;
+}
+
+@media (max-width: 768px) {
+  .gallery-card {
+    height: 300px;
+  }
+
+  .gallery-card-title {
+    font-size: 1rem;
+    padding: 6px 12px;
+  }
+
+  .gallery-button {
+    font-size: 1rem !important;
+    padding: 8px 20px !important;
+  }
+}
+
+/* Add smooth fade-in animation for cards */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.gallery-card {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+/* Add hover effect for the entire card */
+.gallery-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+    circle at center,
+    transparent 0%,
+    rgba(0, 0, 0, 0.03) 100%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.gallery-card:hover::after {
+  opacity: 1;
+}

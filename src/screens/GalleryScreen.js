@@ -1,91 +1,97 @@
 import React, { useState, useEffect } from "react";
 import { Container, Button, Card, Row, Col } from "react-bootstrap";
-import { getDownloadURL, listAll, ref } from "firebase/storage";
-import { storage } from "../firebase-config";
-import Loader from "../components/Loader";
-import Message from "../components/Message";
+import { motion } from "framer-motion";
+import "./GalleryScreen.css";
 
 const GalleryScreen = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState();
-
-  const [isHovering, setIsHovering] = useState(-1);
   const [images, setImages] = useState([]);
-  const galleryRef = ref(
-    storage,
-    "gs://tinkerbellphotograpy.appspot.com/Gallery/GalleryImages/"
-  );
 
-  const fetchGallery = () => {
-    try {
-      listAll(galleryRef).then((response) => {
-        response.items.forEach((item) => {
-          getDownloadURL(item).then((url) => {
-            const beforDot = item.name.split(".");
-            const img = { url: url, name: beforDot[0] };
-            setImages((prev) => [...prev, img]);
-          });
-        });
-        setLoading(false);
-      });
-    } catch (error) {
-      error.response && error.response.data.message
-        ? setError(error.response.data.message)
-        : setError(error.message);
-    }
-  };
+  const galleryCategories = [
+    { name: "children", path: "Children", title: "ילדים" },
+    { name: "family", path: "Family", title: "משפחה" },
+    { name: "firstClass", path: "FirstClass", title: "'כיתה א" },
+    { name: "newBorn", path: "NewBorn", title: "ניו-בורן" },
+    { name: "oneYearOld", path: "OneYearOld", title: "בן שנה" },
+    { name: "pregnancy", path: "Pregnancy", title: "הריון" },
+    { name: "purim", path: "Purim", title: "פורים" },
+  ];
 
   useEffect(() => {
-    fetchGallery();
+    const loadGalleryImages = () => {
+      try {
+        const galleryImages = galleryCategories.map((category) => ({
+          name: category.name,
+          url: `/images/Gallery/${category.path}/GalleryFaceCard/image.jpg`,
+        }));
+
+        setImages(galleryImages);
+        setLoading(false);
+      } catch (error) {
+        setError("Failed to load gallery images");
+        setLoading(false);
+      }
+    };
+
+    loadGalleryImages();
   }, []);
 
-  return (
-    <Container style={{ marginTop: "100px" }}>
-      {loading ? (
-        <Loader />
-      ) : error ? (
-        <Message variant="danger">{error}</Message>
-      ) : (
-        <Row xs={1} md={3}>
-          {images.map((image, index) => (
-            <Col key={index}>
-              <Card
-                className="bg-dark text-white shadow rounded m-2"
-                onMouseEnter={() => setIsHovering(index)}
-                onMouseLeave={() => setIsHovering(-1)}
-              >
-                {image.name === "children" ? (
-                  <Card.Title className="text-center">ילדים</Card.Title>
-                ) : image.name === "family" ? (
-                  <Card.Title className="text-center">משפחה</Card.Title>
-                ) : image.name === "firstClass" ? (
-                  <Card.Title className="text-center">'כיתה א</Card.Title>
-                ) : image.name === "newBorn" ? (
-                  <Card.Title className="text-center">ניו-בורן</Card.Title>
-                ) : image.name === "oneYearOld" ? (
-                  <Card.Title className="text-center">בן שנה</Card.Title>
-                ) : image.name === "pregnancy" ? (
-                  <Card.Title className="text-center">הריון</Card.Title>
-                ) : (
-                  <Card.Title className="text-center">פורים</Card.Title>
-                )}
+  const getHebrewTitle = (name) => {
+    const category = galleryCategories.find((cat) => cat.name === name);
+    return category ? category.title : name;
+  };
 
-                <Card.Img src={image.url} loading="lazy" alt="Card-image" />
-                {isHovering === index ? (
-                  <Card.ImgOverlay
-                    style={{ backgroundColor: "white", opacity: "50%" }}
-                  >
-                    <Button
-                      variant="outline-light"
-                      className="w-100 h-100 d-flex justify-content-center"
-                      href={`imagescreen/${image.name}`}
-                    ></Button>
-                  </Card.ImgOverlay>
-                ) : null}
-              </Card>
-            </Col>
-          ))}
-        </Row>
+  return (
+    <Container className="gallery-container">
+      {loading ? (
+        <div className="gallery-loader">
+          <div className="spinner-border" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div>
+        </div>
+      ) : error ? (
+        <div className="alert alert-danger" role="alert">
+          {error}
+        </div>
+      ) : (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        >
+          <Row className="gallery-grid g-4">
+            {images.map((image, index) => (
+              <Col lg={4} md={6} sm={12} key={index} className="gallery-col">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                >
+                  <Card className="gallery-card">
+                    <div className="gallery-card-title">
+                      {getHebrewTitle(image.name)}
+                    </div>
+                    <Card.Img
+                      className="gallery-image"
+                      src={image.url}
+                      loading="lazy"
+                      alt={getHebrewTitle(image.name)}
+                    />
+                    <div className="gallery-overlay">
+                      <Button
+                        className="gallery-button"
+                        href={`imagescreen/${image.name}`}
+                      >
+                        צפה בגלריה
+                      </Button>
+                    </div>
+                  </Card>
+                </motion.div>
+              </Col>
+            ))}
+          </Row>
+        </motion.div>
       )}
     </Container>
   );

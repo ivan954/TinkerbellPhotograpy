@@ -1,0 +1,337 @@
+.home-container {
+  min-height: calc(100vh - 76px);
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  background-image: radial-gradient(
+      circle at 100% 0%,
+      rgba(255, 255, 255, 0.8) 0%,
+      transparent 20%
+    ),
+    radial-gradient(
+      circle at 0% 100%,
+      rgba(255, 255, 255, 0.8) 0%,
+      transparent 20%
+    );
+}
+
+/* Welcome Section Styles */
+h1 {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 1rem;
+  animation: fadeInDown 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  position: relative;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  letter-spacing: 0.5px;
+}
+
+h1::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #333, transparent);
+  animation: expandWidth 1.5s ease forwards 0.5s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  font-size: 1.8rem;
+  color: #666;
+  margin-bottom: 2rem;
+  animation: fadeInUp 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  opacity: 0;
+  animation-fill-mode: forwards;
+  animation-delay: 0.3s;
+  font-weight: 300;
+  letter-spacing: 0.3px;
+}
+
+/* About Section Styles */
+.about-section {
+  padding: 2rem;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+  animation: floatIn 1s ease-out forwards;
+  transform-origin: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.about-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 105, 180, 0.3),
+    transparent
+  );
+  animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.about-section h2 {
+  color: #333;
+  margin-bottom: 1.5rem;
+  animation: fadeInUp 0.8s ease-out forwards;
+  animation-delay: 0.2s;
+  opacity: 0;
+}
+
+.about-section p {
+  color: #666;
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+  animation: fadeInUp 0.8s ease-out forwards;
+  animation-delay: 0.4s;
+  opacity: 0;
+}
+
+.about-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease;
+  animation: fadeInUp 0.8s ease-out forwards;
+  animation-delay: 0.6s;
+  opacity: 0;
+}
+
+.about-image:hover {
+  transform: scale(1.02) translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Recommendations Section */
+.recommendations-section {
+  padding: 3rem 0;
+  animation: fadeIn 1.5s ease-out;
+  position: relative;
+  text-align: center;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.4) 100%
+  );
+  border-radius: 20px;
+}
+
+.recommendations-title {
+  color: #333;
+  margin-bottom: 3rem;
+  position: relative;
+  animation: fadeInUp 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  letter-spacing: 1px;
+  display: inline-block;
+}
+
+.recommendations-title::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #333, transparent);
+  animation: expandWidth 1.5s ease forwards 0.5s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Logo Styles */
+.home-logo {
+  padding: 2rem 0;
+  animation: fadeInDown 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  position: relative;
+  perspective: 1000px;
+}
+
+.home-logo img {
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.1));
+  transform-style: preserve-3d;
+}
+
+.home-logo img:hover {
+  transform: scale(1.05) rotate(2deg) translateZ(20px);
+  filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.15));
+}
+
+/* Enhanced Animations */
+@keyframes expandWidth {
+  from {
+    width: 0;
+    opacity: 0;
+  }
+  to {
+    width: 100px;
+    opacity: 1;
+  }
+}
+
+@keyframes expandFromCenter {
+  from {
+    width: 0;
+    opacity: 0;
+  }
+  to {
+    width: 50px;
+    opacity: 1;
+  }
+}
+
+@keyframes shine {
+  0% {
+    left: -100%;
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    left: 150%;
+    opacity: 0;
+  }
+}
+
+@keyframes floatIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px) scale(0.9) rotateX(10deg);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotateX(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px) scale(0.9) rotateY(10deg);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1) rotateY(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px) scale(0.9) rotateY(-10deg);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1) rotateY(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  .about-section {
+    padding: 1rem;
+  }
+
+  .about-section p {
+    margin-bottom: 1rem;
+  }
+
+  .home-logo img {
+    width: 250px !important;
+  }
+}
+
+/* Loading and Error States */
+.loader-container {
+  min-height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(5px);
+  border-radius: 15px;
+}
+
+.error-message {
+  padding: 1.5rem;
+  border-radius: 15px;
+  background: rgba(255, 0, 0, 0.1);
+  color: #dc3545;
+  text-align: center;
+  animation: fadeIn 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  box-shadow: 0 5px 15px rgba(220, 53, 69, 0.1);
+  transform: translateY(0);
+  transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(220, 53, 69, 0.2);
+}
+
+.error-message:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(220, 53, 69, 0.15);
+  background: rgba(255, 0, 0, 0.15);
+}

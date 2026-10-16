@@ -1,0 +1,38 @@
+{
+  "form": {
+    "title": "השארת פרטים",
+    "fields": {
+      "name": "שם",
+      "email": "מייל",
+      "phone": "טלפון",
+      "message": "הודעה"
+    },
+    "buttons": {
+      "submit": "שלח"
+    },
+    "messages": {
+      "success": "ההודעה נשלחה בהצלחה"
+    },
+    "emailjs": {
+      "serviceId": "service_6sg0n85",
+      "templateId": "template_3xp1igw",
+      "userId": "7YFNhK8QbTvo1UzF5"
+    }
+  },
+  "info": {
+    "studio": {
+      "name": "טינקרבל סטודיו",
+      "photographer": "תמי מזור - 0504230342"
+    },
+    "address": {
+      "street": "כתובת - מבצע נחשון 23",
+      "city": "מודיעין -מכבים-רעות"
+    },
+    "businessHours": {
+      "title": "שעות פעילות",
+      "weekdays": "ימים : א'- ה' 17:00 - 9:00",
+      "friday": "יום שישי 15:00 - 9:00",
+      "saturday": "(לא עובדים בשבת)"
+    }
+  }
+}

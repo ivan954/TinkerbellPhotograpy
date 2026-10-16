@@ -1,12 +1,10 @@
-import React from 'react'
-import { Alert } from 'react-bootstrap'
+import React from "react";
+import { Alert } from "react-bootstrap";
+import commonData from "../data/components/screens/common.json";
 
 const Message = ({ variant, children }) => {
-	return <Alert variant={variant}>{children}</Alert>
-}
+  const defaultVariant = commonData.message.defaultVariant;
+  return <Alert variant={variant || defaultVariant}>{children}</Alert>;
+};
 
-Message.defaultProp = {
-	variant: 'info',
-}
-
-export default Message
+export default Message;

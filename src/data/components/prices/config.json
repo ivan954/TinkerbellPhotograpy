@@ -1,0 +1,44 @@
+{
+  "sections": {
+    "children": {
+      "title": "צילומי ילדים",
+      "file": "children.json"
+    },
+    "family": {
+      "title": "צילומי משפחה",
+      "file": "family.json"
+    },
+    "pregnancy": {
+      "title": "צילומי הריון",
+      "file": "pregnancy.json"
+    },
+    "newborn": {
+      "title": "צילומי ניובורן",
+      "file": "newborn.json"
+    },
+    "firstclass": {
+      "title": "צילומי כיתה א׳",
+      "file": "firstclass.json"
+    },
+    "halake": {
+      "title": "צילומי חלאקה",
+      "file": "halake.json"
+    },
+    "tadmit": {
+      "title": "צילומי תדמית",
+      "file": "tadmit.json"
+    },
+    "shavuot": {
+      "title": "צילומי שבועות",
+      "file": "shavuot.json"
+    },
+    "purim": {
+      "title": "צילומי פורים",
+      "file": "purim.json"
+    },
+    "oneyear": {
+      "title": "צילומי גיל שנה",
+      "file": "oneyear.json"
+    }
+  }
+}

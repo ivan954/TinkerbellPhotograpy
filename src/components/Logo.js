@@ -1,56 +1,34 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import { storage } from "../firebase-config";
-import { getDownloadURL, listAll, ref } from "firebase/storage";
-import Loader from "./Loader";
-import Message from "./Message";
+import PropTypes from "prop-types";
+import commonData from "../data/components/screens/common.json";
 
-const Logo = () => {
-  const [logoList, setLogoList] = useState();
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState();
-  const logoDataRef = ref(
-    storage,
-    "gs://tinkerbellphotograpy.appspot.com/Logo/"
-  );
+const Logo = ({ width }) => {
+  const { logo } = commonData;
+  const logoWidth = width || logo?.defaultWidth;
 
-  const getLogoImage = async () => {
-    try {
-      const data = await listAll(logoDataRef).then((response) => {
-        response.items.forEach((item) => {
-          getDownloadURL(item).then((url) => {
-            setLogoList(url);
-          });
-        });
-        setLoading(false);
-      });
-    } catch (error) {
-      error.response && error.response.data.message
-        ? setError(error.response.data.message)
-        : setError(error.message);
-    }
-  };
-
-  useEffect(() => {
-    getLogoImage();
-  }, []);
   return (
-    <>
-      {loading ? (
-        <Loader />
-      ) : error ? (
-        <Message variant="danger">{error}</Message>
-      ) : (
-        <Container>
-          <Row>
-            <Col className="text-center">
-              <img src={logoList} width={300} alt="" />
-            </Col>
-          </Row>
-        </Container>
-      )}
-    </>
+    <Container className={logo?.className}>
+      <Row>
+        <Col className="text-center">
+          <img
+            src={logo?.path}
+            alt={logo?.alt}
+            width={logoWidth}
+            style={{ maxWidth: "100%", height: "auto" }}
+            onError={(e) => {
+              e.target.onerror = null;
+              console.error("Failed to load logo image");
+            }}
+          />
+        </Col>
+      </Row>
+    </Container>
   );
+};
+
+Logo.propTypes = {
+  width: PropTypes.number,
 };
 
 export default Logo;

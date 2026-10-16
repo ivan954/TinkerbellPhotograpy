@@ -1,0 +1,24 @@
+{
+  "screens": {
+    "home": {
+      "title": "דף הבית",
+      "file": "home.json"
+    },
+    "contact": {
+      "title": "צור קשר",
+      "file": "contact.json"
+    },
+    "header": {
+      "title": "תפריט ראשי",
+      "file": "header.json"
+    },
+    "footer": {
+      "title": "כותרת תחתונה",
+      "file": "footer.json"
+    },
+    "common": {
+      "title": "נתונים משותפים",
+      "file": "common.json"
+    }
+  }
+}

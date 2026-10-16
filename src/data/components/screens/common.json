@@ -1,0 +1,39 @@
+{
+  "loading": "טוען נתונים...",
+  "backToDashboard": "חזור ללוח הבקרה",
+  "message": {
+    "defaultVariant": "info"
+  },
+  "logo": {
+    "path": "/images/Logo/Logo.png",
+    "alt": "Tinkerbell Photography Logo",
+    "defaultWidth": 300
+  },
+  "extras": {
+    "title": "תוספות",
+    "items": [
+      "פיתוח תמונות 15*10 - 1.50 ש\"ח לתמונה",
+      "תמונה אחת מעוצבת בפוטושופ 20 ש\"ח (מעל 10 תמונות 15 ש\"ח לתמונה)"
+    ],
+    "tables": {
+      "headers": {
+        "canvas": "קנבסים",
+        "kapa": "קאפות"
+      },
+      "prices": {
+        "canvas": [
+          { "size": "20*30", "price": "150 ש\"ח" },
+          { "size": "30*40", "price": "200 ש\"ח" },
+          { "size": "40*60", "price": "300 ש\"ח" },
+          { "size": "50*70", "price": "400 ש\"ח" }
+        ],
+        "kapa": [
+          { "size": "20*30", "price": "100 ש\"ח" },
+          { "size": "30*40", "price": "150 ש\"ח" },
+          { "size": "40*60", "price": "200 ש\"ח" },
+          { "size": "50*70", "price": "300 ש\"ח" }
+        ]
+      }
+    }
+  }
+}

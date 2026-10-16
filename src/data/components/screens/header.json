@@ -1,0 +1,22 @@
+{
+  "navigation": {
+    "links": {
+      "home": "בית",
+      "gallery": "גלריה",
+      "contact": "צור קשר",
+      "pricesDropdown": "מחירונים"
+    },
+    "prices": {
+      "הריון": "/PregnancyPrices",
+      "ניובורן": "/NewBornPrices",
+      "גיל שנה": "/OneYearPrices",
+      "חלאקה": "/HalakePrices",
+      "ילדים": "/ChildrenPrices",
+      "משפחה": "/FamilyPrices",
+      "פורים": "/PurimPrices",
+      "שבועות": "/ShavuotPrices",
+      "כיתה א'": "/FirstClassPrices",
+      "צילומי תדמית": "/TadmitPrices"
+    }
+  }
+}

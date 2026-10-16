@@ -24,64 +24,20 @@ function App() {
         <main className="py-3">
           <div>
             <Routes>
-              <Route  path="/" element={<HomeScreen />}></Route>
-              <Route  path="/gallery" element={<GalleryScreen />}></Route>
-              <Route  path="/contact" element={<ContactScreen />}></Route>
-              <Route
-                
-                path="/imagescreen/:name"
-                element={<ImagesScreen />}
-              ></Route>
-              <Route
-                
-                path="/PregnancyPrices"
-                element={<PregnancyPrices />}
-              ></Route>
-              <Route
-                
-                path="/NewBornPrices"
-                element={<NewBornPrices />}
-              ></Route>
-              <Route
-                
-                path="/OneYearPrices"
-                element={<OneYearPrices />}
-              ></Route>
-              <Route
-                
-                path="/HalakePrices"
-                element={<HalakePrices />}
-              ></Route>
-              <Route
-                
-                path="/ChildrenPrices"
-                element={<ChildrenPrices />}
-              ></Route>
-              <Route
-                
-                path="/FamilyPrices"
-                element={<FamilyPrices />}
-              ></Route>
-              <Route
-                
-                path="/PurimPrices"
-                element={<PurimPrices />}
-              ></Route>
-              <Route
-                
-                path="/ShavuotPrices"
-                element={<ShavuotPrices />}
-              ></Route>
-              <Route
-                
-                path="/FirstClassPrices"
-                element={<FirstClassPrices />}
-              ></Route>
-              <Route
-                
-                path="/TadmitPrices"
-                element={<TadmitPrices />}
-              ></Route>
+              <Route path="/" element={<HomeScreen />} />
+              <Route path="/gallery" element={<GalleryScreen />} />
+              <Route path="/contact" element={<ContactScreen />} />
+              <Route path="/imagescreen/:name" element={<ImagesScreen />} />
+              <Route path="/PregnancyPrices" element={<PregnancyPrices />} />
+              <Route path="/NewBornPrices" element={<NewBornPrices />} />
+              <Route path="/OneYearPrices" element={<OneYearPrices />} />
+              <Route path="/HalakePrices" element={<HalakePrices />} />
+              <Route path="/ChildrenPrices" element={<ChildrenPrices />} />
+              <Route path="/FamilyPrices" element={<FamilyPrices />} />
+              <Route path="/PurimPrices" element={<PurimPrices />} />
+              <Route path="/ShavuotPrices" element={<ShavuotPrices />} />
+              <Route path="/FirstClassPrices" element={<FirstClassPrices />} />
+              <Route path="/TadmitPrices" element={<TadmitPrices />} />
             </Routes>
           </div>
         </main>
