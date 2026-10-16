@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/TinkerbellPhotograpy/static/css/main.410791fd.css",
+    "main.js": "/TinkerbellPhotograpy/static/js/main.3c9932be.js",
+    "static/js/453.e12307d1.chunk.js": "/TinkerbellPhotograpy/static/js/453.e12307d1.chunk.js",
+    "index.html": "/TinkerbellPhotograpy/index.html",
+    "main.410791fd.css.map": "/TinkerbellPhotograpy/static/css/main.410791fd.css.map",
+    "main.3c9932be.js.map": "/TinkerbellPhotograpy/static/js/main.3c9932be.js.map",
+    "453.e12307d1.chunk.js.map": "/TinkerbellPhotograpy/static/js/453.e12307d1.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.410791fd.css",
+    "static/js/main.3c9932be.js"
+  ]
+}

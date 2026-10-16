@@ -1,0 +1,19 @@
+RewriteEngine On
+RewriteBase /
+RewriteRule ^index\.html$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-l
+RewriteRule . /index.html [L]
+
+# Proxy requests to Node.js server
+RewriteCond %{REQUEST_URI} ^/api/
+RewriteRule ^api/(.*) http://localhost:3001/api/$1 [P,L]
+
+# Enable CORS if needed
+<IfModule mod_headers.c>
+    Header set Access-Control-Allow-Origin "*"
+</IfModule>
+
+# Handle errors
+ErrorDocument 404 /index.html
