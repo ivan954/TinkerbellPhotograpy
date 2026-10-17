@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunktinkerbell_photography=self.webpackChunktinkerbell_photography||[]).push([[498],{5803:(e,p,a)=>{a.r(p),a.d(p,{default:()=>h});a(5043);var r=a(6822),t=a(579);const h=()=>(0,t.jsx)(r.A,{packageType:"pregnancy"})}}]);
-//# sourceMappingURL=498.0770a6c8.chunk.js.map

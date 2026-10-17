@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunktinkerbell_photography=self.webpackChunktinkerbell_photography||[]).push([[74],{8595:(e,t,a)=>{a.r(t),a.d(t,{default:()=>k});a(5043);var p=a(6822),h=a(579);const k=()=>(0,h.jsx)(p.A,{packageType:"tadmit"})}}]);
-//# sourceMappingURL=74.fe534f4e.chunk.js.map
