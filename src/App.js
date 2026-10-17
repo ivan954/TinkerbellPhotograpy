@@ -9,6 +9,7 @@ import {
   useLocation,
 } from "react-router-dom";
 import HomeScreen from "./screens/HomeScreen";
+import NotFound from "./screens/NotFound";
 
 const GalleryScreen = lazy(() => import("./screens/GalleryScreen"));
 const ContactScreen = lazy(() => import("./screens/ContactScreen"));
@@ -40,7 +41,8 @@ const TadmitPrices = lazy(() => import("./screens/pricesScreens/TadmitPrices"));
 const ScrollToTop = () => {
   const { pathname } = useLocation();
   useEffect(() => {
-    window.scrollTo(0, 0);
+    // "instant" so the page doesn't visibly scroll up past the old content.
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
   }, [pathname]);
   return null;
 };
@@ -51,7 +53,7 @@ function App() {
       <Router basename={process.env.PUBLIC_URL}>
         <ScrollToTop />
         <Header />
-        <main className="pb-3">
+        <main>
           <Suspense fallback={<Loader />}>
             <Routes>
               <Route path="/" element={<HomeScreen />} />
@@ -68,6 +70,7 @@ function App() {
               <Route path="/ShavuotPrices" element={<ShavuotPrices />} />
               <Route path="/FirstClassPrices" element={<FirstClassPrices />} />
               <Route path="/TadmitPrices" element={<TadmitPrices />} />
+              <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>
         </main>

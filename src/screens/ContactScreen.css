@@ -1,0 +1,144 @@
+.contact-page {
+  padding-bottom: 4rem;
+}
+
+.contact-card,
+.contact-info {
+  height: 100%;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 2rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.contact-card h2,
+.contact-info h2 {
+  font-size: 1.6rem;
+  margin-bottom: 1.25rem;
+}
+
+.contact-card .form-label {
+  font-weight: 500;
+  margin-bottom: 0.35rem;
+}
+
+.contact-card .form-control,
+.contact-card .form-select {
+  border-radius: var(--radius-sm);
+  border-color: var(--color-border);
+  padding: 0.7rem 0.9rem;
+  background-color: var(--color-bg);
+}
+
+.contact-card .form-control:focus,
+.contact-card .form-select:focus {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(181, 113, 95, 0.18);
+  background-color: #fff;
+}
+
+.contact-submit {
+  margin-top: 1.5rem;
+  min-width: 180px;
+}
+
+.contact-success {
+  text-align: center;
+  padding: 2rem 0;
+}
+
+.contact-success > svg {
+  font-size: 3rem;
+  color: #3c9a5f;
+  margin-bottom: 0.75rem;
+}
+
+.contact-success h3 {
+  font-size: 1.5rem;
+}
+
+.contact-success p {
+  color: var(--color-muted);
+}
+
+.contact-whatsapp {
+  width: 100%;
+  margin-bottom: 1.5rem;
+}
+
+.contact-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.contact-list li {
+  display: flex;
+  gap: 0.9rem;
+  padding: 0.9rem 0;
+}
+
+.contact-list li + li {
+  border-top: 1px solid var(--color-border);
+}
+
+.contact-list li > svg {
+  flex-shrink: 0;
+  font-size: 1.25rem;
+  color: var(--color-accent);
+  margin-top: 0.25rem;
+}
+
+.contact-list div {
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-list strong {
+  font-weight: 500;
+  color: var(--color-muted);
+  font-size: 0.92rem;
+}
+
+.contact-list a {
+  text-decoration: none;
+}
+
+.contact-list a:hover {
+  text-decoration: underline;
+}
+
+.contact-waze {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 0.25rem;
+  color: #1a9fd6 !important;
+}
+
+.contact-map {
+  margin-top: 1.5rem;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  height: 340px;
+  background: var(--color-soft);
+}
+
+.contact-map iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+@media (max-width: 575.98px) {
+  .contact-card,
+  .contact-info {
+    padding: 1.4rem;
+  }
+
+  .contact-map {
+    height: 260px;
+  }
+}

@@ -1,87 +1,56 @@
 import React from "react";
-import {
-  Card,
-  Container,
-  ListGroup,
-  ListGroupItem,
-  Row,
-  Table,
-} from "react-bootstrap";
+import { Container, Row, Col, Table } from "react-bootstrap";
 import commonData from "../data/components/screens/common.json";
 import "./ExtrasScreen.css";
 
+const PriceTable = ({ title, rows }) => (
+  <div className="extras-table">
+    <h3>{title}</h3>
+    <Table borderless className="mb-0">
+      <thead>
+        <tr>
+          <th>גודל (ס"מ)</th>
+          <th>מחיר</th>
+        </tr>
+      </thead>
+      <tbody>
+        {rows.map((item) => (
+          <tr key={item.size}>
+            <td>{item.size}</td>
+            <td>{item.price}</td>
+          </tr>
+        ))}
+      </tbody>
+    </Table>
+  </div>
+);
+
 const ExtrasScreen = () => {
   const { extras } = commonData;
-
-  if (!extras) {
-    return (
-      <div className="extras-container">
-        <Card className="text-center d-block w-75 rounded m-auto">
-          <Card.Header style={{ backgroundColor: "#FFF0F5" }}>
-            <h1>{commonData?.loading || "טוען נתונים..."}</h1>
-          </Card.Header>
-        </Card>
-      </div>
-    );
-  }
+  if (!extras) return null;
 
   return (
-    <div className="extras-container">
-      <Card className="text-center d-block w-75 rounded m-auto">
-        <Card.Header style={{ backgroundColor: "#FFF0F5" }}>
-          <h1>{extras.title}</h1>
-        </Card.Header>
-        <Card.Body>
-          <ListGroup variant="flush">
-            {extras.items.map((item, index) => (
-              <ListGroupItem key={index}>{item}</ListGroupItem>
-            ))}
-          </ListGroup>
-          <Container className="mt-4">
-            <Row>
-              <div className="col-md-6">
-                <h3>{extras.tables.headers.canvas}</h3>
-                <Table striped bordered hover>
-                  <thead>
-                    <tr>
-                      <th>גודל</th>
-                      <th>מחיר</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {extras.tables.prices.canvas.map((item, index) => (
-                      <tr key={index}>
-                        <td>{item.size}</td>
-                        <td>{item.price}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </Table>
-              </div>
-              <div className="col-md-6">
-                <h3>{extras.tables.headers.kapa}</h3>
-                <Table striped bordered hover>
-                  <thead>
-                    <tr>
-                      <th>גודל</th>
-                      <th>מחיר</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {extras.tables.prices.kapa.map((item, index) => (
-                      <tr key={index}>
-                        <td>{item.size}</td>
-                        <td>{item.price}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </Table>
-              </div>
-            </Row>
-          </Container>
-        </Card.Body>
-      </Card>
-    </div>
+    <section className="section extras">
+      <Container>
+        <div className="section-heading">
+          <span className="section-eyebrow">אפשר להוסיף לכל חבילה</span>
+          <h2>{extras.title}</h2>
+        </div>
+        <ul className="extras-list">
+          {extras.items.map((item) => (
+            <li key={item}>{item}</li>
+          ))}
+        </ul>
+        <Row className="g-4 mt-1">
+          <Col md={6}>
+            <PriceTable title={extras.tables.headers.canvas} rows={extras.tables.prices.canvas} />
+          </Col>
+          <Col md={6}>
+            <PriceTable title={extras.tables.headers.kapa} rows={extras.tables.prices.kapa} />
+          </Col>
+        </Row>
+      </Container>
+    </section>
   );
 };
 

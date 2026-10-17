@@ -1,150 +1,102 @@
-import React, { useEffect, useState } from "react";
-import { Container, Row, Col, Image, Modal } from "react-bootstrap";
-import { useParams } from "react-router-dom";
+import React, { useCallback, useMemo, useState } from "react";
+import { Container } from "react-bootstrap";
+import { Link, useParams } from "react-router-dom";
+import { BsWhatsapp } from "react-icons/bs";
 import Message from "../components/Message";
+import Lightbox from "../components/Lightbox";
+import categories, { findCategory } from "../data/categories";
 import galleryManifest from "../data/galleryManifest.json";
+import { whatsappLink } from "../data/whatsapp";
+import usePageTitle from "../hooks/usePageTitle";
 import "./ImagesScreen.css";
 
 const ImagesScreen = () => {
-  const [error, setError] = useState(null);
-  const [images, setImages] = useState([]);
-  const [showModal, setShowModal] = useState(false);
-  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const { name } = useParams();
+  const [selectedIndex, setSelectedIndex] = useState(null);
 
-  const handleImageClick = (index) => {
-    setSelectedImageIndex(index);
-    setShowModal(true);
-  };
+  const category = findCategory((item) => item.key.toLowerCase() === name?.toLowerCase());
+  usePageTitle(category ? `גלריית ${category.title}` : "גלריה");
 
-  const handleClose = () => setShowModal(false);
+  const images = useMemo(
+    () =>
+      category
+        ? (galleryManifest[category.key] || []).map((index) => ({
+            path: `${process.env.PUBLIC_URL}/images/Gallery/${category.key}/${index}.jpg`,
+            thumb: `${process.env.PUBLIC_URL}/images/thumbs/Gallery/${category.key}/${index}.jpg`,
+            alt: `צילומי ${category.title} - תמונה ${index}`,
+          }))
+        : [],
+    [category]
+  );
 
-  const handlePrevious = () => {
-    setSelectedImageIndex((prevIndex) =>
-      prevIndex === 0 ? images.length - 1 : prevIndex - 1
+  const closeLightbox = useCallback(() => setSelectedIndex(null), []);
+
+  if (!category) {
+    return (
+      <Container className="py-5 text-center">
+        <Message variant="warning">הגלריה המבוקשת לא נמצאה</Message>
+        <Link to="/gallery" className="btn-brand">
+          חזרה לגלריה
+        </Link>
+      </Container>
     );
-  };
+  }
 
-  const handleNext = () => {
-    setSelectedImageIndex((prevIndex) =>
-      prevIndex === images.length - 1 ? 0 : prevIndex + 1
-    );
-  };
-
-  const handleKeyPress = (event) => {
-    if (!showModal) return;
-
-    switch (event.key) {
-      case "ArrowLeft":
-        handlePrevious();
-        break;
-      case "ArrowRight":
-        handleNext();
-        break;
-      case "Escape":
-        handleClose();
-        break;
-      default:
-        break;
-    }
-  };
-
-  useEffect(() => {
-    document.addEventListener("keydown", handleKeyPress);
-    return () => {
-      document.removeEventListener("keydown", handleKeyPress);
-    };
-  }, [showModal]);
-
-  // Preload the neighbouring photos so the arrows switch instantly.
-  useEffect(() => {
-    if (!showModal || images.length < 2) return;
-    [selectedImageIndex - 1, selectedImageIndex + 1].forEach((index) => {
-      const image = images[(index + images.length) % images.length];
-      new window.Image().src = image.path;
-    });
-  }, [showModal, selectedImageIndex, images]);
-
-  useEffect(() => {
-    const category =Object.keys(galleryManifest).find(
-      (key) => key.toLowerCase() === name?.toLowerCase()
-    );
-
-    if (!category) {
-      setError(`Invalid gallery category: ${name}`);
-      return;
-    }
-
-    setError(null);
-    setImages(
-      galleryManifest[category].map((index) => ({
-        path: `${process.env.PUBLIC_URL}/images/Gallery/${category}/${index}.jpg`,
-        thumb: `${process.env.PUBLIC_URL}/images/thumbs/Gallery/${category}/${index}.jpg`,
-        alt: `${category} Image ${index}`,
-      }))
-    );
-  }, [name]);
+  const otherCategories = categories.filter((item) => item.key !== category.key);
 
   return (
-    <Container>
-      {error ? (
-        <Message variant="danger">{error}</Message>
-      ) : (
-        <>
-          <Row>
-            {images.map((image, index) => (
-              <Col key={index} xs={12} sm={6} md={4} lg={3} className="mb-4">
-                <Image
-                  className="gallery-image"
-                  src={image.thumb}
-                  alt={image.alt}
-                  loading="lazy"
-                  decoding="async"
-                  width="100%"
-                  onClick={() => handleImageClick(index)}
-                />
-              </Col>
-            ))}
-          </Row>
-
-          <Modal
-            show={showModal}
-            onHide={handleClose}
-            centered
-            size="xl"
-            className="gallery-modal"
+    <Container className="images-page">
+      <header className="page-hero">
+        <nav className="breadcrumbs" aria-label="ניווט">
+          <Link to="/">בית</Link> / <Link to="/gallery">גלריה</Link> / {category.title}
+        </nav>
+        <h1>צילומי {category.title}</h1>
+        <div className="images-actions">
+          <Link to={category.pricesPath} className="btn-brand">
+            למחירון {category.title}
+          </Link>
+          <a
+            className="btn-outline-brand"
+            href={whatsappLink(`היי, אשמח לפרטים על צילומי ${category.title}`)}
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            <button
-              className="close-button"
-              onClick={handleClose}
-              aria-label="Close modal"
-            ></button>
-            <Modal.Body>
-              <button
-                className="navigation-button prev-button"
-                onClick={handlePrevious}
-                aria-label="Previous image"
-              >
-                &#10094;
-              </button>
-              <Image
-                className="modal-image"
-                src={images[selectedImageIndex]?.path}
-                alt={images[selectedImageIndex]?.alt}
-              />
-              <button
-                className="navigation-button next-button"
-                onClick={handleNext}
-                aria-label="Next image"
-              >
-                &#10095;
-              </button>
-              <div className="image-counter">
-                {selectedImageIndex + 1} / {images.length}
-              </div>
-            </Modal.Body>
-          </Modal>
-        </>
+            <BsWhatsapp /> לפרטים בוואטסאפ
+          </a>
+        </div>
+      </header>
+
+      <div className="masonry">
+        {images.map((image, index) => (
+          <button
+            key={image.path}
+            className="masonry-item"
+            onClick={() => setSelectedIndex(index)}
+            aria-label={`הגדלת ${image.alt}`}
+          >
+            <img src={image.thumb} alt={image.alt} loading="lazy" decoding="async" />
+          </button>
+        ))}
+      </div>
+
+      <nav className="other-categories" aria-label="גלריות נוספות">
+        <h2>גלריות נוספות</h2>
+        <div className="category-chips">
+          {otherCategories.map((item) => (
+            <Link key={item.key} to={`/imagescreen/${item.key}`} className="category-chip">
+              {item.title}
+            </Link>
+          ))}
+        </div>
+      </nav>
+
+      {selectedIndex !== null && (
+        <Lightbox
+          images={images}
+          index={selectedIndex}
+          onClose={closeLightbox}
+          onChange={setSelectedIndex}
+        />
       )}
     </Container>
   );

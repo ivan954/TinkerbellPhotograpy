@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Container, Carousel } from "react-bootstrap";
+import { Carousel } from "react-bootstrap";
 import homeData from "../data/components/screens/home.json";
 
 const ImagesCarousel = () => {
@@ -13,35 +13,31 @@ const ImagesCarousel = () => {
   };
 
   return (
-    <Container>
-      <Carousel
-        fade
-        variant="dark"
-        interval={carousel.interval}
-        onSlide={handleSlide}
-      >
-        {carousel.images.map((image, index) => (
-          <Carousel.Item key={index}>
-            {(index <= loadedUpTo ||
-              index === carousel.images.length - 1) && (
-              <img
-                className="d-block w-100 rounded"
-                src={`${process.env.PUBLIC_URL}${image.path}`}
-                srcSet={`${process.env.PUBLIC_URL}${image.path.replace("/images/", "/images/thumbs/")} 800w, ${process.env.PUBLIC_URL}${image.path} 1920w`}
-                sizes="100vw"
-                alt={image.alt}
-                fetchpriority={index === 0 ? "high" : "low"}
-                decoding="async"
-                onError={(e) => {
-                  e.target.onerror = null;
-                  console.error(`Failed to load carousel image ${index + 1}`);
-                }}
-              />
-            )}
-          </Carousel.Item>
-        ))}
-      </Carousel>
-    </Container>
+    <Carousel
+      fade
+      controls={false}
+      indicators
+      pause={false}
+      interval={carousel.interval + 2000}
+      onSlide={handleSlide}
+      className="hero-carousel"
+    >
+      {carousel.images.map((image, index) => (
+        <Carousel.Item key={index}>
+          {(index <= loadedUpTo || index === carousel.images.length - 1) && (
+            <img
+              className="hero-image"
+              src={`${process.env.PUBLIC_URL}${image.path}`}
+              srcSet={`${process.env.PUBLIC_URL}${image.path.replace("/images/", "/images/thumbs/")} 800w, ${process.env.PUBLIC_URL}${image.path} 1920w`}
+              sizes="100vw"
+              alt={image.alt}
+              fetchpriority={index === 0 ? "high" : "low"}
+              decoding="async"
+            />
+          )}
+        </Carousel.Item>
+      ))}
+    </Carousel>
   );
 };
 

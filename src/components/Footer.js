@@ -1,97 +1,103 @@
-import React, { useState } from "react";
-import { Container, Button } from "react-bootstrap";
-import Logo from "../components/Logo";
-import {
-  BsFillChatDotsFill,
-  BsWhatsapp,
-  BsInstagram,
-  BsFacebook,
-} from "react-icons/bs";
-import { AiFillCloseCircle, AiTwotonePhone } from "react-icons/ai";
+import React from "react";
+import { Link } from "react-router-dom";
+import { Container, Row, Col } from "react-bootstrap";
+import { BsWhatsapp, BsInstagram, BsFacebook, BsTelephone, BsEnvelope } from "react-icons/bs";
 import { FaWaze } from "react-icons/fa";
-import { GrMail } from "react-icons/gr";
 import footerData from "../data/components/screens/footer.json";
+import contactData from "../data/components/screens/contact.json";
+import commonData from "../data/components/screens/common.json";
+import categories from "../data/categories";
+import { whatsappLink } from "../data/whatsapp";
 import "./Footer.css";
 
 const Footer = () => {
-  const [show, setShow] = useState(false);
   const { social, copyright } = footerData;
-
-  const socialButtons = [
-    {
-      key: "whatsapp",
-      Icon: BsWhatsapp,
-      className: "whatsapp-button",
-      href: social.whatsapp.url,
-    },
-    {
-      key: "waze",
-      Icon: FaWaze,
-      className: "waze-button",
-      href: social.waze.url,
-    },
-    {
-      key: "email",
-      Icon: GrMail,
-      className: "mail-button",
-      href: `mailto:${social.email.address}`,
-    },
-    {
-      key: "instagram",
-      Icon: BsInstagram,
-      className: "instagram-button",
-      href: social.instagram.url,
-    },
-    {
-      key: "facebook",
-      Icon: BsFacebook,
-      className: "facebook-button",
-      href: social.facebook.url,
-    },
-    {
-      key: "phone",
-      Icon: AiTwotonePhone,
-      className: "phone-button",
-      href: `tel:${social.phone.number}`,
-    },
-  ].sort((a, b) => social[a.key].order - social[b.key].order);
+  const { info } = contactData;
+  const { logo } = commonData;
 
   return (
-    <footer>
-      <Container fluid className="footer-container">
-        <Logo width={200} />
-        <Container className="text-center py-3">
-          <h5 className="copyright-text">{copyright}</h5>
-        </Container>
+    <footer className="site-footer">
+      <Container>
+        <Row className="gy-4">
+          <Col lg={4} md={6}>
+            <img
+              className="footer-logo"
+              src={`${process.env.PUBLIC_URL}${logo.path}`}
+              alt={logo.alt}
+              width={160}
+              loading="lazy"
+            />
+            <p className="footer-about">
+              צילומי ניובורן, הריון, ילדים ומשפחות בסטודיו ובלוקיישן, באווירה רגועה וכיפית.
+            </p>
+            <div className="footer-social">
+              <a href={social.instagram.url} target="_blank" rel="noopener noreferrer" aria-label="אינסטגרם">
+                <BsInstagram />
+              </a>
+              <a href={social.facebook.url} target="_blank" rel="noopener noreferrer" aria-label="פייסבוק">
+                <BsFacebook />
+              </a>
+              <a href={whatsappLink()} target="_blank" rel="noopener noreferrer" aria-label="וואטסאפ">
+                <BsWhatsapp />
+              </a>
+              <a href={social.waze.url} target="_blank" rel="noopener noreferrer" aria-label="ניווט עם Waze">
+                <FaWaze />
+              </a>
+            </div>
+          </Col>
+
+          <Col lg={4} md={6}>
+            <h3 className="footer-title">סוגי צילומים</h3>
+            <ul className="footer-links footer-links-grid">
+              {categories.map((category) => (
+                <li key={category.key}>
+                  <Link to={category.pricesPath}>{category.title}</Link>
+                </li>
+              ))}
+            </ul>
+          </Col>
+
+          <Col lg={4} md={12}>
+            <h3 className="footer-title">יצירת קשר</h3>
+            <ul className="footer-links footer-contact">
+              <li>
+                <BsTelephone />
+                <a href={`tel:${social.phone.number}`} dir="ltr">050-423-0342</a>
+              </li>
+              <li>
+                <BsEnvelope />
+                <a href={`mailto:${social.email.address}`}>{social.email.address}</a>
+              </li>
+              <li>
+                <FaWaze />
+                <a href={social.waze.url} target="_blank" rel="noopener noreferrer">
+                  {info.address.street.replace("כתובת - ", "")}, {info.address.city}
+                </a>
+              </li>
+            </ul>
+            <p className="footer-hours">
+              {info.businessHours.weekdays}
+              <br />
+              {info.businessHours.friday}
+            </p>
+          </Col>
+        </Row>
+
+        <div className="footer-bottom">
+          {copyright} {new Date().getFullYear()}
+        </div>
       </Container>
 
-      <Button
-        className={`chat-button ${show ? "active" : ""}`}
-        onClick={() => setShow(!show)}
+      <a
+        className="floating-whatsapp"
+        href={whatsappLink("היי, אשמח לפרטים על צילומים")}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="שליחת הודעה בוואטסאפ"
       >
-        {show ? (
-          <AiFillCloseCircle size={35} />
-        ) : (
-          <BsFillChatDotsFill size={35} />
-        )}
-      </Button>
-
-      {show && (
-        <>
-          {socialButtons.map((button, index) => (
-            <Button
-              key={button.key}
-              className={`social-button show ${button.className}`}
-              style={{ bottom: `calc(2rem + ${(index + 1) * 70}px)` }}
-              href={button.href}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <button.Icon size={30} color="white" />
-            </Button>
-          ))}
-        </>
-      )}
+        <BsWhatsapp />
+        <span className="floating-whatsapp-label">דברו איתי בוואטסאפ</span>
+      </a>
     </footer>
   );
 };
