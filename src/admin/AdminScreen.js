@@ -280,6 +280,7 @@ const AdminScreen = () => {
   usePageTitle("ניהול האתר");
   const [session, setSession] = useState();
   const [isAdmin, setIsAdmin] = useState();
+  const [adminCheckError, setAdminCheckError] = useState();
 
   useEffect(() => {
     if (!supabase) return undefined;
@@ -291,13 +292,17 @@ const AdminScreen = () => {
   const userId = session?.user?.id;
   useEffect(() => {
     setIsAdmin(undefined);
+    setAdminCheckError(undefined);
     if (!userId) return;
     supabase
       .from("admins")
       .select("user_id")
       .eq("user_id", userId)
       .maybeSingle()
-      .then(({ data, error }) => setIsAdmin(!error && Boolean(data)));
+      .then(({ data, error }) => {
+        if (error) setAdminCheckError(error.message);
+        setIsAdmin(!error && Boolean(data));
+      });
   }, [userId]);
 
   if (!supabase) {
@@ -325,6 +330,15 @@ const AdminScreen = () => {
           <p>
             המשתמש <span dir="ltr">{session.user.email}</span> מחובר, אבל אינו מורשה לערוך את האתר.
           </p>
+          {adminCheckError ? (
+            <p className="admin-error">
+              בדיקת ההרשאה נכשלה: <span dir="ltr">{adminCheckError}</span>
+            </p>
+          ) : (
+            <p className="admin-hint">
+              המשתמש לא נמצא בטבלת המנהלים (admins) ב-Supabase.
+            </p>
+          )}
           <button type="button" className="btn-outline-brand" onClick={() => supabase.auth.signOut()}>
             יציאה
           </button>
