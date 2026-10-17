@@ -4,6 +4,7 @@ import { Form, Spinner } from "react-bootstrap";
 import { BsBoxArrowUpLeft, BsCheckCircle } from "react-icons/bs";
 import supabase from "./supabaseClient";
 import FieldEditor from "./FieldEditor";
+import ChangePassword from "./ChangePassword";
 import { documentList } from "./fields";
 import defaults from "../content/defaults";
 import { mergeContent, useSetDocument } from "../content/ContentProvider";
@@ -82,6 +83,7 @@ const Editor = ({ user }) => {
   const [drafts, setDrafts] = useState(null);
   const [loadError, setLoadError] = useState();
   const [status, setStatus] = useState({});
+  const [changingPassword, setChangingPassword] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const currentKey = searchParams.get("doc") || "home";
 
@@ -186,11 +188,18 @@ const Editor = ({ user }) => {
           <Link to="/" target="_blank" className="admin-link">
             לאתר <BsBoxArrowUpLeft />
           </Link>
+          <button type="button" className="admin-link" onClick={() => setChangingPassword(true)}>
+            שינוי סיסמה
+          </button>
           <button type="button" className="admin-link" onClick={() => supabase.auth.signOut()}>
             יציאה
           </button>
         </div>
       </header>
+
+      {changingPassword && (
+        <ChangePassword email={user.email} onClose={() => setChangingPassword(false)} />
+      )}
 
       <div className="admin-body">
         <nav className="admin-nav" aria-label="עמודים">
