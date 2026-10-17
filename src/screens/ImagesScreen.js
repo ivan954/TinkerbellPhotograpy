@@ -4,26 +4,28 @@ import { Link, useParams } from "react-router-dom";
 import { BsWhatsapp } from "react-icons/bs";
 import Message from "../components/Message";
 import Lightbox from "../components/Lightbox";
-import categories, { findCategory } from "../data/categories";
-import galleryManifest from "../data/galleryManifest.json";
-import { whatsappLink } from "../data/whatsapp";
+import { useCategories } from "../data/categories";
+import { useWhatsappLink } from "../data/whatsapp";
+import { imageUrl, thumbUrl } from "../content/images";
 import usePageTitle from "../hooks/usePageTitle";
 import "./ImagesScreen.css";
 
 const ImagesScreen = () => {
   const { name } = useParams();
   const [selectedIndex, setSelectedIndex] = useState(null);
+  const categories = useCategories();
+  const whatsappLink = useWhatsappLink();
 
-  const category = findCategory((item) => item.key.toLowerCase() === name?.toLowerCase());
+  const category = categories.find((item) => item.key.toLowerCase() === name?.toLowerCase());
   usePageTitle(category ? `גלריית ${category.title}` : "גלריה");
 
   const images = useMemo(
     () =>
       category
-        ? (galleryManifest[category.key] || []).map((index) => ({
-            path: `${process.env.PUBLIC_URL}/images/Gallery/${category.key}/${index}.jpg`,
-            thumb: `${process.env.PUBLIC_URL}/images/thumbs/Gallery/${category.key}/${index}.jpg`,
-            alt: `צילומי ${category.title} - תמונה ${index}`,
+        ? category.images.map((path, index) => ({
+            path: imageUrl(path),
+            thumb: thumbUrl(path),
+            alt: `צילומי ${category.title} - תמונה ${index + 1}`,
           }))
         : [],
     [category]
@@ -69,7 +71,7 @@ const ImagesScreen = () => {
       <div className="masonry">
         {images.map((image, index) => (
           <button
-            key={image.path}
+            key={index}
             className="masonry-item"
             onClick={() => setSelectedIndex(index)}
             aria-label={`הגדלת ${image.alt}`}

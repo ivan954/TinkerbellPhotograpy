@@ -1,23 +1,34 @@
 {
+  "page": {
+    "title": "בואו נדבר",
+    "text": "השאירו פרטים ואחזור אליכם בהקדם, או שלחו הודעה בוואטסאפ לתשובה מהירה."
+  },
   "form": {
     "title": "השארת פרטים",
     "fields": {
       "name": "שם",
       "email": "מייל",
       "phone": "טלפון",
-      "message": "הודעה"
+      "message": "הודעה",
+      "type": "סוג הצילום"
     },
     "buttons": {
       "submit": "שלח"
     },
     "messages": {
-      "success": "ההודעה נשלחה בהצלחה"
+      "success": "ההודעה נשלחה בהצלחה",
+      "successText": "תודה! אחזור אליכם בהקדם."
     },
     "emailjs": {
       "serviceId": "service_6sg0n85",
       "templateId": "template_3xp1igw",
       "userId": "7YFNhK8QbTvo1UzF5"
-    }
+    },
+    "messagePlaceholder": "ספרו לי קצת: מועד מועדף, גיל הילדים, רעיונות..."
+  },
+  "whatsapp": {
+    "button": "שליחת הודעה בוואטסאפ",
+    "message": "היי, אשמח לפרטים על צילומים"
   },
   "info": {
     "studio": {

@@ -1,6 +1,6 @@
 import React from "react";
 import { Container, Row, Col, Table } from "react-bootstrap";
-import commonData from "../data/components/screens/common.json";
+import { useContent } from "../content/ContentProvider";
 import "./ExtrasScreen.css";
 
 const PriceTable = ({ title, rows }) => (
@@ -14,8 +14,8 @@ const PriceTable = ({ title, rows }) => (
         </tr>
       </thead>
       <tbody>
-        {rows.map((item) => (
-          <tr key={item.size}>
+        {rows.map((item, index) => (
+          <tr key={index}>
             <td>{item.size}</td>
             <td>{item.price}</td>
           </tr>
@@ -26,19 +26,19 @@ const PriceTable = ({ title, rows }) => (
 );
 
 const ExtrasScreen = () => {
-  const { extras } = commonData;
-  if (!extras) return null;
+  const { extras, pricesPage } = useContent("common");
+  if (!extras.visible) return null;
 
   return (
     <section className="section extras">
       <Container>
         <div className="section-heading">
-          <span className="section-eyebrow">אפשר להוסיף לכל חבילה</span>
+          <span className="section-eyebrow">{pricesPage.extrasEyebrow}</span>
           <h2>{extras.title}</h2>
         </div>
         <ul className="extras-list">
-          {extras.items.map((item) => (
-            <li key={item}>{item}</li>
+          {extras.items.map((item, index) => (
+            <li key={index}>{item}</li>
           ))}
         </ul>
         <Row className="g-4 mt-1">

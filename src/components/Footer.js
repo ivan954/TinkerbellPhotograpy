@@ -3,17 +3,18 @@ import { Link } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
 import { BsWhatsapp, BsInstagram, BsFacebook, BsTelephone, BsEnvelope } from "react-icons/bs";
 import { FaWaze } from "react-icons/fa";
-import footerData from "../data/components/screens/footer.json";
-import contactData from "../data/components/screens/contact.json";
-import commonData from "../data/components/screens/common.json";
-import categories from "../data/categories";
-import { whatsappLink } from "../data/whatsapp";
+import { useContent } from "../content/ContentProvider";
+import { imageUrl } from "../content/images";
+import { useCategories } from "../data/categories";
+import { useWhatsappLink } from "../data/whatsapp";
 import "./Footer.css";
 
 const Footer = () => {
-  const { social, copyright } = footerData;
-  const { info } = contactData;
-  const { logo } = commonData;
+  const { social, copyright, about, floatingWhatsapp } = useContent("footer");
+  const { info } = useContent("contact");
+  const { logo } = useContent("common");
+  const categories = useCategories();
+  const whatsappLink = useWhatsappLink();
 
   return (
     <footer className="site-footer">
@@ -22,14 +23,12 @@ const Footer = () => {
           <Col lg={4} md={6}>
             <img
               className="footer-logo"
-              src={`${process.env.PUBLIC_URL}${logo.path}`}
+              src={imageUrl(logo.path)}
               alt={logo.alt}
               width={160}
               loading="lazy"
             />
-            <p className="footer-about">
-              צילומי ניובורן, הריון, ילדים ומשפחות בסטודיו ובלוקיישן, באווירה רגועה וכיפית.
-            </p>
+            <p className="footer-about">{about}</p>
             <div className="footer-social">
               <a href={social.instagram.url} target="_blank" rel="noopener noreferrer" aria-label="אינסטגרם">
                 <BsInstagram />
@@ -62,7 +61,7 @@ const Footer = () => {
             <ul className="footer-links footer-contact">
               <li>
                 <BsTelephone />
-                <a href={`tel:${social.phone.number}`} dir="ltr">050-423-0342</a>
+                <a href={`tel:${social.phone.number}`} dir="ltr">{social.phone.display}</a>
               </li>
               <li>
                 <BsEnvelope />
@@ -88,16 +87,18 @@ const Footer = () => {
         </div>
       </Container>
 
-      <a
-        className="floating-whatsapp"
-        href={whatsappLink("היי, אשמח לפרטים על צילומים")}
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="שליחת הודעה בוואטסאפ"
-      >
-        <BsWhatsapp />
-        <span className="floating-whatsapp-label">דברו איתי בוואטסאפ</span>
-      </a>
+      {floatingWhatsapp.visible && (
+        <a
+          className="floating-whatsapp"
+          href={whatsappLink(floatingWhatsapp.message)}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="שליחת הודעה בוואטסאפ"
+        >
+          <BsWhatsapp />
+          <span className="floating-whatsapp-label">{floatingWhatsapp.label}</span>
+        </a>
+      )}
     </footer>
   );
 };

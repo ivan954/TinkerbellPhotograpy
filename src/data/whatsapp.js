@@ -1,7 +1,7 @@
-import footerData from "./components/screens/footer.json";
+import { useContent } from "../content/ContentProvider";
 
 // WhatsApp link with a ready-to-send message, so a visitor can book in one tap.
-export const whatsappLink = (text) =>
-  text
-    ? `${footerData.social.whatsapp.url}?text=${encodeURIComponent(text)}`
-    : footerData.social.whatsapp.url;
+export const useWhatsappLink = () => {
+  const { url } = useContent("footer").social.whatsapp;
+  return (text) => (text ? `${url}?text=${encodeURIComponent(text)}` : url);
+};

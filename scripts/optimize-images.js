@@ -6,10 +6,9 @@
 // 2. Creates small thumbnails of the gallery, carousel and about photos in
 //    public/images/thumbs, used by the grids, cards and on mobile.
 // 3. Shrinks the logo to the size it is actually displayed at.
-// 4. Writes src/data/galleryManifest.json with the photo numbers of each
-//    gallery category, so the app does not have to probe for images.
 //
-// Usage: npm run optimize-images  (run after adding new photos)
+// Usage: npm run optimize-images  (run after adding photos to public/images).
+// Photos uploaded from the /admin screen are resized in the browser instead.
 
 const fs = require("fs");
 const path = require("path");
@@ -18,12 +17,10 @@ const sharp = require("sharp");
 const ROOT = path.join(__dirname, "..");
 const IMAGES_DIR = path.join(ROOT, "public", "images");
 const THUMBS_DIR = path.join(IMAGES_DIR, "thumbs");
-const GALLERY_DIR = path.join(IMAGES_DIR, "Gallery");
 const THUMB_SOURCE_DIRS = ["Gallery", "Carousel", "About"].map((dir) =>
   path.join(IMAGES_DIR, dir)
 );
 const LOGO_PATH = path.join(IMAGES_DIR, "Logo", "Logo.png");
-const MANIFEST_PATH = path.join(ROOT, "src", "data", "galleryManifest.json");
 
 const MAX_SIZE = 1920;
 const MAX_BYTES = 1024 * 1024;
@@ -97,21 +94,6 @@ const optimizeLogo = async () => {
   );
 };
 
-const buildManifest = () => {
-  const manifest = {};
-  for (const category of fs.readdirSync(GALLERY_DIR)) {
-    const categoryDir = path.join(GALLERY_DIR, category);
-    if (!fs.statSync(categoryDir).isDirectory()) continue;
-
-    manifest[category] = fs
-      .readdirSync(categoryDir)
-      .filter((file) => /^\d+\.jpg$/i.test(file))
-      .map((file) => parseInt(file, 10))
-      .sort((a, b) => a - b);
-  }
-  fs.writeFileSync(MANIFEST_PATH, JSON.stringify(manifest, null, 2) + "\n");
-};
-
 const main = async () => {
   const files = walk(IMAGES_DIR).filter(isJpeg);
   let totalBefore = 0;
@@ -134,7 +116,6 @@ const main = async () => {
   }
 
   await optimizeLogo();
-  buildManifest();
 
   console.log(
     `\nDone. ${(totalBefore / 1048576).toFixed(1)}MB -> ` +

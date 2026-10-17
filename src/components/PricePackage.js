@@ -4,21 +4,24 @@ import { Container, Row, Col } from "react-bootstrap";
 import { BsWhatsapp, BsCheck2, BsInfoCircle } from "react-icons/bs";
 import ExtrasScreen from "./ExtrasScreen";
 import Reveal from "./Reveal";
-import { findCategory, galleryPath, thumbUrl } from "../data/categories";
-import { whatsappLink } from "../data/whatsapp";
+import { galleryPath } from "../data/categories";
+import { useWhatsappLink } from "../data/whatsapp";
+import { useContent } from "../content/ContentProvider";
+import { thumbUrl } from "../content/images";
 import usePageTitle from "../hooks/usePageTitle";
 import "./PricesScreen.css";
 
 // Shown from the cheapest to the fullest package; in RTL the first is on the right.
 const TIERS = [
-  { key: "basic", image: "Prices/3.jpg" },
-  { key: "extra", image: "Prices/2.jpg" },
-  { key: "premium", image: "Prices/1.jpg", featured: true },
+  { key: "basic" },
+  { key: "extra" },
+  { key: "premium", featured: true },
 ];
 
-const PricePackage = ({ packageType }) => {
-  const packageData = require(`../data/components/prices/${packageType}.json`);
-  const category = findCategory((item) => item.prices === packageType);
+const PricePackage = ({ category }) => {
+  const packageData = useContent(`prices/${category.prices}`);
+  const { pricesPage } = useContent("common");
+  const whatsappLink = useWhatsappLink();
   usePageTitle(packageData.mainTitle);
 
   return (
@@ -30,8 +33,8 @@ const PricePackage = ({ packageType }) => {
           </nav>
           <h1>{packageData.mainTitle}</h1>
           <p>
-            בחרו את החבילה שמתאימה לכם. יש שאלה? אשמח לעזור לבחור{" "}
-            <Link to={galleryPath(category)}>ולהראות עוד תמונות מהגלריה</Link>.
+            {pricesPage.intro}{" "}
+            <Link to={galleryPath(category)}>{pricesPage.galleryLink}</Link>.
           </p>
         </header>
 
@@ -45,16 +48,16 @@ const PricePackage = ({ packageType }) => {
                   delay={index * 100}
                   className={`price-card ${tier.featured ? "is-featured" : ""}`}
                 >
-                  {tier.featured && <span className="price-badge">החבילה המלאה</span>}
+                  {tier.featured && <span className="price-badge">{pricesPage.featuredBadge}</span>}
                   <div className="price-card-image">
                     <img
-                      src={thumbUrl(category, tier.image)}
+                      src={thumbUrl(packageData.images[tier.key])}
                       alt={`${title} - ${category.title}`}
                       loading="lazy"
                       decoding="async"
                       onError={(e) => {
                         e.target.onerror = null;
-                        e.target.src = thumbUrl(category, `${3 - index}.jpg`);
+                        e.target.src = thumbUrl(category.cover);
                       }}
                     />
                   </div>
@@ -66,8 +69,8 @@ const PricePackage = ({ packageType }) => {
                     </div>
                   </div>
                   <ul className="price-features">
-                    {packageData.features[tier.key].map((feature) => (
-                      <li key={feature}>
+                    {packageData.features[tier.key].map((feature, featureIndex) => (
+                      <li key={featureIndex}>
                         <BsCheck2 aria-hidden="true" />
                         <span>{feature}</span>
                       </li>
@@ -80,7 +83,7 @@ const PricePackage = ({ packageType }) => {
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      <BsWhatsapp /> להזמנת החבילה
+                      <BsWhatsapp /> {pricesPage.orderButton}
                     </a>
                   </div>
                 </Reveal>

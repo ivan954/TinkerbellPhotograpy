@@ -2,19 +2,21 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import Reveal from "../components/Reveal";
-import categories, { coverUrl, galleryPath } from "../data/categories";
-import galleryManifest from "../data/galleryManifest.json";
+import { useCategories, coverUrl, galleryPath } from "../data/categories";
+import { useContent } from "../content/ContentProvider";
 import usePageTitle from "../hooks/usePageTitle";
 import "./GalleryScreen.css";
 
 const GalleryScreen = () => {
-  usePageTitle("גלריה");
+  const { page } = useContent("categories");
+  const categories = useCategories();
+  usePageTitle(page.title);
 
   return (
     <Container className="gallery-page">
       <header className="page-hero">
-        <h1>הגלריה</h1>
-        <p>הצצה לצילומים מהסטודיו. בחרו קטגוריה כדי לראות את כל התמונות.</p>
+        <h1>{page.title}</h1>
+        <p>{page.text}</p>
       </header>
 
       <div className="gallery-grid">
@@ -30,9 +32,7 @@ const GalleryScreen = () => {
               />
               <div className="gallery-card-body">
                 <h2>{category.title}</h2>
-                <span>
-                  {galleryManifest[category.key]?.length || 0} תמונות · לצפייה ←
-                </span>
+                <span>{category.images.length} תמונות · לצפייה ←</span>
               </div>
             </Link>
           </Reveal>

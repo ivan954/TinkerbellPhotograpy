@@ -4,20 +4,21 @@ import { Container, Row, Col, Form, Spinner } from "react-bootstrap";
 import { BsWhatsapp, BsTelephone, BsEnvelope, BsClock, BsGeoAlt, BsCheckCircle } from "react-icons/bs";
 import { FaWaze } from "react-icons/fa";
 import Message from "../components/Message";
-import contactData from "../data/components/screens/contact.json";
-import footerData from "../data/components/screens/footer.json";
-import categories from "../data/categories";
-import { whatsappLink } from "../data/whatsapp";
+import { useContent } from "../content/ContentProvider";
+import { useCategories } from "../data/categories";
+import { useWhatsappLink } from "../data/whatsapp";
 import usePageTitle from "../hooks/usePageTitle";
 import "./ContactScreen.css";
 
 const ContactScreen = () => {
-  usePageTitle("צור קשר");
+  const { page, form, info, whatsapp } = useContent("contact");
+  const { social } = useContent("footer");
+  const categories = useCategories();
+  const whatsappLink = useWhatsappLink();
+  usePageTitle(page.title);
   const [status, setStatus] = useState("idle");
   const [error, setError] = useState();
   const [validated, setValidated] = useState(false);
-  const { form, info } = contactData;
-  const { social } = footerData;
   const address = `${info.address.street.replace("כתובת - ", "")}, ${info.address.city}`;
 
   const handleSubmit = (event) => {
@@ -45,8 +46,8 @@ const ContactScreen = () => {
   return (
     <Container className="contact-page">
       <header className="page-hero">
-        <h1>בואו נדבר</h1>
-        <p>השאירו פרטים ואחזור אליכם בהקדם, או שלחו הודעה בוואטסאפ לתשובה מהירה.</p>
+        <h1>{page.title}</h1>
+        <p>{page.text}</p>
       </header>
 
       <Row className="g-4">
@@ -57,7 +58,7 @@ const ContactScreen = () => {
               <div className="contact-success" role="status">
                 <BsCheckCircle />
                 <h3>{form.messages.success}</h3>
-                <p>תודה! אחזור אליכם בהקדם.</p>
+                <p>{form.messages.successText}</p>
                 <button className="btn-outline-brand" onClick={() => setStatus("idle")}>
                   שליחת הודעה נוספת
                 </button>
@@ -97,7 +98,7 @@ const ContactScreen = () => {
                   </Col>
                   <Col sm={6}>
                     <Form.Group controlId="contact-type">
-                      <Form.Label>סוג הצילום</Form.Label>
+                      <Form.Label>{form.fields.type}</Form.Label>
                       <Form.Select name="type" defaultValue="">
                         <option value="">בחרו (לא חובה)</option>
                         {categories.map((category) => (
@@ -115,7 +116,7 @@ const ContactScreen = () => {
                         as="textarea"
                         rows={4}
                         name="message"
-                        placeholder="ספרו לי קצת: מועד מועדף, גיל הילדים, רעיונות..."
+                        placeholder={form.messagePlaceholder}
                       />
                     </Form.Group>
                   </Col>
@@ -146,11 +147,11 @@ const ContactScreen = () => {
             <h2>{info.studio.name}</h2>
             <a
               className="btn-whatsapp contact-whatsapp"
-              href={whatsappLink("היי, אשמח לפרטים על צילומים")}
+              href={whatsappLink(whatsapp.message)}
               target="_blank"
               rel="noopener noreferrer"
             >
-              <BsWhatsapp /> שליחת הודעה בוואטסאפ
+              <BsWhatsapp /> {whatsapp.button}
             </a>
             <ul className="contact-list">
               <li>

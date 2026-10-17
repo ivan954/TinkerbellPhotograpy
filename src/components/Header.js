@@ -2,15 +2,16 @@ import React, { useEffect, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { BsInstagram, BsFacebook } from "react-icons/bs";
 import { Container, Navbar, Nav, NavDropdown } from "react-bootstrap";
-import headerData from "../data/components/screens/header.json";
-import footerData from "../data/components/screens/footer.json";
-import commonData from "../data/components/screens/common.json";
+import { useContent } from "../content/ContentProvider";
+import { imageUrl } from "../content/images";
+import { useCategories } from "../data/categories";
 import "./Header.css";
 
 const Header = () => {
-  const { navigation } = headerData;
-  const { social } = footerData;
-  const { logo } = commonData;
+  const { navigation } = useContent("header");
+  const { social } = useContent("footer");
+  const { logo } = useContent("common");
+  const categories = useCategories();
   const { pathname } = useLocation();
   // Controlled so the mobile menu closes after a link is tapped.
   const [expanded, setExpanded] = useState(false);
@@ -28,9 +29,9 @@ const Header = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const priceRoutes = Object.entries(navigation.prices).map(([name, path]) => ({
-    name,
-    to: path,
+  const priceRoutes = categories.map((category) => ({
+    name: category.title,
+    to: category.pricesPath,
   }));
   const onPricesPage = priceRoutes.some((route) => route.to === pathname);
 
@@ -44,7 +45,7 @@ const Header = () => {
       <Container>
         <Navbar.Brand as={Link} to="/" className="brand-logo" onClick={closeMenu}>
           <img
-            src={`${process.env.PUBLIC_URL}${logo.path}`}
+            src={imageUrl(logo.path)}
             alt={logo.alt}
             width={130}
             height="auto"
@@ -102,7 +103,7 @@ const Header = () => {
               <BsFacebook />
             </a>
             <Link to="/contact" className="btn-brand" onClick={closeMenu}>
-              לתיאום צילום
+              {navigation.links.book}
             </Link>
           </div>
         </Navbar.Collapse>

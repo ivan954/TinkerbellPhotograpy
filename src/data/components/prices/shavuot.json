@@ -39,5 +39,10 @@
       "כל שעה נוספת 250 ש\"ח"
     ]
   },
+  "images": {
+    "premium": "/images/Gallery/Shavuot/Prices/1.jpg",
+    "extra": "/images/Gallery/Shavuot/Prices/2.jpg",
+    "basic": "/images/Gallery/Shavuot/Prices/3.jpg"
+  },
   "additionalInfo": "צילומי שבועות מתקיימים בסטודיו בלבד"
 }

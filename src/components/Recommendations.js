@@ -1,24 +1,20 @@
 import React from "react";
 import { Carousel } from "react-bootstrap";
+import { imageUrl } from "../content/images";
 import "./Recommendations.css";
 
-const recommendations = Array.from({ length: 6 }, (_, index) => ({
-  path: `${process.env.PUBLIC_URL}/images/Recommendations/${index + 1}.jpeg`,
-  alt: `המלצה ${index + 1}`,
-}));
-
-const Recommendations = () => {
+const Recommendations = ({ images }) => {
   return (
     <Carousel
       interval={5000}
       variant="dark"
       className="recommendations-carousel"
     >
-      {recommendations.map((recommendation, index) => (
-        <Carousel.Item key={index}>
+      {images.map((recommendation) => (
+        <Carousel.Item key={recommendation.path}>
           <div className="recommendation-slide">
             <img
-              src={recommendation.path}
+              src={imageUrl(recommendation.path)}
               alt={recommendation.alt}
               loading="lazy"
               decoding="async"

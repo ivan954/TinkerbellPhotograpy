@@ -1,5 +1,11 @@
 {
+  "about": "צילומי ניובורן, הריון, ילדים ומשפחות בסטודיו ובלוקיישן, באווירה רגועה וכיפית.",
   "copyright": "Copyright © Tinkerbell Studio",
+  "floatingWhatsapp": {
+    "visible": true,
+    "label": "דברו איתי בוואטסאפ",
+    "message": "היי, אשמח לפרטים על צילומים"
+  },
   "social": {
     "whatsapp": {
       "url": "https://wa.me/972504230342",
@@ -23,7 +29,8 @@
     },
     "phone": {
       "number": "+972504230342",
-      "order": 6
+      "order": 6,
+      "display": "050-423-0342"
     }
   }
 }

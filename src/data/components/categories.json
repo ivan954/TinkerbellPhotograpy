@@ -1,0 +1,194 @@
+{
+  "page": {
+    "title": "הגלריה",
+    "text": "הצצה לצילומים מהסטודיו. בחרו קטגוריה כדי לראות את כל התמונות."
+  },
+  "list": [
+    {
+      "key": "NewBorn",
+      "title": "ניובורן",
+      "visible": true,
+      "prices": "newborn",
+      "pricesPath": "/NewBornPrices",
+      "cover": "/images/Gallery/NewBorn/GalleryFaceCard/image.jpg",
+      "images": [
+        "/images/Gallery/NewBorn/1.jpg",
+        "/images/Gallery/NewBorn/2.jpg",
+        "/images/Gallery/NewBorn/3.jpg",
+        "/images/Gallery/NewBorn/4.jpg",
+        "/images/Gallery/NewBorn/5.jpg",
+        "/images/Gallery/NewBorn/6.jpg",
+        "/images/Gallery/NewBorn/7.jpg",
+        "/images/Gallery/NewBorn/8.jpg",
+        "/images/Gallery/NewBorn/9.jpg",
+        "/images/Gallery/NewBorn/10.jpg",
+        "/images/Gallery/NewBorn/11.jpg",
+        "/images/Gallery/NewBorn/12.jpg",
+        "/images/Gallery/NewBorn/13.jpg",
+        "/images/Gallery/NewBorn/14.jpg",
+        "/images/Gallery/NewBorn/15.jpg",
+        "/images/Gallery/NewBorn/16.jpg"
+      ]
+    },
+    {
+      "key": "Pregnancy",
+      "title": "הריון",
+      "visible": true,
+      "prices": "pregnancy",
+      "pricesPath": "/PregnancyPrices",
+      "cover": "/images/Gallery/Pregnancy/GalleryFaceCard/image.jpg",
+      "images": [
+        "/images/Gallery/Pregnancy/1.jpg",
+        "/images/Gallery/Pregnancy/2.jpg",
+        "/images/Gallery/Pregnancy/3.jpg"
+      ]
+    },
+    {
+      "key": "OneYearOld",
+      "title": "גיל שנה",
+      "visible": true,
+      "prices": "oneyear",
+      "pricesPath": "/OneYearPrices",
+      "cover": "/images/Gallery/OneYearOld/GalleryFaceCard/image.jpg",
+      "images": [
+        "/images/Gallery/OneYearOld/1.jpg",
+        "/images/Gallery/OneYearOld/2.jpg",
+        "/images/Gallery/OneYearOld/3.jpg"
+      ]
+    },
+    {
+      "key": "Children",
+      "title": "ילדים",
+      "visible": true,
+      "prices": "children",
+      "pricesPath": "/ChildrenPrices",
+      "cover": "/images/Gallery/Children/GalleryFaceCard/image.jpg",
+      "images": [
+        "/images/Gallery/Children/1.jpg",
+        "/images/Gallery/Children/2.jpg",
+        "/images/Gallery/Children/3.jpg",
+        "/images/Gallery/Children/4.jpg",
+        "/images/Gallery/Children/5.jpg",
+        "/images/Gallery/Children/6.jpg",
+        "/images/Gallery/Children/7.jpg",
+        "/images/Gallery/Children/8.jpg",
+        "/images/Gallery/Children/9.jpg",
+        "/images/Gallery/Children/10.jpg",
+        "/images/Gallery/Children/11.jpg",
+        "/images/Gallery/Children/12.jpg",
+        "/images/Gallery/Children/13.jpg",
+        "/images/Gallery/Children/14.jpg",
+        "/images/Gallery/Children/15.jpg",
+        "/images/Gallery/Children/16.jpg",
+        "/images/Gallery/Children/17.jpg",
+        "/images/Gallery/Children/18.jpg",
+        "/images/Gallery/Children/19.jpg",
+        "/images/Gallery/Children/20.jpg",
+        "/images/Gallery/Children/21.jpg",
+        "/images/Gallery/Children/22.jpg"
+      ]
+    },
+    {
+      "key": "Family",
+      "title": "משפחה",
+      "visible": true,
+      "prices": "family",
+      "pricesPath": "/FamilyPrices",
+      "cover": "/images/Gallery/Family/GalleryFaceCard/image.jpg",
+      "images": [
+        "/images/Gallery/Family/1.jpg",
+        "/images/Gallery/Family/2.jpg",
+        "/images/Gallery/Family/3.jpg",
+        "/images/Gallery/Family/4.jpg",
+        "/images/Gallery/Family/5.jpg",
+        "/images/Gallery/Family/6.jpg",
+        "/images/Gallery/Family/7.jpg",
+        "/images/Gallery/Family/8.jpg",
+        "/images/Gallery/Family/9.jpg",
+        "/images/Gallery/Family/10.jpg",
+        "/images/Gallery/Family/11.jpg",
+        "/images/Gallery/Family/12.jpg"
+      ]
+    },
+    {
+      "key": "Halake",
+      "title": "חלאקה",
+      "visible": true,
+      "prices": "halake",
+      "pricesPath": "/HalakePrices",
+      "cover": "/images/Gallery/Halake/1.jpg",
+      "images": [
+        "/images/Gallery/Halake/1.jpg",
+        "/images/Gallery/Halake/2.jpg",
+        "/images/Gallery/Halake/3.jpg"
+      ]
+    },
+    {
+      "key": "FirstClass",
+      "title": "כיתה א'",
+      "visible": true,
+      "prices": "firstclass",
+      "pricesPath": "/FirstClassPrices",
+      "cover": "/images/Gallery/FirstClass/GalleryFaceCard/image.jpg",
+      "images": [
+        "/images/Gallery/FirstClass/1.jpg",
+        "/images/Gallery/FirstClass/2.jpg",
+        "/images/Gallery/FirstClass/3.jpg",
+        "/images/Gallery/FirstClass/4.jpg",
+        "/images/Gallery/FirstClass/5.jpg"
+      ]
+    },
+    {
+      "key": "Purim",
+      "title": "פורים",
+      "visible": true,
+      "prices": "purim",
+      "pricesPath": "/PurimPrices",
+      "cover": "/images/Gallery/Purim/GalleryFaceCard/image.jpg",
+      "images": [
+        "/images/Gallery/Purim/1.jpg",
+        "/images/Gallery/Purim/2.jpg",
+        "/images/Gallery/Purim/3.jpg",
+        "/images/Gallery/Purim/4.jpg",
+        "/images/Gallery/Purim/5.jpg",
+        "/images/Gallery/Purim/6.jpg",
+        "/images/Gallery/Purim/7.jpg",
+        "/images/Gallery/Purim/8.jpg",
+        "/images/Gallery/Purim/9.jpg",
+        "/images/Gallery/Purim/10.jpg",
+        "/images/Gallery/Purim/11.jpg",
+        "/images/Gallery/Purim/12.jpg"
+      ]
+    },
+    {
+      "key": "Shavuot",
+      "title": "שבועות",
+      "visible": true,
+      "prices": "shavuot",
+      "pricesPath": "/ShavuotPrices",
+      "cover": "/images/Gallery/Shavuot/3.jpg",
+      "images": [
+        "/images/Gallery/Shavuot/1.jpg",
+        "/images/Gallery/Shavuot/2.jpg",
+        "/images/Gallery/Shavuot/3.jpg"
+      ]
+    },
+    {
+      "key": "Tadmit",
+      "title": "צילומי תדמית",
+      "visible": true,
+      "prices": "tadmit",
+      "pricesPath": "/TadmitPrices",
+      "cover": "/images/Gallery/Tadmit/2.jpg",
+      "images": [
+        "/images/Gallery/Tadmit/1.jpg",
+        "/images/Gallery/Tadmit/2.jpg",
+        "/images/Gallery/Tadmit/3.jpg",
+        "/images/Gallery/Tadmit/4.jpg",
+        "/images/Gallery/Tadmit/5.jpg",
+        "/images/Gallery/Tadmit/6.jpg",
+        "/images/Gallery/Tadmit/7.jpg"
+      ]
+    }
+  ]
+}

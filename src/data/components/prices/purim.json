@@ -39,5 +39,10 @@
       "כל שעה נוספת 250 ש\"ח"
     ]
   },
+  "images": {
+    "premium": "/images/Gallery/Purim/Prices/1.jpg",
+    "extra": "/images/Gallery/Purim/Prices/2.jpg",
+    "basic": "/images/Gallery/Purim/Prices/3.jpg"
+  },
   "additionalInfo": "צילומי פורים מתקיימים בסטודיו בלבד"
 }

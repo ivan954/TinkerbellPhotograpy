@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { Carousel } from "react-bootstrap";
-import homeData from "../data/components/screens/home.json";
+import { imageUrl, thumbUrl } from "../content/images";
 
-const ImagesCarousel = () => {
-  const { carousel } = homeData;
+const ImagesCarousel = ({ carousel }) => {
   // Only the slides up to this index are loaded: the visible one and the next,
   // so the rest of the photos don't compete with the first one.
   const [loadedUpTo, setLoadedUpTo] = useState(1);
@@ -23,12 +22,12 @@ const ImagesCarousel = () => {
       className="hero-carousel"
     >
       {carousel.images.map((image, index) => (
-        <Carousel.Item key={index}>
+        <Carousel.Item key={image.path}>
           {(index <= loadedUpTo || index === carousel.images.length - 1) && (
             <img
               className="hero-image"
-              src={`${process.env.PUBLIC_URL}${image.path}`}
-              srcSet={`${process.env.PUBLIC_URL}${image.path.replace("/images/", "/images/thumbs/")} 800w, ${process.env.PUBLIC_URL}${image.path} 1920w`}
+              src={imageUrl(image.path)}
+              srcSet={`${thumbUrl(image.path)} 800w, ${imageUrl(image.path)} 1920w`}
               sizes="100vw"
               alt={image.alt}
               fetchpriority={index === 0 ? "high" : "low"}

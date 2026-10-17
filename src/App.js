@@ -4,38 +4,20 @@ import Footer from "./components/Footer";
 import Loader from "./components/Loader";
 import {
   BrowserRouter as Router,
+  Outlet,
   Route,
   Routes,
   useLocation,
 } from "react-router-dom";
 import HomeScreen from "./screens/HomeScreen";
 import NotFound from "./screens/NotFound";
+import { useCategories } from "./data/categories";
 
 const GalleryScreen = lazy(() => import("./screens/GalleryScreen"));
 const ContactScreen = lazy(() => import("./screens/ContactScreen"));
 const ImagesScreen = lazy(() => import("./screens/ImagesScreen"));
-const PregnancyPrices = lazy(() =>
-  import("./screens/pricesScreens/PregnancyPrices")
-);
-const NewBornPrices = lazy(() =>
-  import("./screens/pricesScreens/NewBornPrices")
-);
-const OneYearPrices = lazy(() =>
-  import("./screens/pricesScreens/OneYearPrices")
-);
-const HalakePrices = lazy(() => import("./screens/pricesScreens/HalakePrices"));
-const ChildrenPrices = lazy(() =>
-  import("./screens/pricesScreens/ChildrenPrices")
-);
-const FamilyPrices = lazy(() => import("./screens/pricesScreens/FamilyPrices"));
-const PurimPrices = lazy(() => import("./screens/pricesScreens/PurimPrices"));
-const ShavuotPrices = lazy(() =>
-  import("./screens/pricesScreens/ShavuotPrices")
-);
-const FirstClassPrices = lazy(() =>
-  import("./screens/pricesScreens/FirstClassPrices")
-);
-const TadmitPrices = lazy(() => import("./screens/pricesScreens/TadmitPrices"));
+const PricePackage = lazy(() => import("./components/PricePackage"));
+const AdminScreen = lazy(() => import("./admin/AdminScreen"));
 
 // Start every page at the top, like a normal page load.
 const ScrollToTop = () => {
@@ -47,36 +29,50 @@ const ScrollToTop = () => {
   return null;
 };
 
+const SiteLayout = () => (
+  <>
+    <Header />
+    <main>
+      <Suspense fallback={<Loader />}>
+        <Outlet />
+      </Suspense>
+    </main>
+    <Footer />
+  </>
+);
+
 function App() {
+  const categories = useCategories();
+
   return (
-    <>
-      <Router basename={process.env.PUBLIC_URL}>
-        <ScrollToTop />
-        <Header />
-        <main>
-          <Suspense fallback={<Loader />}>
-            <Routes>
-              <Route path="/" element={<HomeScreen />} />
-              <Route path="/gallery" element={<GalleryScreen />} />
-              <Route path="/contact" element={<ContactScreen />} />
-              <Route path="/imagescreen/:name" element={<ImagesScreen />} />
-              <Route path="/PregnancyPrices" element={<PregnancyPrices />} />
-              <Route path="/NewBornPrices" element={<NewBornPrices />} />
-              <Route path="/OneYearPrices" element={<OneYearPrices />} />
-              <Route path="/HalakePrices" element={<HalakePrices />} />
-              <Route path="/ChildrenPrices" element={<ChildrenPrices />} />
-              <Route path="/FamilyPrices" element={<FamilyPrices />} />
-              <Route path="/PurimPrices" element={<PurimPrices />} />
-              <Route path="/ShavuotPrices" element={<ShavuotPrices />} />
-              <Route path="/FirstClassPrices" element={<FirstClassPrices />} />
-              <Route path="/TadmitPrices" element={<TadmitPrices />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </Suspense>
-        </main>
-        <Footer />
-      </Router>
-    </>
+    <Router basename={process.env.PUBLIC_URL}>
+      <ScrollToTop />
+      <Routes>
+        <Route
+          path="/admin"
+          element={
+            <Suspense fallback={<Loader />}>
+              <AdminScreen />
+            </Suspense>
+          }
+        />
+        <Route element={<SiteLayout />}>
+          <Route path="/" element={<HomeScreen />} />
+          <Route path="/gallery" element={<GalleryScreen />} />
+          <Route path="/contact" element={<ContactScreen />} />
+          <Route path="/imagescreen/:name" element={<ImagesScreen />} />
+          {/* One price page per category, at the path set in its content. */}
+          {categories.map((category) => (
+            <Route
+              key={category.key}
+              path={category.pricesPath}
+              element={<PricePackage category={category} />}
+            />
+          ))}
+          <Route path="*" element={<NotFound />} />
+        </Route>
+      </Routes>
+    </Router>
   );
 }
 

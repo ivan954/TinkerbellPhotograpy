@@ -1,15 +1,20 @@
 {
-  "loading": "טוען נתונים...",
-  "backToDashboard": "חזור ללוח הבקרה",
   "message": {
     "defaultVariant": "info"
   },
   "logo": {
     "path": "/images/Logo/Logo.png",
-    "alt": "Tinkerbell Photography Logo",
-    "defaultWidth": 300
+    "alt": "Tinkerbell Photography Logo"
+  },
+  "pricesPage": {
+    "intro": "בחרו את החבילה שמתאימה לכם. יש שאלה? אשמח לעזור לבחור",
+    "galleryLink": "ולהראות עוד תמונות מהגלריה",
+    "featuredBadge": "החבילה המלאה",
+    "orderButton": "להזמנת החבילה",
+    "extrasEyebrow": "אפשר להוסיף לכל חבילה"
   },
   "extras": {
+    "visible": true,
     "title": "תוספות",
     "items": [
       "פיתוח תמונות 15*10 - 1.50 ש\"ח לתמונה",
@@ -22,16 +27,40 @@
       },
       "prices": {
         "canvas": [
-          { "size": "20*30", "price": "150 ש\"ח" },
-          { "size": "30*40", "price": "200 ש\"ח" },
-          { "size": "40*60", "price": "300 ש\"ח" },
-          { "size": "50*70", "price": "400 ש\"ח" }
+          {
+            "size": "20*30",
+            "price": "150 ש\"ח"
+          },
+          {
+            "size": "30*40",
+            "price": "200 ש\"ח"
+          },
+          {
+            "size": "40*60",
+            "price": "300 ש\"ח"
+          },
+          {
+            "size": "50*70",
+            "price": "400 ש\"ח"
+          }
         ],
         "kapa": [
-          { "size": "20*30", "price": "100 ש\"ח" },
-          { "size": "30*40", "price": "150 ש\"ח" },
-          { "size": "40*60", "price": "200 ש\"ח" },
-          { "size": "50*70", "price": "300 ש\"ח" }
+          {
+            "size": "20*30",
+            "price": "100 ש\"ח"
+          },
+          {
+            "size": "30*40",
+            "price": "150 ש\"ח"
+          },
+          {
+            "size": "40*60",
+            "price": "200 ש\"ח"
+          },
+          {
+            "size": "50*70",
+            "price": "300 ש\"ח"
+          }
         ]
       }
     }

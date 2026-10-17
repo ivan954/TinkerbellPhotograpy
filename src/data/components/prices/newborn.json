@@ -39,5 +39,10 @@
       "כל שעה נוספת 250 ש\"ח"
     ]
   },
+  "images": {
+    "premium": "/images/Gallery/NewBorn/Prices/1.jpg",
+    "extra": "/images/Gallery/NewBorn/Prices/2.jpg",
+    "basic": "/images/Gallery/NewBorn/Prices/3.jpg"
+  },
   "additionalInfo": "צילומי ניובורן מתבצעים בסטודיו בלבד"
 }

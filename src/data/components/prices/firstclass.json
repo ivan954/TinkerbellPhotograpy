@@ -39,5 +39,10 @@
       "כל שעה נוספת 250 ש\"ח"
     ]
   },
+  "images": {
+    "premium": "/images/Gallery/FirstClass/Prices/1.jpg",
+    "extra": "/images/Gallery/FirstClass/Prices/2.jpg",
+    "basic": "/images/Gallery/FirstClass/Prices/3.jpg"
+  },
   "additionalInfo": "צילומים בטבע בתוספת של 100 ש\"ח בקרבת מודיעין"
 }
