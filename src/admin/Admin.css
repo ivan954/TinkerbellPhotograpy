@@ -37,6 +37,8 @@
   color: var(--color-accent);
 }
 
+/* Top bar */
+
 .admin-topbar {
   position: sticky;
   top: 0;
@@ -70,6 +72,8 @@
   cursor: pointer;
   font-size: 0.95rem;
 }
+
+/* Layout: page menu + editor */
 
 .admin-body {
   display: grid;
@@ -143,24 +147,53 @@
   margin: 0;
 }
 
-.admin-section,
-.admin-list {
+/* Sections: a card whose title opens and closes it */
+
+.admin-section {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius);
-  padding: 1rem 1.25rem 1.25rem;
-  margin-bottom: 1.25rem;
+  margin-bottom: 1rem;
+  overflow: hidden;
 }
 
-.admin-section > legend,
-.admin-list > legend,
-.admin-group > legend {
+.admin-section-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  background: none;
+  border: none;
+  padding: 1rem 1.25rem;
+  text-align: start;
   font-family: var(--font-display);
   font-weight: 700;
   font-size: 1.2rem;
-  padding: 0 0.25rem;
-  margin: 0 0 0.5rem;
+  color: var(--color-text);
 }
+
+.admin-section-toggle:hover {
+  background: var(--color-bg);
+}
+
+.admin-section-body {
+  padding: 0 1.25rem 1.25rem;
+}
+
+.admin-chevron {
+  flex-shrink: 0;
+  font-size: 1rem;
+  color: var(--color-muted);
+  transition: transform 0.2s ease;
+}
+
+.is-open > .admin-section-toggle .admin-chevron,
+.is-open > .admin-list-item-header .admin-chevron {
+  transform: rotate(180deg);
+}
+
+/* Nested groups and lists inside a section */
 
 .admin-group {
   border-inline-start: 3px solid var(--color-border);
@@ -168,22 +201,24 @@
   margin: 1rem 0;
 }
 
-.admin-group > legend {
+.admin-group > legend,
+fieldset.admin-list > legend {
+  float: none;
+  width: auto;
+  font-family: var(--font-display);
+  font-weight: 700;
   font-size: 1.05rem;
-}
-
-/* Lists nested inside a section don't need a second card. */
-.admin-section .admin-list,
-.admin-list .admin-list {
-  border: none;
   padding: 0;
-  margin: 1rem 0 0;
+  margin: 0 0 0.5rem;
 }
 
-.admin-section .admin-list > legend,
-.admin-list .admin-list > legend {
-  font-size: 1.05rem;
+fieldset.admin-list {
+  margin: 1rem 0 0;
+  padding: 0;
+  border: none;
 }
+
+/* Fields */
 
 .admin-field {
   margin-bottom: 0.85rem;
@@ -210,32 +245,102 @@
   box-shadow: 0 0 0 0.2rem rgba(181, 113, 95, 0.25);
 }
 
+/* List items: a summary row that opens the item's fields */
+
 .admin-list-item {
   border: 1px solid var(--color-border);
   border-radius: var(--radius-sm);
-  padding: 0.75rem 1rem 0.25rem;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.6rem;
   background: var(--color-bg);
 }
 
 .admin-list-item-header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.4rem 0.6rem;
+}
+
+.admin-item-toggle {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: none;
+  border: none;
+  padding: 0.25rem 0;
+  text-align: start;
+  color: var(--color-text);
+}
+
+.admin-item-toggle img {
+  width: 52px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+
+.admin-item-title {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.3;
+}
+
+.admin-item-title strong {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.admin-item-title small {
+  color: var(--color-muted);
+}
+
+.admin-list-item-body {
+  padding: 0.25rem 0.9rem 0.25rem;
+  border-top: 1px solid var(--color-border);
+  padding-top: 0.75rem;
+}
+
+/* Plain lines (e.g. package features): text box and buttons in one row */
+
+.admin-row {
+  display: flex;
+  align-items: flex-start;
   gap: 0.5rem;
   margin-bottom: 0.5rem;
 }
 
+.admin-row-input {
+  flex: 1;
+  min-width: 0;
+}
+
+.admin-row-input .admin-field {
+  margin-bottom: 0;
+}
+
+.admin-row .admin-item-controls {
+  padding-top: 3px;
+}
+
+/* Move / delete buttons */
+
 .admin-item-controls {
   display: flex;
+  flex-shrink: 0;
   gap: 0.25rem;
 }
 
 .admin-item-controls button {
   display: grid;
   place-items: center;
-  width: 32px;
-  height: 32px;
+  width: 34px;
+  height: 34px;
   border: 1px solid var(--color-border);
   border-radius: 8px;
   background: var(--color-surface);
@@ -255,12 +360,15 @@
   align-items: center;
   gap: 0.75rem;
   flex-wrap: wrap;
+  margin-top: 0.25rem;
 }
 
 .admin-btn-sm {
   padding: 0.35rem 0.9rem;
   font-size: 0.9rem;
 }
+
+/* Images */
 
 .admin-image-row {
   display: flex;
@@ -310,13 +418,14 @@
   padding: 0.35rem;
 }
 
+/* Status messages and the save bar */
+
 .admin-uploading {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
   color: var(--color-muted);
   font-size: 0.9rem;
-  margin-inline-start: 0.75rem;
 }
 
 .admin-error {
@@ -349,10 +458,25 @@
   border-top: 1px solid var(--color-border);
 }
 
+/* Phone */
+
 @media (max-width: 767.98px) {
+  .admin-topbar {
+    padding: 0.6rem 0.9rem;
+  }
+
+  .admin-topbar-actions {
+    gap: 0.85rem;
+  }
+
+  .admin-user {
+    display: none;
+  }
+
   .admin-body {
-    grid-template-columns: 1fr;
-    padding-top: 1rem;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.75rem;
+    padding: 0.75rem 0.75rem 0;
   }
 
   .admin-nav-list {
@@ -361,19 +485,100 @@
 
   .admin-nav-select {
     display: block;
-  }
-
-  .admin-user {
-    display: none;
-  }
-
-  .admin-section,
-  .admin-list {
-    padding: 0.85rem 0.9rem 1rem;
+    position: sticky;
+    top: 3.4rem;
+    z-index: 15;
+    font-weight: 500;
+    box-shadow: var(--shadow-sm);
   }
 
   .admin-main-header {
-    flex-direction: column;
-    gap: 0.25rem;
+    align-items: center;
+    margin-bottom: 0.75rem;
+  }
+
+  .admin-main-header h1 {
+    font-size: 1.4rem;
+  }
+
+  .admin-section-toggle {
+    padding: 0.9rem 1rem;
+    font-size: 1.1rem;
+  }
+
+  .admin-section-body {
+    padding: 0 0.85rem 1rem;
+  }
+
+  .admin-group {
+    padding-inline-start: 0.7rem;
+  }
+
+  .admin-list-item-body {
+    padding: 0.75rem 0.7rem 0.25rem;
+  }
+
+  .admin-item-controls button {
+    width: 38px;
+    height: 38px;
+  }
+
+  .admin-image-row img,
+  .admin-image-empty {
+    width: 96px;
+    height: 72px;
+  }
+
+  /* Plain lines: the text gets the full width, the buttons go under it. */
+  .admin-row {
+    flex-wrap: wrap;
+    gap: 0.3rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .admin-row-input {
+    flex-basis: 100%;
+  }
+
+  .admin-row .admin-item-controls {
+    margin-inline-start: auto;
+    padding-top: 0;
+  }
+
+  .admin-row .admin-item-controls button {
+    width: 34px;
+    height: 30px;
+  }
+
+  .admin-image-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.5rem;
+  }
+
+  .admin-image-tile .admin-item-controls {
+    gap: 0.2rem;
+    padding: 0.3rem;
+  }
+
+  .admin-image-tile .admin-item-controls button {
+    width: 34px;
+    height: 34px;
+  }
+
+  .admin-savebar {
+    gap: 0.5rem;
+    padding: 0.7rem 0;
+  }
+
+  .admin-savebar .btn-brand,
+  .admin-savebar .btn-outline-brand {
+    flex: 1;
+    justify-content: center;
+  }
+
+  .admin-savebar > span {
+    flex-basis: 100%;
+    order: -1;
+    font-size: 0.9rem;
   }
 }
