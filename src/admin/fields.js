@@ -174,17 +174,49 @@ export const emptyLike = (value) => {
   return "";
 };
 
-// Titles of the documents in the admin menu, in this order.
+// The documents in the admin menu, in this order. `description` says what the
+// page controls; `path` is where to see it on the site.
 export const documentList = (categories) => [
-  { key: "home", title: "דף הבית" },
-  { key: "categories", title: "גלריות ותמונות" },
+  {
+    key: "home",
+    title: "דף הבית",
+    description: "אזור הפתיחה, היתרונות, סוגי הצילומים, ההמלצות והקריאה לפעולה.",
+    path: "/",
+  },
+  {
+    key: "categories",
+    title: "גלריות ותמונות",
+    description: "הקטגוריות בגלריה: תמונת השער, כל התמונות, הסדר והאם הן מוצגות.",
+    path: "/gallery",
+  },
   ...categories.list.map((category) => ({
     key: `prices/${category.prices}`,
     title: `מחירון ${category.title}`,
+    description: "שמות החבילות, המחירים ומה כלול בכל חבילה.",
+    path: category.pricesPath,
     group: "מחירונים",
   })),
-  { key: "common", title: "תוספות, לוגו וטקסטים משותפים" },
-  { key: "contact", title: "צור קשר" },
-  { key: "header", title: "תפריט עליון" },
-  { key: "footer", title: "פרטי קשר ותחתית" },
+  {
+    key: "common",
+    title: "תוספות, לוגו וטקסטים משותפים",
+    description: "הלוגו, הטקסטים שחוזרים בכל עמודי המחירון וטבלאות התוספות.",
+  },
+  {
+    key: "contact",
+    title: "צור קשר",
+    description: "טופס יצירת הקשר, פרטי הסטודיו ושעות הפעילות.",
+    path: "/contact",
+  },
+  {
+    key: "header",
+    title: "תפריט עליון",
+    description: "שמות הקישורים בתפריט וכפתור תיאום הצילום.",
+    path: "/",
+  },
+  {
+    key: "footer",
+    title: "פרטי קשר ותחתית",
+    description: "רשתות חברתיות, טלפון, וואטסאפ ושורת זכויות היוצרים.",
+    path: "/",
+  },
 ];

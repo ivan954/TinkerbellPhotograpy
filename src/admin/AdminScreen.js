@@ -1,9 +1,30 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import { Form, Spinner } from "react-bootstrap";
-import { BsBoxArrowUpLeft, BsCheckCircle } from "react-icons/bs";
+import { Dropdown, Form, Modal, Spinner } from "react-bootstrap";
+import {
+  BsArrowCounterclockwise,
+  BsArrowsCollapse,
+  BsArrowsExpand,
+  BsBoxArrowLeft,
+  BsBoxArrowUpLeft,
+  BsCamera,
+  BsCheck2,
+  BsCheckCircle,
+  BsEnvelope,
+  BsExclamationTriangle,
+  BsEye,
+  BsEyeSlash,
+  BsGrid,
+  BsHouseDoor,
+  BsImages,
+  BsKey,
+  BsLayoutTextWindowReverse,
+  BsMenuButtonWide,
+  BsPersonCircle,
+  BsTags,
+} from "react-icons/bs";
 import supabase from "./supabaseClient";
-import FieldEditor from "./FieldEditor";
+import FieldEditor, { SectionsCommand } from "./FieldEditor";
 import ChangePassword from "./ChangePassword";
 import { documentList } from "./fields";
 import defaults from "../content/defaults";
@@ -20,9 +41,35 @@ const updateIn = (value, [head, ...rest], fn) => {
 
 const same = (a, b) => JSON.stringify(a) === JSON.stringify(b);
 
+const DOC_ICONS = {
+  home: BsHouseDoor,
+  categories: BsImages,
+  common: BsGrid,
+  contact: BsEnvelope,
+  header: BsMenuButtonWide,
+  footer: BsLayoutTextWindowReverse,
+};
+
+const docIcon = (key) => (key.startsWith("prices/") ? BsTags : DOC_ICONS[key] || BsGrid);
+
+// The login, "no access" and "not configured" screens share this card.
+const AuthCard = ({ title, subtitle, children }) => (
+  <div className="admin-login">
+    <div className="admin-login-card">
+      <div className="admin-login-brand">
+        <span className="admin-brand-mark"><BsCamera /></span>
+        <h1>{title}</h1>
+        {subtitle && <p>{subtitle}</p>}
+      </div>
+      {children}
+    </div>
+  </div>
+);
+
 const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState();
   const [busy, setBusy] = useState(false);
 
@@ -42,9 +89,8 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="admin-login">
-      <Form onSubmit={handleSubmit} className="admin-login-card">
-        <h1>ניהול האתר</h1>
+    <AuthCard title="ניהול האתר" subtitle="התחברו כדי לערוך את התוכן והתמונות באתר">
+      <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3" controlId="admin-email">
           <Form.Label>מייל</Form.Label>
           <Form.Control
@@ -54,28 +100,66 @@ const LoginForm = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
+            autoFocus
           />
         </Form.Group>
         <Form.Group className="mb-3" controlId="admin-password">
           <Form.Label>סיסמה</Form.Label>
-          <Form.Control
-            type="password"
-            dir="ltr"
-            autoComplete="current-password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
+          <div className="admin-password">
+            <Form.Control
+              type={showPassword ? "text" : "password"}
+              dir="ltr"
+              autoComplete="current-password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+            <button
+              type="button"
+              className="admin-password-toggle"
+              onClick={() => setShowPassword((value) => !value)}
+              aria-label={showPassword ? "הסתרת הסיסמה" : "הצגת הסיסמה"}
+              title={showPassword ? "הסתרת הסיסמה" : "הצגת הסיסמה"}
+            >
+              {showPassword ? <BsEyeSlash /> : <BsEye />}
+            </button>
+          </div>
         </Form.Group>
-        {error && <div className="admin-error mb-3">{error}</div>}
+        {error && (
+          <div className="admin-alert mb-3" role="alert">
+            <BsExclamationTriangle /> {error}
+          </div>
+        )}
         <button type="submit" className="btn-brand w-100" disabled={busy}>
           {busy ? <Spinner animation="border" size="sm" /> : "כניסה"}
         </button>
         <Link to="/" className="admin-back">חזרה לאתר</Link>
       </Form>
-    </div>
+    </AuthCard>
   );
 };
+
+const ConfirmRestore = ({ title, onConfirm, onCancel }) => (
+  <Modal show onHide={onCancel} centered dir="rtl">
+    <Modal.Header closeButton>
+      <Modal.Title>שחזור לתוכן המקורי</Modal.Title>
+    </Modal.Header>
+    <Modal.Body>
+      <p className="mb-0">
+        להחזיר את <strong>{title}</strong> לתוכן המקורי? כל השינויים שנשמרו בעמוד הזה יימחקו,
+        ואי אפשר לבטל את הפעולה.
+      </p>
+    </Modal.Body>
+    <Modal.Footer>
+      <button type="button" className="btn-outline-brand" onClick={onCancel}>
+        ביטול
+      </button>
+      <button type="button" className="btn-danger-brand" onClick={onConfirm}>
+        <BsArrowCounterclockwise /> שחזור
+      </button>
+    </Modal.Footer>
+  </Modal>
+);
 
 const Editor = ({ user }) => {
   const setDocument = useSetDocument();
@@ -84,8 +168,11 @@ const Editor = ({ user }) => {
   const [loadError, setLoadError] = useState();
   const [status, setStatus] = useState({});
   const [changingPassword, setChangingPassword] = useState(false);
+  const [confirmingRestore, setConfirmingRestore] = useState(false);
+  const [sectionsCommand, setSectionsCommand] = useState(null);
   const [searchParams, setSearchParams] = useSearchParams();
   const currentKey = searchParams.get("doc") || "home";
+  const saveRef = useRef();
 
   useEffect(() => {
     supabase
@@ -122,20 +209,57 @@ const Editor = ({ user }) => {
     return () => window.removeEventListener("beforeunload", warn);
   }, [anyDirty]);
 
+  // Ctrl+S (Cmd+S on a Mac) saves the page being edited. KeyS also matches a Hebrew keyboard.
+  useEffect(() => {
+    const onKeyDown = (event) => {
+      if ((event.ctrlKey || event.metaKey) && (event.code === "KeyS" || event.key === "s")) {
+        event.preventDefault();
+        saveRef.current?.();
+      }
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, []);
+
+  // The success message is a toast that hides itself.
+  useEffect(() => {
+    if (!status.message) return undefined;
+    const timer = setTimeout(() => setStatus({}), 4000);
+    return () => clearTimeout(timer);
+  }, [status]);
+
   const update = useCallback(
     (path, fn) => {
       setDrafts((current) => ({ ...current, [currentKey]: updateIn(current[currentKey], path, fn) }));
-      setStatus({});
+      setStatus((value) => (value.error ? {} : value));
     },
     [currentKey]
   );
 
-  if (loadError) return <div className="admin-error m-4">טעינת התוכן נכשלה: {loadError}</div>;
-  if (!drafts) return <div className="admin-loading"><Spinner animation="border" /></div>;
+  if (loadError) {
+    return (
+      <div className="admin-loading">
+        <div className="admin-alert" role="alert">
+          <BsExclamationTriangle /> טעינת התוכן נכשלה: {loadError}
+        </div>
+      </div>
+    );
+  }
+  if (!drafts) {
+    return (
+      <div className="admin-loading">
+        <Spinner animation="border" />
+        <span>טוען את תוכן האתר...</span>
+      </div>
+    );
+  }
 
   const docs = documentList(drafts.categories);
   const current = docs.find((doc) => doc.key === currentKey) || docs[0];
   const draft = drafts[current.key];
+  const dirty = isDirty(current.key);
+  const otherDirty = docs.filter((doc) => doc.key !== current.key && isDirty(doc.key)).length;
+  const CurrentIcon = docIcon(current.key);
 
   const save = async () => {
     setStatus({ busy: true });
@@ -148,6 +272,7 @@ const Editor = ({ user }) => {
     setDocument(current.key, draft);
     setStatus({ message: "השינויים נשמרו ומופיעים באתר" });
   };
+  saveRef.current = dirty && !status.busy ? save : undefined;
 
   const discard = () => {
     setDrafts((value) => ({ ...value, [current.key]: saved[current.key] }));
@@ -155,9 +280,7 @@ const Editor = ({ user }) => {
   };
 
   const restoreDefault = async () => {
-    if (!window.confirm(`להחזיר את "${current.title}" לתוכן המקורי? כל השינויים שנשמרו בעמוד הזה יימחקו.`)) {
-      return;
-    }
+    setConfirmingRestore(false);
     setStatus({ busy: true });
     const { error } = await supabase.from("site_content").delete().eq("key", current.key);
     if (error) {
@@ -174,31 +297,49 @@ const Editor = ({ user }) => {
   const selectDoc = (key) => {
     setSearchParams({ doc: key });
     setStatus({});
+    setSectionsCommand(null);
     window.scrollTo({ top: 0 });
   };
-
-  const dirty = isDirty(current.key);
 
   return (
     <div className="admin">
       <header className="admin-topbar">
-        <strong>ניהול האתר</strong>
+        <div className="admin-brand">
+          <span className="admin-brand-mark"><BsCamera /></span>
+          <strong>ניהול האתר</strong>
+        </div>
         <div className="admin-topbar-actions">
-          <span className="admin-user" dir="ltr">{user.email}</span>
-          <Link to="/" target="_blank" className="admin-link">
-            לאתר <BsBoxArrowUpLeft />
+          <Link to="/" target="_blank" className="admin-ghost" title="פתיחת האתר בלשונית חדשה">
+            <BsBoxArrowUpLeft /> <span className="admin-hide-phone">לאתר</span>
           </Link>
-          <button type="button" className="admin-link" onClick={() => setChangingPassword(true)}>
-            שינוי סיסמה
-          </button>
-          <button type="button" className="admin-link" onClick={() => supabase.auth.signOut()}>
-            יציאה
-          </button>
+          <Dropdown align="start">
+            <Dropdown.Toggle as="button" type="button" className="admin-ghost admin-account" aria-label="חשבון">
+              <BsPersonCircle />
+              <span className="admin-hide-phone admin-account-email" dir="ltr">{user.email}</span>
+            </Dropdown.Toggle>
+            <Dropdown.Menu className="admin-menu">
+              <Dropdown.Header dir="ltr" className="admin-show-phone">{user.email}</Dropdown.Header>
+              <Dropdown.Item as="button" type="button" onClick={() => setChangingPassword(true)}>
+                <BsKey /> שינוי סיסמה
+              </Dropdown.Item>
+              <Dropdown.Divider />
+              <Dropdown.Item as="button" type="button" onClick={() => supabase.auth.signOut()}>
+                <BsBoxArrowLeft /> יציאה
+              </Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
         </div>
       </header>
 
       {changingPassword && (
         <ChangePassword email={user.email} onClose={() => setChangingPassword(false)} />
+      )}
+      {confirmingRestore && (
+        <ConfirmRestore
+          title={current.title}
+          onConfirm={restoreDefault}
+          onCancel={() => setConfirmingRestore(false)}
+        />
       )}
 
       <div className="admin-body">
@@ -216,62 +357,115 @@ const Editor = ({ user }) => {
               </option>
             ))}
           </Form.Select>
-          <ul className="admin-nav-list">
-            {docs.map((doc, index) => (
-              <React.Fragment key={doc.key}>
-                {doc.group && doc.group !== docs[index - 1]?.group && (
-                  <li className="admin-nav-group">{doc.group}</li>
-                )}
-                <li>
-                  <button
-                    type="button"
-                    className={doc.key === current.key ? "active" : ""}
-                    onClick={() => selectDoc(doc.key)}
-                  >
-                    {doc.title}
-                    {isDirty(doc.key) && <span className="admin-dirty-dot" title="שינויים שלא נשמרו" />}
-                  </button>
-                </li>
-              </React.Fragment>
-            ))}
-          </ul>
+          <div className="admin-nav-card">
+            <ul className="admin-nav-list">
+              {docs.map((doc, index) => {
+                const Icon = docIcon(doc.key);
+                return (
+                  <React.Fragment key={doc.key}>
+                    {doc.group && doc.group !== docs[index - 1]?.group && (
+                      <li className="admin-nav-group">{doc.group}</li>
+                    )}
+                    <li>
+                      <button
+                        type="button"
+                        className={`${doc.key === current.key ? "active" : ""} ${doc.group ? "is-sub" : ""}`}
+                        aria-current={doc.key === current.key ? "page" : undefined}
+                        onClick={() => selectDoc(doc.key)}
+                      >
+                        {!doc.group && <Icon className="admin-nav-icon" aria-hidden="true" />}
+                        <span className="admin-nav-title">{doc.group ? doc.title.replace(/^מחירון /, "") : doc.title}</span>
+                        {isDirty(doc.key) && <span className="admin-dirty-dot" title="שינויים שלא נשמרו" />}
+                      </button>
+                    </li>
+                  </React.Fragment>
+                );
+              })}
+            </ul>
+          </div>
         </nav>
 
         <section className="admin-main">
-          <div className="admin-main-header">
-            <h1>{current.title}</h1>
-            <button type="button" className="admin-link" onClick={restoreDefault}>
-              שחזור לתוכן המקורי
+          <div className="admin-page-header">
+            <span className="admin-page-icon"><CurrentIcon /></span>
+            <div className="admin-page-heading">
+              <h1>{current.title}</h1>
+              {current.description && <p>{current.description}</p>}
+            </div>
+          </div>
+
+          <div className="admin-toolbar">
+            {current.path && (
+              <Link to={current.path} target="_blank" className="admin-ghost" title="העמוד באתר, כפי שנשמר">
+                <BsEye /> צפייה באתר
+              </Link>
+            )}
+            <button type="button" className="admin-ghost" onClick={() => setSectionsCommand({ open: true })}>
+              <BsArrowsExpand /> פתיחת הכל
+            </button>
+            <button type="button" className="admin-ghost" onClick={() => setSectionsCommand({ open: false })}>
+              <BsArrowsCollapse /> סגירת הכל
+            </button>
+            <button
+              type="button"
+              className="admin-ghost danger admin-toolbar-end"
+              onClick={() => setConfirmingRestore(true)}
+              disabled={status.busy}
+            >
+              <BsArrowCounterclockwise /> שחזור לתוכן המקורי
             </button>
           </div>
 
-          <FieldEditor
-            key={current.key}
-            docKey={current.key}
-            value={draft}
-            update={update}
-            folder={current.key}
-          />
+          <SectionsCommand.Provider value={sectionsCommand}>
+            <FieldEditor
+              key={current.key}
+              docKey={current.key}
+              value={draft}
+              update={update}
+              folder={current.key}
+            />
+          </SectionsCommand.Provider>
 
-          <div className="admin-savebar">
-            <button type="button" className="btn-brand" onClick={save} disabled={!dirty || status.busy}>
-              {status.busy ? <Spinner animation="border" size="sm" /> : "שמירה"}
-            </button>
-            <button type="button" className="btn-outline-brand" onClick={discard} disabled={!dirty || status.busy}>
-              ביטול שינויים
-            </button>
-            {status.message && (
-              <span className="admin-success">
-                <BsCheckCircle /> {status.message}
-              </span>
-            )}
-            {status.error && <span className="admin-error">{status.error}</span>}
-            {!status.message && !status.error && dirty && (
-              <span className="admin-hint">יש שינויים שלא נשמרו</span>
-            )}
+          <div className={`admin-savebar ${dirty ? "is-dirty" : ""}`}>
+            <div className="admin-savebar-status" aria-live="polite">
+              {status.error ? (
+                <span className="admin-error"><BsExclamationTriangle /> {status.error}</span>
+              ) : dirty ? (
+                <span className="admin-hint"><span className="admin-dirty-dot" /> יש שינויים שלא נשמרו</span>
+              ) : (
+                <span className="admin-saved"><BsCheck2 /> הכל שמור</span>
+              )}
+              {otherDirty > 0 && (
+                <small>
+                  {otherDirty === 1
+                    ? "יש שינויים שלא נשמרו גם בעמוד נוסף"
+                    : `יש שינויים שלא נשמרו גם ב-${otherDirty} עמודים נוספים`}
+                </small>
+              )}
+            </div>
+            <div className="admin-savebar-actions">
+              <button type="button" className="btn-outline-brand" onClick={discard} disabled={!dirty || status.busy}>
+                ביטול שינויים
+              </button>
+              <button
+                type="button"
+                className="btn-brand"
+                onClick={save}
+                disabled={!dirty || status.busy}
+                title="Ctrl+S"
+              >
+                {status.busy ? <Spinner animation="border" size="sm" /> : "שמירה"}
+              </button>
+            </div>
           </div>
         </section>
       </div>
+
+      {status.message && (
+        <div className="admin-toast" role="status">
+          <BsCheckCircle /> {status.message}
+        </div>
+      )}
     </div>
   );
 };
@@ -307,12 +501,9 @@ const AdminScreen = () => {
 
   if (!supabase) {
     return (
-      <div className="admin-login">
-        <div className="admin-login-card">
-          <h1>ניהול האתר</h1>
-          <p>החיבור ל-Supabase עדיין לא הוגדר. יש להוסיף את הפרטים לקובץ <code>.env</code> (ראו <code>.env.example</code>) ולבנות את האתר מחדש.</p>
-        </div>
-      </div>
+      <AuthCard title="ניהול האתר">
+        <p>החיבור ל-Supabase עדיין לא הוגדר. יש להוסיף את הפרטים לקובץ <code>.env</code> (ראו <code>.env.example</code>) ולבנות את האתר מחדש.</p>
+      </AuthCard>
     );
   }
 
@@ -324,26 +515,23 @@ const AdminScreen = () => {
 
   if (!isAdmin) {
     return (
-      <div className="admin-login">
-        <div className="admin-login-card">
-          <h1>אין הרשאה</h1>
-          <p>
-            המשתמש <span dir="ltr">{session.user.email}</span> מחובר, אבל אינו מורשה לערוך את האתר.
+      <AuthCard title="אין הרשאה">
+        <p>
+          המשתמש <span dir="ltr">{session.user.email}</span> מחובר, אבל אינו מורשה לערוך את האתר.
+        </p>
+        {adminCheckError ? (
+          <div className="admin-alert mb-3" role="alert">
+            <BsExclamationTriangle /> בדיקת ההרשאה נכשלה: <span dir="ltr">{adminCheckError}</span>
+          </div>
+        ) : (
+          <p className="admin-muted">
+            המשתמש לא נמצא בטבלת המנהלים (admins) ב-Supabase.
           </p>
-          {adminCheckError ? (
-            <p className="admin-error">
-              בדיקת ההרשאה נכשלה: <span dir="ltr">{adminCheckError}</span>
-            </p>
-          ) : (
-            <p className="admin-hint">
-              המשתמש לא נמצא בטבלת המנהלים (admins) ב-Supabase.
-            </p>
-          )}
-          <button type="button" className="btn-outline-brand" onClick={() => supabase.auth.signOut()}>
-            יציאה
-          </button>
-        </div>
-      </div>
+        )}
+        <button type="button" className="btn-outline-brand w-100" onClick={() => supabase.auth.signOut()}>
+          יציאה
+        </button>
+      </AuthCard>
     );
   }
 
