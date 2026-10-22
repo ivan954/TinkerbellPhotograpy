@@ -20,6 +20,10 @@ const ContactScreen = () => {
   const [error, setError] = useState();
   const [validated, setValidated] = useState(false);
   const address = `${info.address.street.replace("כתובת - ", "")}, ${info.address.city}`;
+  // Google doesn't find the studio from the Hebrew address, so the map is pinned
+  // at the Waze link's coordinates (its "ll" parameter) when it has them.
+  const wazeLocation = social.waze.url.match(/[?&]ll=(-?[\d.]+)(?:%2C|,)(-?[\d.]+)/i);
+  const mapQuery = wazeLocation ? `${wazeLocation[1]},${wazeLocation[2]}` : address;
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -195,7 +199,7 @@ const ContactScreen = () => {
       <div className="contact-map">
         <iframe
           title="מפת הגעה לסטודיו"
-          src={`https://maps.google.com/maps?q=${encodeURIComponent(address)}&hl=he&z=15&output=embed`}
+          src={`https://maps.google.com/maps?q=${encodeURIComponent(mapQuery)}&hl=he&z=16&output=embed`}
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
         />
