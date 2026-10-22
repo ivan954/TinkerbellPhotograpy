@@ -6,7 +6,6 @@ import {
   BsArrowsCollapse,
   BsArrowsExpand,
   BsBoxArrowLeft,
-  BsBoxArrowUpLeft,
   BsCamera,
   BsCheck2,
   BsCheckCircle,
@@ -309,9 +308,6 @@ const Editor = ({ user }) => {
           <strong>ניהול האתר</strong>
         </div>
         <div className="admin-topbar-actions">
-          <Link to="/" target="_blank" className="admin-ghost" title="פתיחת האתר בלשונית חדשה">
-            <BsBoxArrowUpLeft /> <span className="admin-hide-phone">לאתר</span>
-          </Link>
           <Dropdown align="start">
             <Dropdown.Toggle as="button" type="button" className="admin-ghost admin-account" aria-label="חשבון">
               <BsPersonCircle />
