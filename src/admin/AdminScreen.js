@@ -31,6 +31,9 @@ import { mergeContent, useSetDocument } from "../content/ContentProvider";
 import usePageTitle from "../hooks/usePageTitle";
 import "./Admin.css";
 
+// Pages open with every section closed, as after "close all".
+const ALL_CLOSED = { open: false };
+
 const updateIn = (value, [head, ...rest], fn) => {
   if (head === undefined) return fn(value);
   const copy = Array.isArray(value) ? [...value] : { ...value };
@@ -168,10 +171,16 @@ const Editor = ({ user }) => {
   const [status, setStatus] = useState({});
   const [changingPassword, setChangingPassword] = useState(false);
   const [confirmingRestore, setConfirmingRestore] = useState(false);
-  // Every page opens with its sections closed, as after "close all".
-  const [sectionsCommand, setSectionsCommand] = useState({ open: false });
+  const [sectionsCommand, setSectionsCommand] = useState(null);
   const [searchParams, setSearchParams] = useSearchParams();
   const currentKey = searchParams.get("doc") || "home";
+  // Each time another page is shown (menu, back/forward) it opens closed, as
+  // after "close all". Reset during render so the page never flashes open.
+  const [commandKey, setCommandKey] = useState(currentKey);
+  if (commandKey !== currentKey) {
+    setCommandKey(currentKey);
+    setSectionsCommand(null);
+  }
   const saveRef = useRef();
 
   useEffect(() => {
@@ -297,7 +306,6 @@ const Editor = ({ user }) => {
   const selectDoc = (key) => {
     setSearchParams({ doc: key });
     setStatus({});
-    setSectionsCommand({ open: false });
     window.scrollTo({ top: 0 });
   };
 
@@ -413,7 +421,7 @@ const Editor = ({ user }) => {
             </button>
           </div>
 
-          <SectionsCommand.Provider value={sectionsCommand}>
+          <SectionsCommand.Provider value={sectionsCommand || ALL_CLOSED}>
             <FieldEditor
               key={current.key}
               docKey={current.key}
