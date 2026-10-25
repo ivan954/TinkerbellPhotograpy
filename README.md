@@ -100,7 +100,7 @@ npm run deploy
 
 This builds the site, copies `index.html` to `404.html` (so direct links and page refreshes work on GitHub Pages) and pushes `build/` to the `gh-pages` branch. GitHub Pages must be set to deploy from that branch (repository Settings → Pages).
 
-The `.env` file must be present when deploying, otherwise the published site won't connect to Supabase.
+The Supabase values must be available when deploying, otherwise the published site won't connect to Supabase: either a local `.env` file (it is git-ignored, never commit it) or the `REACT_APP_SUPABASE_URL` and `REACT_APP_SUPABASE_ANON_KEY` environment variables, which the build reads the same way.
 
 The site is served from the `/TinkerbellPhotograpy` subpath, set by `homepage` in `package.json`. All internal links and image paths use `process.env.PUBLIC_URL`, so changing `homepage` (for example to a custom domain) is enough to move the site.
 
