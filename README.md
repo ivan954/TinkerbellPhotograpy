@@ -2,8 +2,8 @@
 
 Website for Tinkerbell Studio, a children's and family photography studio in Modiin, Israel. The site is in Hebrew (right-to-left) and shows the studio's galleries, price lists and contact details. Texts, prices and photos can be edited from a password-protected admin screen.
 
-**Live site:** https://ivan954.github.io/TinkerbellPhotograpy
-**Admin screen:** https://ivan954.github.io/TinkerbellPhotograpy/admin
+**Live site:** https://tinkerbell-studio.com
+**Admin screen:** https://tinkerbell-studio.com/admin
 
 ## Pages
 
@@ -72,7 +72,7 @@ npm install
 npm start
 ```
 
-The site opens at http://localhost:3000/TinkerbellPhotograpy.
+The site opens at http://localhost:3000.
 
 Without a `.env` file the site runs on the built-in JSON content and the admin screen is disabled. To connect it to Supabase, copy `.env.example` to `.env` and fill in:
 
@@ -102,7 +102,7 @@ This builds the site, copies `index.html` to `404.html` (so direct links and pag
 
 The Supabase values must be available when deploying, otherwise the published site won't connect to Supabase: either a local `.env` file (it is git-ignored, never commit it) or the `REACT_APP_SUPABASE_URL` and `REACT_APP_SUPABASE_ANON_KEY` environment variables, which the build reads the same way.
 
-The site is served from the `/TinkerbellPhotograpy` subpath, set by `homepage` in `package.json`. All internal links and image paths use `process.env.PUBLIC_URL`, so changing `homepage` (for example to a custom domain) is enough to move the site.
+The site is served at the custom domain `tinkerbell-studio.com` (registered at Cloudflare), set by `homepage` in `package.json` and `public/CNAME`. All internal links and image paths use `process.env.PUBLIC_URL`, so changing `homepage` (for example to a custom domain) is enough to move the site.
 
 ## Supabase setup
 
