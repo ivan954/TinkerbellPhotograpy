@@ -168,7 +168,8 @@ const Editor = ({ user }) => {
   const [status, setStatus] = useState({});
   const [changingPassword, setChangingPassword] = useState(false);
   const [confirmingRestore, setConfirmingRestore] = useState(false);
-  const [sectionsCommand, setSectionsCommand] = useState(null);
+  // Every page opens with its sections closed, as after "close all".
+  const [sectionsCommand, setSectionsCommand] = useState({ open: false });
   const [searchParams, setSearchParams] = useSearchParams();
   const currentKey = searchParams.get("doc") || "home";
   const saveRef = useRef();
@@ -296,7 +297,7 @@ const Editor = ({ user }) => {
   const selectDoc = (key) => {
     setSearchParams({ doc: key });
     setStatus({});
-    setSectionsCommand(null);
+    setSectionsCommand({ open: false });
     window.scrollTo({ top: 0 });
   };
 
