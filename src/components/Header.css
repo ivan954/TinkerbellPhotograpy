@@ -1,6 +1,6 @@
 .header {
   min-height: var(--header-height);
-  background: rgba(251, 246, 242, 0.85);
+  background: rgba(252, 241, 243, 0.88);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   transition: box-shadow 0.3s ease, background-color 0.3s ease;

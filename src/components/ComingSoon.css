@@ -13,7 +13,7 @@
   background:
     radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.9), transparent 45%),
     radial-gradient(circle at 80% 85%, rgba(201, 169, 110, 0.25), transparent 50%),
-    linear-gradient(150deg, var(--color-soft), #f8eee9);
+    linear-gradient(150deg, var(--color-soft), #fdf3f5);
   border: 1px dashed rgba(184, 154, 94, 0.55);
   border-radius: var(--radius);
 }

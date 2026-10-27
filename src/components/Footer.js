@@ -96,9 +96,9 @@ const Footer = () => {
           href={whatsappLink(floatingWhatsapp.message)}
           target="_blank"
           rel="noopener noreferrer"
-          aria-label="שליחת הודעה בוואטסאפ"
+          aria-label={`${floatingWhatsapp.label} בוואטסאפ`}
         >
-          <BsWhatsapp />
+          <BsWhatsapp aria-hidden="true" />
           <span className="floating-whatsapp-label">{floatingWhatsapp.label}</span>
         </a>
       )}

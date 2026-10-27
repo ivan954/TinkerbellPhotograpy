@@ -85,7 +85,7 @@ const PricePackage = ({ category }) => {
                       <Photo
                         src={thumbUrl(image)}
                         alt={`${title} - ${category.title}`}
-                        loading="lazy"
+                        loading={index === 0 ? "eager" : "lazy"}
                         decoding="async"
                       />
                     ) : (

@@ -30,8 +30,10 @@ const GalleryScreen = () => {
                 <Photo
                   className="gallery-card-image"
                   src={coverUrl(category)}
-                  alt={category.title}
-                  loading="lazy"
+                  alt=""
+                  // The first row is on screen right away, so it isn't lazy.
+                  loading={index < 3 ? "eager" : "lazy"}
+                  fetchpriority={index < 2 ? "high" : undefined}
                   decoding="async"
                 />
               ) : (

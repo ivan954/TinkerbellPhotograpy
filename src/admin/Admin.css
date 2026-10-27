@@ -7,7 +7,7 @@
   --admin-success: #2e7d4f;
   --admin-warning: #b5651d;
   --admin-dirty: #d9822b;
-  --admin-focus: 0 0 0 0.2rem rgba(181, 113, 95, 0.22);
+  --admin-focus: 0 0 0 0.2rem rgba(168, 86, 110, 0.22);
   --admin-topbar-height: 60px;
 }
 
@@ -774,7 +774,7 @@ fieldset.admin-list {
 
 .admin-drop.is-dragging {
   outline-color: var(--color-accent);
-  background: rgba(181, 113, 95, 0.07);
+  background: rgba(168, 86, 110, 0.07);
 }
 
 .admin-image-grid {

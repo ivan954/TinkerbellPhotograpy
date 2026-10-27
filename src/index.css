@@ -1,25 +1,30 @@
 /* Design tokens shared by every screen */
 :root {
-  --color-bg: #fbf6f2;
-  --color-surface: #ffffff;
-  --color-soft: #f4e7e1;
-  --color-blush: #ebcdc3;
-  --color-accent: #b5715f;
-  --color-accent-dark: #8f5444;
-  --color-text: #3b2f2b;
-  --color-muted: #7a6a64;
-  --color-border: #ecdcd5;
-  --color-whatsapp: #25d366;
-  --color-gold: #b89a5e;
+  /* Fairy-tale palette: powder pink with touches of gold */
+  --color-bg: #fcf1f3;
+  --color-surface: #fffbfc;
+  --color-soft: #f8e4e9;
+  --color-blush: #f0cdd6;
+  --color-accent: #a8566e;
+  --color-accent-dark: #86405a;
+  --color-text: #3d2a30;
+  --color-muted: #76595f;
+  --color-border: #f0d9df;
+  /* WhatsApp green, a shade deeper so white text on it stays readable */
+  --color-whatsapp: #15843f;
+  /* Decorative gold (lines, icons, glitter) and a darker one for small text */
+  --color-gold: #c9a45c;
+  --color-gold-light: #ecd9a8;
+  --color-gold-text: #80612b;
 
   --font-body: "Heebo", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial,
     sans-serif;
-  --font-display: "Frank Ruhl Libre", Georgia, serif;
+  --font-display: "Bellefair", Georgia, serif;
 
   --radius-sm: 10px;
   --radius: 18px;
-  --shadow-sm: 0 2px 10px rgba(59, 47, 43, 0.06);
-  --shadow: 0 12px 34px rgba(59, 47, 43, 0.12);
+  --shadow-sm: 0 2px 12px rgba(134, 64, 90, 0.07);
+  --shadow: 0 14px 36px rgba(134, 64, 90, 0.14);
   --header-height: 76px;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -30,6 +35,14 @@ html {
 
 body {
   background-color: var(--color-bg);
+  /* Soft glows of gold and pink across the page */
+  background-image: radial-gradient(
+      ellipse 60% 40% at 100% 0%,
+      rgba(236, 217, 168, 0.28),
+      transparent 70%
+    ),
+    radial-gradient(ellipse 50% 35% at 0% 35%, rgba(240, 205, 214, 0.55), transparent 70%),
+    radial-gradient(ellipse 55% 35% at 100% 75%, rgba(236, 217, 168, 0.2), transparent 70%);
   color: var(--color-text);
   margin: 0;
   font-family: var(--font-body);
@@ -45,8 +58,14 @@ h3,
 .display-font {
   font-family: var(--font-display);
   color: var(--color-text);
-  font-weight: 700;
+  font-weight: 400;
   line-height: 1.25;
+}
+
+/* Small headings (cards, steps) read better in the body font */
+h3 {
+  font-family: var(--font-body);
+  font-weight: 700;
 }
 
 a {
@@ -62,8 +81,9 @@ a:hover {
   outline-offset: 3px;
 }
 
+/* At least a screen tall, so the footer never jumps while a page loads. */
 main {
-  min-height: 70vh;
+  min-height: 100vh;
   padding-top: var(--header-height);
 }
 
@@ -106,7 +126,7 @@ picture {
   background: var(--color-accent-dark);
   color: #fff;
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(143, 84, 68, 0.25);
+  box-shadow: 0 8px 20px rgba(134, 64, 90, 0.28);
 }
 
 .btn-outline-brand {
@@ -128,10 +148,10 @@ picture {
 
 .btn-whatsapp:hover,
 .btn-whatsapp:focus-visible {
-  background: #1ebe5b;
+  background: #117536;
   color: #fff;
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3);
+  box-shadow: 0 8px 20px rgba(21, 132, 63, 0.3);
 }
 
 .btn-brand:disabled {
@@ -146,7 +166,9 @@ picture {
 }
 
 .section-soft {
-  background: var(--color-soft);
+  background: linear-gradient(180deg, rgba(248, 228, 233, 0.9), rgba(248, 228, 233, 0.6));
+  border-top: 1px solid rgba(201, 164, 92, 0.25);
+  border-bottom: 1px solid rgba(201, 164, 92, 0.25);
 }
 
 .section-heading {
@@ -157,7 +179,7 @@ picture {
 
 .section-eyebrow {
   display: inline-block;
-  color: var(--color-gold);
+  color: var(--color-gold-text);
   font-weight: 500;
   letter-spacing: 0.08em;
   font-size: 0.95rem;
@@ -270,6 +292,11 @@ picture {
   .reveal {
     opacity: 1;
     transform: none;
+  }
+
+  /* No floating glitter for visitors who asked for less motion */
+  .hero-glitter {
+    display: none;
   }
 }
 

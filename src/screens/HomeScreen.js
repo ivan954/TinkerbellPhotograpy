@@ -15,6 +15,17 @@ import { imageUrl, thumbUrl } from "../content/images";
 import usePageTitle from "../hooks/usePageTitle";
 import "./HomeScreen.css";
 
+// Gold glitter floating up over the hero photo: horizontal position (%),
+// size (px), seconds per rise, start delay (s) and sideways drift (px).
+// Every fifth one is a little star instead of a dot.
+const GLITTER = [
+  [4, 5, 11, 0, 30], [9, 3, 9, 4, -20], [14, 7, 13, 2, 40], [19, 4, 10, 7, -30],
+  [24, 3, 12, 1, 20], [29, 6, 14, 5, -40], [34, 4, 9, 3, 25], [39, 3, 11, 8, -15],
+  [44, 5, 13, 0.5, 35], [49, 4, 10, 6, -25], [54, 7, 12, 2.5, 30], [59, 3, 9, 9, -20],
+  [64, 5, 14, 1.5, 40], [69, 4, 11, 4.5, -35], [74, 3, 10, 7.5, 15], [79, 6, 13, 3.5, -30],
+  [84, 4, 9, 0.8, 25], [89, 5, 12, 5.5, -20], [94, 3, 11, 2.2, 30], [97, 4, 14, 6.5, -25],
+];
+
 // Icons for the highlights, in order (they repeat if more highlights are added).
 const HIGHLIGHT_ICONS = [BsHouseHeart, BsHeart, BsStars];
 
@@ -36,9 +47,19 @@ const HomeScreen = () => {
           fetchpriority="high"
           decoding="async"
         />
-        <div className="hero-sparkles" aria-hidden="true">
-          {Array.from({ length: 14 }, (_, index) => (
-            <span key={index} />
+        <div className="hero-glitter" aria-hidden="true">
+          {GLITTER.map(([left, size, duration, delay, drift], index) => (
+            <span
+              key={index}
+              className={index % 5 === 2 ? "is-star" : undefined}
+              style={{
+                "--left": `${left}%`,
+                "--size": `${size}px`,
+                "--duration": `${duration}s`,
+                "--delay": `${-delay}s`,
+                "--drift": `${drift}px`,
+              }}
+            />
           ))}
         </div>
         <div className="hero-overlay">
@@ -101,7 +122,7 @@ const HomeScreen = () => {
                 <Reveal key={category.key} className="service-card" delay={(index % 4) * 80}>
                   <Link to={galleryPath(category)} className="service-card-link">
                     {coverUrl(category) ? (
-                      <Photo src={coverUrl(category)} alt={category.title} loading="lazy" decoding="async" />
+                      <Photo src={coverUrl(category)} alt="" loading="lazy" decoding="async" />
                     ) : (
                       <ComingSoon compact />
                     )}

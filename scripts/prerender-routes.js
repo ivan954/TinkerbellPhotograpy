@@ -20,11 +20,20 @@ const seo = read("seo.json");
 const categories = read("components/categories.json");
 const about = read("components/screens/about.json");
 const contact = read("components/screens/contact.json");
+const home = read("components/screens/home.json");
 
 const pageTitle = (title) => `${title} | ${SITE_NAME}`;
 
+// The home page's large photo starts downloading with the HTML instead of
+// after the app has loaded (same files Photo.js picks: WebP, small on phones).
+const heroWebp = (folder) => home.hero.image.replace("/images/", folder).replace(/\.jpe?g$/i, ".webp");
+const heroPreload = /^\/images\/(Carousel|About)\//.test(home.hero.image)
+  ? `<link rel="preload" as="image" type="image/webp" fetchpriority="high" ` +
+    `imagesrcset="${heroWebp("/images/thumbs/")} 800w, ${heroWebp("/images/")} 1920w" imagesizes="100vw">`
+  : "";
+
 const routes = [
-  { path: "/", title: `${SITE_NAME} | צילומי ילדים ומשפחות במודיעין` },
+  { path: "/", title: `${SITE_NAME} | צילומי ילדים ומשפחות במודיעין`, head: heroPreload },
   { path: "/gallery", title: pageTitle(categories.page.title), description: seo.gallery },
   { path: "/about", title: pageTitle(about.pageTitle), description: about.description },
   { path: "/contact", title: pageTitle(contact.page.title), description: seo.contact },
@@ -54,7 +63,7 @@ const setTag = (html, pattern, replacement) => {
   return html.replace(pattern, replacement);
 };
 
-const render = ({ path: route, title, description }) => {
+const render = ({ path: route, title, description, head = "" }) => {
   const url = `${seo.siteUrl}${route}`;
   let html = setTag(template, /<title>[^<]*<\/title>/, `<title>${escape(title)}</title>`);
   html = setTag(html, /<meta property="og:title" content="[^"]*"/, `<meta property="og:title" content="${escape(title)}"`);
@@ -68,6 +77,7 @@ const render = ({ path: route, title, description }) => {
       `<meta property="og:description" content="${escape(description)}"`
     );
   }
+  if (head) html = setTag(html, /<\/head>/, `${head}</head>`);
   return html;
 };
 
@@ -78,7 +88,7 @@ for (const route of routes) {
 }
 
 // Unknown addresses (and old links) still open the app, which shows its own page.
-fs.copyFileSync(path.join(BUILD, "index.html"), path.join(BUILD, "404.html"));
+fs.writeFileSync(path.join(BUILD, "404.html"), template);
 
 const today = new Date().toISOString().slice(0, 10);
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>

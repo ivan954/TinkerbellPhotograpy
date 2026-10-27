@@ -84,7 +84,12 @@ const ImagesScreen = () => {
             onClick={() => setSelectedIndex(index)}
             aria-label={`הגדלת ${image.alt}`}
           >
-            <Photo src={image.thumb} alt={image.alt} loading="lazy" decoding="async" />
+            <Photo
+              src={image.thumb}
+              alt={image.alt}
+              loading={index < 3 ? "eager" : "lazy"}
+              decoding="async"
+            />
           </button>
         ))}
       </div>

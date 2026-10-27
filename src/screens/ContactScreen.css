@@ -34,7 +34,7 @@
 .contact-card .form-control:focus,
 .contact-card .form-select:focus {
   border-color: var(--color-accent);
-  box-shadow: 0 0 0 3px rgba(181, 113, 95, 0.18);
+  box-shadow: 0 0 0 3px rgba(168, 86, 110, 0.18);
   background-color: #fff;
 }
 
