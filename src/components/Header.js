@@ -11,6 +11,7 @@ const Header = () => {
   const { navigation } = useContent("header");
   const { social } = useContent("footer");
   const { logo } = useContent("common");
+  const { faq } = useContent("home");
   const categories = useCategories();
   const { pathname } = useLocation();
   // Controlled so the mobile menu closes after a link is tapped.
@@ -81,6 +82,11 @@ const Header = () => {
                 </NavDropdown.Item>
               ))}
             </NavDropdown>
+            {faq.visible && (
+              <Nav.Link as={NavLink} to="/faq" onClick={closeMenu}>
+                {navigation.links.faq}
+              </Nav.Link>
+            )}
             <Nav.Link as={NavLink} to="/contact" onClick={closeMenu}>
               {navigation.links.contact}
             </Nav.Link>

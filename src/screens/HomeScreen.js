@@ -7,7 +7,6 @@ import Reveal from "../components/Reveal";
 import Photo from "../components/Photo";
 import ComingSoon from "../components/ComingSoon";
 import TrustRow from "../components/TrustRow";
-import Faq from "../components/Faq";
 import { useCategories, coverUrl, galleryPath } from "../data/categories";
 import { useWhatsappLink } from "../data/whatsapp";
 import { useContent } from "../content/ContentProvider";
@@ -33,7 +32,7 @@ const HomeScreen = () => {
   usePageTitle();
   const categories = useCategories();
   const whatsappLink = useWhatsappLink();
-  const { hero, highlights, services, about, steps, testimonials, faq, cta } = useContent("home");
+  const { hero, highlights, services, about, steps, testimonials, cta } = useContent("home");
 
   return (
     <div className="home">
@@ -202,8 +201,6 @@ const HomeScreen = () => {
       )}
 
       <TrustRow />
-
-      <Faq faq={faq} />
 
       {cta.visible && (
         <section className="cta-band">

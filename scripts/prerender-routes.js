@@ -36,6 +36,7 @@ const routes = [
   { path: "/", title: `${SITE_NAME} | צילומי ילדים ומשפחות במודיעין`, head: heroPreload },
   { path: "/gallery", title: pageTitle(categories.page.title), description: seo.gallery },
   { path: "/about", title: pageTitle(about.pageTitle), description: about.description },
+  { path: "/faq", title: pageTitle(home.faq.title), description: seo.faq },
   { path: "/contact", title: pageTitle(contact.page.title), description: seo.contact },
 ];
 

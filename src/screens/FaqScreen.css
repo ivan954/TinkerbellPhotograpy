@@ -49,3 +49,25 @@
   color: var(--color-muted);
   line-height: 1.8;
 }
+
+.faq-page {
+  padding-bottom: 4rem;
+}
+
+.faq-page .page-hero .section-eyebrow {
+  margin-bottom: 0.35rem;
+}
+
+.faq-ask {
+  text-align: center;
+  margin-top: 2.5rem;
+}
+
+.faq-ask p {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.faq-page-trust {
+  margin-top: 4rem;
+}
