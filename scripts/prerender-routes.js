@@ -23,15 +23,21 @@ const contact = read("components/screens/contact.json");
 const home = read("components/screens/home.json");
 const faq = read("components/screens/faq.json");
 
+const template = fs.readFileSync(path.join(BUILD, "index.html"), "utf8");
+
 const pageTitle = (title) => `${title} | ${SITE_NAME}`;
 
 // The home page's large photo starts downloading with the HTML instead of
-// after the app has loaded (same files Photo.js picks: WebP, small on phones).
-const heroWebp = (folder) => home.hero.image.replace("/images/", folder).replace(/\.jpe?g$/i, ".webp");
-const heroPreload = /^\/images\/(Carousel|About)\//.test(home.hero.image)
-  ? `<link rel="preload" as="image" type="image/webp" fetchpriority="high" ` +
-    `imagesrcset="${heroWebp("/images/thumbs/")} 800w, ${heroWebp("/images/")} 1920w" imagesizes="100vw">`
-  : "";
+// after the app has loaded (the same files Photo.js picks: the 800px copy on
+// phones). Photos are in Supabase Storage; the build put its address in the
+// page's preconnect link.
+const supabaseUrl = (template.match(/<link rel="preconnect" href="(https:[^"]+supabase[^"]*)"/) || [])[1];
+const bucket = supabaseUrl && `${supabaseUrl.replace(/\/$/, "")}/storage/v1/object/public/site-images`;
+const heroPreload =
+  bucket && !/^https?:/.test(home.hero.image)
+    ? `<link rel="preload" as="image" fetchpriority="high" ` +
+      `imagesrcset="${bucket}/thumbs/${home.hero.image} 800w, ${bucket}/${home.hero.image} 1920w" imagesizes="100vw">`
+    : "";
 
 const routes = [
   { path: "/", title: `${SITE_NAME} | צילומי ילדים ומשפחות במודיעין`, head: heroPreload },
@@ -58,7 +64,6 @@ for (const category of categories.list.filter((item) => item.visible !== false))
 const escape = (text) =>
   text.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
-const template = fs.readFileSync(path.join(BUILD, "index.html"), "utf8");
 
 const setTag = (html, pattern, replacement) => {
   if (!pattern.test(html)) throw new Error(`index.html has no tag matching ${pattern}`);

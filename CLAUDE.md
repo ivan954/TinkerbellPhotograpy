@@ -11,3 +11,6 @@
   settings; never ask for the keys in chat and never deploy without them,
   or the live site loses its admin screen and Supabase content.
 - Never put the Supabase secret / `service_role` key anywhere in the repo.
+- No photos in the repo: all photos are in the Supabase `site-images` bucket
+  (see README "Photos"). Don't add images under `public/`; new photos are
+  uploaded from the admin screen.

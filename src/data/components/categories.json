@@ -10,24 +10,24 @@
       "visible": true,
       "prices": "newborn",
       "pricesPath": "/NewBornPrices",
-      "cover": "/images/Gallery/NewBorn/GalleryFaceCard/image.jpg",
+      "cover": "bundled/Gallery/NewBorn/GalleryFaceCard/image.jpg",
       "images": [
-        "/images/Gallery/NewBorn/1.jpg",
-        "/images/Gallery/NewBorn/2.jpg",
-        "/images/Gallery/NewBorn/3.jpg",
-        "/images/Gallery/NewBorn/4.jpg",
-        "/images/Gallery/NewBorn/5.jpg",
-        "/images/Gallery/NewBorn/6.jpg",
-        "/images/Gallery/NewBorn/7.jpg",
-        "/images/Gallery/NewBorn/8.jpg",
-        "/images/Gallery/NewBorn/9.jpg",
-        "/images/Gallery/NewBorn/10.jpg",
-        "/images/Gallery/NewBorn/11.jpg",
-        "/images/Gallery/NewBorn/12.jpg",
-        "/images/Gallery/NewBorn/13.jpg",
-        "/images/Gallery/NewBorn/14.jpg",
-        "/images/Gallery/NewBorn/15.jpg",
-        "/images/Gallery/NewBorn/16.jpg"
+        "bundled/Gallery/NewBorn/1.jpg",
+        "bundled/Gallery/NewBorn/2.jpg",
+        "bundled/Gallery/NewBorn/3.jpg",
+        "bundled/Gallery/NewBorn/4.jpg",
+        "bundled/Gallery/NewBorn/5.jpg",
+        "bundled/Gallery/NewBorn/6.jpg",
+        "bundled/Gallery/NewBorn/7.jpg",
+        "bundled/Gallery/NewBorn/8.jpg",
+        "bundled/Gallery/NewBorn/9.jpg",
+        "bundled/Gallery/NewBorn/10.jpg",
+        "bundled/Gallery/NewBorn/11.jpg",
+        "bundled/Gallery/NewBorn/12.jpg",
+        "bundled/Gallery/NewBorn/13.jpg",
+        "bundled/Gallery/NewBorn/14.jpg",
+        "bundled/Gallery/NewBorn/15.jpg",
+        "bundled/Gallery/NewBorn/16.jpg"
       ]
     },
     {
@@ -36,11 +36,11 @@
       "visible": true,
       "prices": "pregnancy",
       "pricesPath": "/PregnancyPrices",
-      "cover": "/images/Gallery/Pregnancy/GalleryFaceCard/image.jpg",
+      "cover": "bundled/Gallery/Pregnancy/GalleryFaceCard/image.jpg",
       "images": [
-        "/images/Gallery/Pregnancy/1.jpg",
-        "/images/Gallery/Pregnancy/2.jpg",
-        "/images/Gallery/Pregnancy/3.jpg"
+        "bundled/Gallery/Pregnancy/1.jpg",
+        "bundled/Gallery/Pregnancy/2.jpg",
+        "bundled/Gallery/Pregnancy/3.jpg"
       ]
     },
     {
@@ -49,11 +49,11 @@
       "visible": true,
       "prices": "oneyear",
       "pricesPath": "/OneYearPrices",
-      "cover": "/images/Gallery/OneYearOld/GalleryFaceCard/image.jpg",
+      "cover": "bundled/Gallery/OneYearOld/GalleryFaceCard/image.jpg",
       "images": [
-        "/images/Gallery/OneYearOld/1.jpg",
-        "/images/Gallery/OneYearOld/2.jpg",
-        "/images/Gallery/OneYearOld/3.jpg"
+        "bundled/Gallery/OneYearOld/1.jpg",
+        "bundled/Gallery/OneYearOld/2.jpg",
+        "bundled/Gallery/OneYearOld/3.jpg"
       ]
     },
     {
@@ -62,30 +62,30 @@
       "visible": true,
       "prices": "children",
       "pricesPath": "/ChildrenPrices",
-      "cover": "/images/Gallery/Children/GalleryFaceCard/image.jpg",
+      "cover": "bundled/Gallery/Children/GalleryFaceCard/image.jpg",
       "images": [
-        "/images/Gallery/Children/1.jpg",
-        "/images/Gallery/Children/2.jpg",
-        "/images/Gallery/Children/3.jpg",
-        "/images/Gallery/Children/4.jpg",
-        "/images/Gallery/Children/5.jpg",
-        "/images/Gallery/Children/6.jpg",
-        "/images/Gallery/Children/7.jpg",
-        "/images/Gallery/Children/8.jpg",
-        "/images/Gallery/Children/9.jpg",
-        "/images/Gallery/Children/10.jpg",
-        "/images/Gallery/Children/11.jpg",
-        "/images/Gallery/Children/12.jpg",
-        "/images/Gallery/Children/13.jpg",
-        "/images/Gallery/Children/14.jpg",
-        "/images/Gallery/Children/15.jpg",
-        "/images/Gallery/Children/16.jpg",
-        "/images/Gallery/Children/17.jpg",
-        "/images/Gallery/Children/18.jpg",
-        "/images/Gallery/Children/19.jpg",
-        "/images/Gallery/Children/20.jpg",
-        "/images/Gallery/Children/21.jpg",
-        "/images/Gallery/Children/22.jpg"
+        "bundled/Gallery/Children/1.jpg",
+        "bundled/Gallery/Children/2.jpg",
+        "bundled/Gallery/Children/3.jpg",
+        "bundled/Gallery/Children/4.jpg",
+        "bundled/Gallery/Children/5.jpg",
+        "bundled/Gallery/Children/6.jpg",
+        "bundled/Gallery/Children/7.jpg",
+        "bundled/Gallery/Children/8.jpg",
+        "bundled/Gallery/Children/9.jpg",
+        "bundled/Gallery/Children/10.jpg",
+        "bundled/Gallery/Children/11.jpg",
+        "bundled/Gallery/Children/12.jpg",
+        "bundled/Gallery/Children/13.jpg",
+        "bundled/Gallery/Children/14.jpg",
+        "bundled/Gallery/Children/15.jpg",
+        "bundled/Gallery/Children/16.jpg",
+        "bundled/Gallery/Children/17.jpg",
+        "bundled/Gallery/Children/18.jpg",
+        "bundled/Gallery/Children/19.jpg",
+        "bundled/Gallery/Children/20.jpg",
+        "bundled/Gallery/Children/21.jpg",
+        "bundled/Gallery/Children/22.jpg"
       ]
     },
     {
@@ -94,20 +94,20 @@
       "visible": true,
       "prices": "family",
       "pricesPath": "/FamilyPrices",
-      "cover": "/images/Gallery/Family/GalleryFaceCard/image.jpg",
+      "cover": "bundled/Gallery/Family/GalleryFaceCard/image.jpg",
       "images": [
-        "/images/Gallery/Family/1.jpg",
-        "/images/Gallery/Family/2.jpg",
-        "/images/Gallery/Family/3.jpg",
-        "/images/Gallery/Family/4.jpg",
-        "/images/Gallery/Family/5.jpg",
-        "/images/Gallery/Family/6.jpg",
-        "/images/Gallery/Family/7.jpg",
-        "/images/Gallery/Family/8.jpg",
-        "/images/Gallery/Family/9.jpg",
-        "/images/Gallery/Family/10.jpg",
-        "/images/Gallery/Family/11.jpg",
-        "/images/Gallery/Family/12.jpg"
+        "bundled/Gallery/Family/1.jpg",
+        "bundled/Gallery/Family/2.jpg",
+        "bundled/Gallery/Family/3.jpg",
+        "bundled/Gallery/Family/4.jpg",
+        "bundled/Gallery/Family/5.jpg",
+        "bundled/Gallery/Family/6.jpg",
+        "bundled/Gallery/Family/7.jpg",
+        "bundled/Gallery/Family/8.jpg",
+        "bundled/Gallery/Family/9.jpg",
+        "bundled/Gallery/Family/10.jpg",
+        "bundled/Gallery/Family/11.jpg",
+        "bundled/Gallery/Family/12.jpg"
       ]
     },
     {
@@ -116,11 +116,11 @@
       "visible": true,
       "prices": "halake",
       "pricesPath": "/HalakePrices",
-      "cover": "/images/Gallery/Halake/1.jpg",
+      "cover": "bundled/Gallery/Halake/1.jpg",
       "images": [
-        "/images/Gallery/Halake/1.jpg",
-        "/images/Gallery/Halake/2.jpg",
-        "/images/Gallery/Halake/3.jpg"
+        "bundled/Gallery/Halake/1.jpg",
+        "bundled/Gallery/Halake/2.jpg",
+        "bundled/Gallery/Halake/3.jpg"
       ]
     },
     {
@@ -129,13 +129,13 @@
       "visible": true,
       "prices": "firstclass",
       "pricesPath": "/FirstClassPrices",
-      "cover": "/images/Gallery/FirstClass/GalleryFaceCard/image.jpg",
+      "cover": "bundled/Gallery/FirstClass/GalleryFaceCard/image.jpg",
       "images": [
-        "/images/Gallery/FirstClass/1.jpg",
-        "/images/Gallery/FirstClass/2.jpg",
-        "/images/Gallery/FirstClass/3.jpg",
-        "/images/Gallery/FirstClass/4.jpg",
-        "/images/Gallery/FirstClass/5.jpg"
+        "bundled/Gallery/FirstClass/1.jpg",
+        "bundled/Gallery/FirstClass/2.jpg",
+        "bundled/Gallery/FirstClass/3.jpg",
+        "bundled/Gallery/FirstClass/4.jpg",
+        "bundled/Gallery/FirstClass/5.jpg"
       ]
     },
     {
@@ -144,20 +144,20 @@
       "visible": true,
       "prices": "purim",
       "pricesPath": "/PurimPrices",
-      "cover": "/images/Gallery/Purim/GalleryFaceCard/image.jpg",
+      "cover": "bundled/Gallery/Purim/GalleryFaceCard/image.jpg",
       "images": [
-        "/images/Gallery/Purim/1.jpg",
-        "/images/Gallery/Purim/2.jpg",
-        "/images/Gallery/Purim/3.jpg",
-        "/images/Gallery/Purim/4.jpg",
-        "/images/Gallery/Purim/5.jpg",
-        "/images/Gallery/Purim/6.jpg",
-        "/images/Gallery/Purim/7.jpg",
-        "/images/Gallery/Purim/8.jpg",
-        "/images/Gallery/Purim/9.jpg",
-        "/images/Gallery/Purim/10.jpg",
-        "/images/Gallery/Purim/11.jpg",
-        "/images/Gallery/Purim/12.jpg"
+        "bundled/Gallery/Purim/1.jpg",
+        "bundled/Gallery/Purim/2.jpg",
+        "bundled/Gallery/Purim/3.jpg",
+        "bundled/Gallery/Purim/4.jpg",
+        "bundled/Gallery/Purim/5.jpg",
+        "bundled/Gallery/Purim/6.jpg",
+        "bundled/Gallery/Purim/7.jpg",
+        "bundled/Gallery/Purim/8.jpg",
+        "bundled/Gallery/Purim/9.jpg",
+        "bundled/Gallery/Purim/10.jpg",
+        "bundled/Gallery/Purim/11.jpg",
+        "bundled/Gallery/Purim/12.jpg"
       ]
     },
     {
@@ -166,11 +166,11 @@
       "visible": true,
       "prices": "shavuot",
       "pricesPath": "/ShavuotPrices",
-      "cover": "/images/Gallery/Shavuot/3.jpg",
+      "cover": "bundled/Gallery/Shavuot/3.jpg",
       "images": [
-        "/images/Gallery/Shavuot/1.jpg",
-        "/images/Gallery/Shavuot/2.jpg",
-        "/images/Gallery/Shavuot/3.jpg"
+        "bundled/Gallery/Shavuot/1.jpg",
+        "bundled/Gallery/Shavuot/2.jpg",
+        "bundled/Gallery/Shavuot/3.jpg"
       ]
     },
     {
@@ -179,15 +179,15 @@
       "visible": true,
       "prices": "tadmit",
       "pricesPath": "/TadmitPrices",
-      "cover": "/images/Gallery/Tadmit/2.jpg",
+      "cover": "bundled/Gallery/Tadmit/2.jpg",
       "images": [
-        "/images/Gallery/Tadmit/1.jpg",
-        "/images/Gallery/Tadmit/2.jpg",
-        "/images/Gallery/Tadmit/3.jpg",
-        "/images/Gallery/Tadmit/4.jpg",
-        "/images/Gallery/Tadmit/5.jpg",
-        "/images/Gallery/Tadmit/6.jpg",
-        "/images/Gallery/Tadmit/7.jpg"
+        "bundled/Gallery/Tadmit/1.jpg",
+        "bundled/Gallery/Tadmit/2.jpg",
+        "bundled/Gallery/Tadmit/3.jpg",
+        "bundled/Gallery/Tadmit/4.jpg",
+        "bundled/Gallery/Tadmit/5.jpg",
+        "bundled/Gallery/Tadmit/6.jpg",
+        "bundled/Gallery/Tadmit/7.jpg"
       ]
     }
   ]

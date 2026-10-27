@@ -40,9 +40,9 @@
     ]
   },
   "images": {
-    "premium": "/images/Gallery/Pregnancy/Prices/1.jpg",
-    "extra": "/images/Gallery/Pregnancy/Prices/2.jpg",
-    "basic": "/images/Gallery/Pregnancy/Prices/3.jpg"
+    "premium": "bundled/Gallery/Pregnancy/Prices/1.jpg",
+    "extra": "bundled/Gallery/Pregnancy/Prices/2.jpg",
+    "basic": "bundled/Gallery/Pregnancy/Prices/3.jpg"
   },
   "additionalInfo": "צילומים בטבע בתוספת של 100 ש\"ח בקרבת מודיעין"
 }

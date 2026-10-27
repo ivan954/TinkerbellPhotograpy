@@ -27,7 +27,6 @@ import {
 import supabase from "./supabaseClient";
 import FieldEditor, { SectionsCommand } from "./FieldEditor";
 import ChangePassword from "./ChangePassword";
-import MigrationCard from "./MigrationCard";
 import { documentList } from "./fields";
 import defaults from "../content/defaults";
 import { buildContent, useSetDocument } from "../content/ContentProvider";
@@ -398,16 +397,6 @@ const Editor = ({ user }) => {
         </nav>
 
         <section className="admin-main">
-          <MigrationCard
-            saved={saved}
-            hasUnsavedChanges={anyDirty}
-            onMigrated={(changed) => {
-              setSaved((value) => ({ ...value, ...changed }));
-              setDrafts((value) => ({ ...value, ...changed }));
-              Object.entries(changed).forEach(([key, data]) => setDocument(key, data));
-            }}
-          />
-
           <div className="admin-page-header">
             <span className="admin-page-icon"><CurrentIcon /></span>
             <div className="admin-page-heading">

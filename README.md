@@ -60,10 +60,9 @@ Adding a new gallery category is not possible from the admin screen yet, because
 
 ### Photos
 
-- **Built-in photos** live in `public/images/` and are served by GitHub Pages. Thumbnails are in `public/images/thumbs/`.
-- **Uploaded photos** live in the Supabase `site-images` bucket, with thumbnails under `thumbs/`.
+All photos live in the Supabase `site-images` bucket; none are stored in this repository. Add or replace them from the admin screen: each upload is resized in the browser to at most 1920px (EXIF data such as GPS is dropped) and gets an 800px-wide thumbnail at the same path under `thumbs/`.
 
-After adding photos to `public/images/` by hand, run `npm run optimize-images`. It resizes and recompresses them, removes EXIF data, creates thumbnails, saves lighter WebP copies of the thumbnails and the carousel/about photos (used automatically by browsers that support them) and shrinks the logo. Files that are already optimized are skipped.
+The content stores a photo either as a full URL (uploads) or as a path inside the bucket (the built-in content, e.g. `bundled/Gallery/NewBorn/1.jpg`, the photos that used to ship with the site); `src/content/images.js` turns both into addresses.
 
 ## Local development
 
@@ -90,7 +89,6 @@ Both values are public by design: they end up in the site's JavaScript, and what
 | `npm start` | Runs the site locally |
 | `npm run build` | Builds the production site into `build/` |
 | `npm run deploy` | Builds and publishes to GitHub Pages (the `gh-pages` branch) |
-| `npm run optimize-images` | Optimizes photos in `public/images/` and creates thumbnails |
 
 ## Deployment
 
@@ -142,8 +140,7 @@ Free Supabase projects pause after a week without activity. The GitHub workflow 
 ## Project structure
 
 ```
-public/images/          Built-in photos (optimized) and thumbs/
-scripts/                optimize-images.js, prerender-routes.js (runs before deploy)
+scripts/                prerender-routes.js (runs before deploy)
 supabase/schema.sql     Database tables, policies and storage bucket
 src/
   App.js                Routes (price pages are generated from the categories)

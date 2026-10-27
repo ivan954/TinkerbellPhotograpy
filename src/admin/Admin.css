@@ -1185,37 +1185,3 @@ fieldset.admin-list {
     bottom: 8.5rem;
   }
 }
-
-/* One-time move of the built-in photos to Supabase (MigrationCard.js) */
-.admin-migration {
-  margin-bottom: 1.5rem;
-  padding: 1.25rem 1.5rem;
-  border: 1px solid rgba(201, 164, 92, 0.6);
-  border-radius: var(--radius);
-  background: #fffaf0;
-}
-
-.admin-migration.is-done {
-  border-color: rgba(21, 132, 63, 0.4);
-  background: #f3fbf5;
-}
-
-.admin-migration p {
-  margin-bottom: 0.75rem;
-}
-
-.admin-migration-title {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-weight: 700;
-}
-
-.admin-migration .progress {
-  height: 1.4rem;
-}
-
-.admin-migration ul {
-  margin: 0.5rem 0 0;
-  font-size: 0.85rem;
-}

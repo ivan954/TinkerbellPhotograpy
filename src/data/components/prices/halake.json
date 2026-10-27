@@ -40,9 +40,9 @@
     ]
   },
   "images": {
-    "premium": "/images/Gallery/Halake/Prices/1.jpg",
-    "extra": "/images/Gallery/Halake/Prices/2.jpg",
-    "basic": "/images/Gallery/Halake/Prices/3.jpg"
+    "premium": "bundled/Gallery/Halake/Prices/1.jpg",
+    "extra": "bundled/Gallery/Halake/Prices/2.jpg",
+    "basic": "bundled/Gallery/Halake/Prices/3.jpg"
   },
   "additionalInfo": "צילומים בטבע בתוספת של 100 ש\"ח בקרבת מודיעין"
 }

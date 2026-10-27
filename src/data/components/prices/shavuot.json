@@ -40,9 +40,9 @@
     ]
   },
   "images": {
-    "premium": "/images/Gallery/Shavuot/Prices/1.jpg",
-    "extra": "/images/Gallery/Shavuot/Prices/2.jpg",
-    "basic": "/images/Gallery/Shavuot/Prices/3.jpg"
+    "premium": "bundled/Gallery/Shavuot/Prices/1.jpg",
+    "extra": "bundled/Gallery/Shavuot/Prices/2.jpg",
+    "basic": "bundled/Gallery/Shavuot/Prices/3.jpg"
   },
   "additionalInfo": "צילומי שבועות מתקיימים בסטודיו בלבד"
 }

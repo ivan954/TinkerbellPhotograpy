@@ -28,7 +28,7 @@ test("a category whose photos were all deleted still offers to add photos", () =
 });
 
 test("a category with photos offers to add more", () => {
-  renderEditor("categories", { list: [category(["/images/Gallery/Halake/1.jpg"])] });
+  renderEditor("categories", { list: [category(["bundled/Gallery/Halake/1.jpg"])] });
   expect(screen.getByText("הוספת תמונות")).toBeInTheDocument();
 });
 

@@ -40,9 +40,9 @@
     ]
   },
   "images": {
-    "premium": "/images/Gallery/Children/Prices/1.jpg",
-    "extra": "/images/Gallery/Children/Prices/2.jpg",
-    "basic": "/images/Gallery/Children/Prices/3.jpg"
+    "premium": "bundled/Gallery/Children/Prices/1.jpg",
+    "extra": "bundled/Gallery/Children/Prices/2.jpg",
+    "basic": "bundled/Gallery/Children/Prices/3.jpg"
   },
   "additionalInfo": "צילומים בטבע בתוספת של 100 ש\"ח בקרבת מודיעין"
 }

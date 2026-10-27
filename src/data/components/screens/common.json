@@ -3,7 +3,7 @@
     "defaultVariant": "info"
   },
   "logo": {
-    "path": "/images/Logo/Logo.png",
+    "path": "bundled/Logo/Logo.png",
     "alt": "Tinkerbell Photography Logo"
   },
   "trust": {
