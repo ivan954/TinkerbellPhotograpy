@@ -136,6 +136,7 @@ const HIDDEN = [
 const LIST_TEMPLATES = {
   "home:testimonials.quotes": { text: "", name: "", city: "", visible: true },
   "home:faq.items": { question: "", answer: "" },
+  "home:testimonials.images": { path: "", alt: "" },
 };
 
 // Lists whose items can be reordered and hidden but not added or removed
@@ -168,7 +169,8 @@ export const isHidden = (docKey, path) => matches(HIDDEN, docKey, path);
 
 export const listTemplate = (docKey, path) => LIST_TEMPLATES[pattern(docKey, path)];
 
-export const isFixedList = (docKey, path) => matches(FIXED_LISTS, docKey, path);
+// Only the list itself is fixed; lists inside its items (a category's photos) are not.
+export const isFixedList = (docKey, path) => FIXED_LISTS.includes(pattern(docKey, path));
 
 const lastKey = (path) => [...path].reverse().find((part) => typeof part === "string");
 

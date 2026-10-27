@@ -311,7 +311,8 @@ const ListField = ({ docKey, path, value, update, folder }) => {
     uploadFiles(files, (url) => updateList((list) => [...list, { ...emptyLike(template), path: url }]));
   const { dragging, dropProps } = useDropFiles(addPhotos);
 
-  if (typeof template === "string" && isImageField([...path, 0])) {
+  // Decided by the field's name too, so an emptied photo list still offers uploads.
+  if ((template === undefined || typeof template === "string") && isImageField([...path, 0])) {
     return <ImageListField label={fieldLabel(path)} value={value} updateList={updateList} folder={folder} />;
   }
 
