@@ -24,9 +24,8 @@
   position: relative;
   display: block;
   width: 100%;
-  /* Space is kept for the photo before it loads, so the text doesn't jump */
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
+  /* The whole photo is shown in its own proportions (portrait or landscape) */
+  height: auto;
   border-radius: var(--radius);
   box-shadow: var(--shadow);
 }
