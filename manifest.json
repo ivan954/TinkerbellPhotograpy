@@ -20,8 +20,8 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#fbf6f2",
-  "background_color": "#fbf6f2",
+  "theme_color": "#fcf1f3",
+  "background_color": "#fcf1f3",
   "dir": "rtl",
   "lang": "he"
 }
