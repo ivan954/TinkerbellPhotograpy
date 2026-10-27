@@ -22,7 +22,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "predeploy": "npm run build && node -e \"require('fs').copyFileSync('build/index.html', 'build/404.html')\"",
+    "predeploy": "npm run build && node scripts/prerender-routes.js",
     "deploy": "gh-pages -d build",
     "optimize-images": "node scripts/optimize-images.js",
     "test": "react-scripts test",

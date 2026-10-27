@@ -1,0 +1,50 @@
+.about-page {
+  padding-bottom: 4rem;
+}
+
+.about-page .page-hero .section-eyebrow {
+  margin-bottom: 0.35rem;
+}
+
+.about-page-photo {
+  position: relative;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.about-page-photo::before {
+  content: "";
+  position: absolute;
+  inset: -0.9rem;
+  border: 1px solid rgba(184, 154, 94, 0.55);
+  border-radius: calc(var(--radius) + 8px);
+}
+
+.about-page-photo img {
+  position: relative;
+  display: block;
+  width: 100%;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.about-page-story p {
+  font-size: 1.12rem;
+  line-height: 2;
+  color: var(--color-text);
+  margin-bottom: 1.25rem;
+}
+
+.about-page-story .about-actions {
+  margin-top: 2rem;
+}
+
+.about-page-trust {
+  margin-top: 4rem;
+}
+
+@media (max-width: 991.98px) {
+  .about-page-photo::before {
+    inset: -0.6rem;
+  }
+}

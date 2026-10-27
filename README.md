@@ -63,7 +63,7 @@ Adding a new gallery category is not possible from the admin screen yet, because
 - **Built-in photos** live in `public/images/` and are served by GitHub Pages. Thumbnails are in `public/images/thumbs/`.
 - **Uploaded photos** live in the Supabase `site-images` bucket, with thumbnails under `thumbs/`.
 
-After adding photos to `public/images/` by hand, run `npm run optimize-images`. It resizes and recompresses them, removes EXIF data, creates thumbnails and shrinks the logo. Files that are already optimized are skipped.
+After adding photos to `public/images/` by hand, run `npm run optimize-images`. It resizes and recompresses them, removes EXIF data, creates thumbnails, saves lighter WebP copies of the thumbnails and the carousel/about photos (used automatically by browsers that support them) and shrinks the logo. Files that are already optimized are skipped.
 
 ## Local development
 
@@ -98,7 +98,7 @@ Both values are public by design: they end up in the site's JavaScript, and what
 npm run deploy
 ```
 
-This builds the site, copies `index.html` to `404.html` (so direct links and page refreshes work on GitHub Pages) and pushes `build/` to the `gh-pages` branch. GitHub Pages must be set to deploy from that branch (repository Settings → Pages).
+This builds the site, runs `scripts/prerender-routes.js` and pushes `build/` to the `gh-pages` branch. The prerender step writes an HTML file for every page (e.g. `gallery.html`, served at `/gallery`) with its own title, description and canonical link, so direct links return status 200 and Google sees each page properly; it also writes `sitemap.xml` and copies `index.html` to `404.html` for any other address. GitHub Pages must be set to deploy from that branch (repository Settings → Pages).
 
 The Supabase values must be available when deploying, otherwise the published site won't connect to Supabase: either a local `.env` file (it is git-ignored, never commit it) or the `REACT_APP_SUPABASE_URL` and `REACT_APP_SUPABASE_ANON_KEY` environment variables, which the build reads the same way.
 
@@ -143,7 +143,7 @@ Free Supabase projects pause after a week without activity. The GitHub workflow 
 
 ```
 public/images/          Built-in photos (optimized) and thumbs/
-scripts/                optimize-images.js
+scripts/                optimize-images.js, prerender-routes.js (runs before deploy)
 supabase/schema.sql     Database tables, policies and storage bucket
 src/
   App.js                Routes (price pages are generated from the categories)

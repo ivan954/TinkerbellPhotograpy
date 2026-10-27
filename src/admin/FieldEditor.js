@@ -21,6 +21,7 @@ import {
   isImageField,
   isMultiline,
   itemTitle,
+  listTemplate,
 } from "./fields";
 
 // Every change goes through update(path, fn), where fn receives the *current*
@@ -305,7 +306,7 @@ const ListField = ({ docKey, path, value, update, folder }) => {
   const initialLength = useRef(value.length).current;
   const updateList = (fn) => update(path, fn);
   const fixed = isFixedList(docKey, path);
-  const template = value[0];
+  const template = value[0] ?? listTemplate(docKey, path);
   const addPhotos = (files) =>
     uploadFiles(files, (url) => updateList((list) => [...list, { ...emptyLike(template), path: url }]));
   const { dragging, dropProps } = useDropFiles(addPhotos);

@@ -13,6 +13,7 @@ const Footer = () => {
   const { social, copyright, about, floatingWhatsapp } = useContent("footer");
   const { info } = useContent("contact");
   const { logo } = useContent("common");
+  const { navigation } = useContent("header");
   const categories = useCategories();
   const whatsappLink = useWhatsappLink();
 
@@ -28,7 +29,9 @@ const Footer = () => {
               width={160}
               loading="lazy"
             />
-            <p className="footer-about">{about}</p>
+            <p className="footer-about">
+              {about} <Link to="/about">{navigation.links.aboutPage} ←</Link>
+            </p>
             <div className="footer-social">
               <a href={social.instagram.url} target="_blank" rel="noopener noreferrer" aria-label="אינסטגרם">
                 <BsInstagram />

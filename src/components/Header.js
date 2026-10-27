@@ -62,6 +62,9 @@ const Header = () => {
             <Nav.Link as={NavLink} to="/gallery" onClick={closeMenu}>
               {navigation.links.gallery}
             </Nav.Link>
+            <Nav.Link as={NavLink} to="/about" onClick={closeMenu}>
+              {navigation.links.aboutPage}
+            </Nav.Link>
             <NavDropdown
               title={navigation.links.pricesDropdown}
               id="prices-nav-dropdown"

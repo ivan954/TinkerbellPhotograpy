@@ -5,7 +5,10 @@
 //    files are skipped, so running the script again does not degrade quality.
 // 2. Creates small thumbnails of the gallery, carousel and about photos in
 //    public/images/thumbs, used by the grids, cards and on mobile.
-// 3. Shrinks the logo to the size it is actually displayed at.
+// 3. Saves a WebP copy (about 30% lighter) of every thumbnail and of the
+//    carousel and about photos, which browsers that support it load instead
+//    (see src/components/Photo.js).
+// 4. Shrinks the logo to the size it is actually displayed at.
 //
 // Usage: npm run optimize-images  (run after adding photos to public/images).
 // Photos uploaded from the /admin screen are resized in the browser instead.
@@ -28,6 +31,9 @@ const QUALITY = 80;
 const THUMB_WIDTH = 800;
 const THUMB_QUALITY = 75;
 const LOGO_WIDTH = 600;
+const WEBP_QUALITY = 72;
+// Folders whose photos get a WebP copy; must match HAS_WEBP in Photo.js.
+const WEBP_DIRS = [THUMBS_DIR, ...["Carousel", "About"].map((dir) => path.join(IMAGES_DIR, dir))];
 
 sharp.cache(false);
 
@@ -40,6 +46,12 @@ const walk = (dir) =>
       return fullPath === THUMBS_DIR ? [] : walk(fullPath);
     }
     return [fullPath];
+  });
+
+const walkAll = (dir) =>
+  fs.readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
+    const fullPath = path.join(dir, entry.name);
+    return entry.isDirectory() ? walkAll(fullPath) : [fullPath];
   });
 
 const optimizeImage = async (file) => {
@@ -78,6 +90,15 @@ const createThumbnail = async (file) => {
     .toFile(thumbPath);
 };
 
+const createWebp = async (file) => {
+  const webpPath = file.replace(/\.jpe?g$/i, ".webp");
+  if (fs.existsSync(webpPath) && fs.statSync(webpPath).mtimeMs >= fs.statSync(file).mtimeMs) {
+    return 0;
+  }
+  await sharp(fs.readFileSync(file)).webp({ quality: WEBP_QUALITY }).toFile(webpPath);
+  return 1;
+};
+
 const optimizeLogo = async () => {
   const input = fs.readFileSync(LOGO_PATH);
   const { width } = await sharp(input).metadata();
@@ -114,6 +135,16 @@ const main = async () => {
       await createThumbnail(file);
     }
   }
+
+  // walk() skips the thumbs folder, so it is listed with walkAll().
+  const webpSources = WEBP_DIRS.flatMap((dir) =>
+    dir === THUMBS_DIR ? walkAll(dir) : walk(dir)
+  ).filter(isJpeg);
+  let webpCount = 0;
+  for (const file of webpSources) {
+    webpCount += await createWebp(file);
+  }
+  if (webpCount) console.log(`created ${webpCount} WebP copies`);
 
   await optimizeLogo();
 

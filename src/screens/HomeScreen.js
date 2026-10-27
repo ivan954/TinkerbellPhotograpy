@@ -2,13 +2,16 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
 import { BsWhatsapp, BsCamera, BsHeart, BsStars, BsHouseHeart } from "react-icons/bs";
-import ImagesCarousel from "../components/ImagesCarousel";
 import Recommendations from "../components/Recommendations";
 import Reveal from "../components/Reveal";
+import Photo from "../components/Photo";
+import ComingSoon from "../components/ComingSoon";
+import TrustRow from "../components/TrustRow";
+import Faq from "../components/Faq";
 import { useCategories, coverUrl, galleryPath } from "../data/categories";
 import { useWhatsappLink } from "../data/whatsapp";
 import { useContent } from "../content/ContentProvider";
-import { thumbUrl } from "../content/images";
+import { imageUrl, thumbUrl } from "../content/images";
 import usePageTitle from "../hooks/usePageTitle";
 import "./HomeScreen.css";
 
@@ -19,13 +22,25 @@ const HomeScreen = () => {
   usePageTitle();
   const categories = useCategories();
   const whatsappLink = useWhatsappLink();
-  const { hero, carousel, highlights, services, about, steps, testimonials, cta } =
-    useContent("home");
+  const { hero, highlights, services, about, steps, testimonials, faq, cta } = useContent("home");
 
   return (
     <div className="home">
       <section className="hero">
-        <ImagesCarousel carousel={carousel} />
+        <Photo
+          className="hero-image"
+          src={imageUrl(hero.image)}
+          thumb={thumbUrl(hero.image)}
+          sizes="100vw"
+          alt={hero.imageAlt}
+          fetchpriority="high"
+          decoding="async"
+        />
+        <div className="hero-sparkles" aria-hidden="true">
+          {Array.from({ length: 14 }, (_, index) => (
+            <span key={index} />
+          ))}
+        </div>
         <div className="hero-overlay">
           <Container>
             <div className="hero-content">
@@ -85,7 +100,11 @@ const HomeScreen = () => {
               {categories.map((category, index) => (
                 <Reveal key={category.key} className="service-card" delay={(index % 4) * 80}>
                   <Link to={galleryPath(category)} className="service-card-link">
-                    <img src={coverUrl(category)} alt={category.title} loading="lazy" decoding="async" />
+                    {coverUrl(category) ? (
+                      <Photo src={coverUrl(category)} alt={category.title} loading="lazy" decoding="async" />
+                    ) : (
+                      <ComingSoon compact />
+                    )}
                     <span className="service-card-title">{category.title}</span>
                   </Link>
                   <Link to={category.pricesPath} className="service-card-price">
@@ -104,7 +123,7 @@ const HomeScreen = () => {
             <Row className="align-items-center g-4 g-lg-5">
               <Col lg={6}>
                 <Reveal className="about-image-wrap">
-                  <img src={thumbUrl(about.image)} alt={about.imageAlt} loading="lazy" decoding="async" />
+                  <Photo src={thumbUrl(about.image)} alt={about.imageAlt} loading="lazy" decoding="async" />
                 </Reveal>
               </Col>
               <Col lg={6}>
@@ -113,11 +132,11 @@ const HomeScreen = () => {
                   <h2>{about.title}</h2>
                   <p>{about.text}</p>
                   <div className="about-actions">
-                    <Link to="/contact" className="btn-brand">
-                      <BsCamera /> {about.contactButton}
+                    <Link to="/about" className="btn-brand">
+                      {about.moreButton}
                     </Link>
-                    <Link to="/gallery" className="btn-outline-brand">
-                      {about.galleryButton}
+                    <Link to="/contact" className="btn-outline-brand">
+                      <BsCamera /> {about.contactButton}
                     </Link>
                   </div>
                 </Reveal>
@@ -156,10 +175,14 @@ const HomeScreen = () => {
               <span className="section-eyebrow">{testimonials.eyebrow}</span>
               <h2>{testimonials.title}</h2>
             </Reveal>
-            <Recommendations images={testimonials.images} />
+            <Recommendations quotes={testimonials.quotes} images={testimonials.images} />
           </Container>
         </section>
       )}
+
+      <TrustRow />
+
+      <Faq faq={faq} />
 
       {cta.visible && (
         <section className="cta-band">

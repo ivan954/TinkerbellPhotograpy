@@ -89,3 +89,9 @@
     margin-bottom: 0.6rem;
   }
 }
+
+.images-coming-soon {
+  max-width: 560px;
+  min-height: 280px;
+  margin: 0 auto;
+}

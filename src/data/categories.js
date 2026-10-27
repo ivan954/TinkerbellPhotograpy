@@ -7,6 +7,7 @@ import { thumbUrl } from "../content/images";
 export const useCategories = () =>
   useContent("categories").list.filter((category) => category.visible !== false);
 
-export const coverUrl = (category) => thumbUrl(category.cover);
+// The cover photo, or the gallery's first photo; empty when it has neither.
+export const coverUrl = (category) => thumbUrl(category.cover || category.images?.[0]);
 
 export const galleryPath = (category) => `/imagescreen/${category.key}`;

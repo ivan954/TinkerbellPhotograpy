@@ -4,10 +4,13 @@ import { Link, useParams } from "react-router-dom";
 import { BsWhatsapp } from "react-icons/bs";
 import Message from "../components/Message";
 import Lightbox from "../components/Lightbox";
+import Photo from "../components/Photo";
+import ComingSoon from "../components/ComingSoon";
 import { useCategories } from "../data/categories";
 import { useWhatsappLink } from "../data/whatsapp";
 import { imageUrl, thumbUrl } from "../content/images";
 import usePageTitle from "../hooks/usePageTitle";
+import seo from "../data/seo.json";
 import "./ImagesScreen.css";
 
 const ImagesScreen = () => {
@@ -17,7 +20,10 @@ const ImagesScreen = () => {
   const whatsappLink = useWhatsappLink();
 
   const category = categories.find((item) => item.key.toLowerCase() === name?.toLowerCase());
-  usePageTitle(category ? `גלריית ${category.title}` : "גלריה");
+  usePageTitle(
+    category ? `צילומי ${category.title}` : "גלריה",
+    category ? seo.category.replace("{title}", category.title) : seo.gallery
+  );
 
   const images = useMemo(
     () =>
@@ -68,6 +74,8 @@ const ImagesScreen = () => {
         </div>
       </header>
 
+      {!images.length && <ComingSoon className="images-coming-soon" />}
+
       <div className="masonry">
         {images.map((image, index) => (
           <button
@@ -76,7 +84,7 @@ const ImagesScreen = () => {
             onClick={() => setSelectedIndex(index)}
             aria-label={`הגדלת ${image.alt}`}
           >
-            <img src={image.thumb} alt={image.alt} loading="lazy" decoding="async" />
+            <Photo src={image.thumb} alt={image.alt} loading="lazy" decoding="async" />
           </button>
         ))}
       </div>

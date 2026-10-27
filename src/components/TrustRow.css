@@ -1,0 +1,41 @@
+.trust-row {
+  padding: 1.75rem 0;
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.trust-row ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 1.25rem 2rem;
+}
+
+.trust-row li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+}
+
+.trust-row li > svg {
+  flex-shrink: 0;
+  font-size: 1.6rem;
+  color: var(--color-gold);
+  margin-top: 0.15rem;
+}
+
+.trust-row strong {
+  display: block;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.trust-row span {
+  display: block;
+  color: var(--color-muted);
+  font-size: 0.94rem;
+  line-height: 1.5;
+}

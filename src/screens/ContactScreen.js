@@ -8,6 +8,7 @@ import { useContent } from "../content/ContentProvider";
 import { useCategories } from "../data/categories";
 import { useWhatsappLink } from "../data/whatsapp";
 import usePageTitle from "../hooks/usePageTitle";
+import seo from "../data/seo.json";
 import "./ContactScreen.css";
 
 const ContactScreen = () => {
@@ -15,7 +16,7 @@ const ContactScreen = () => {
   const { social } = useContent("footer");
   const categories = useCategories();
   const whatsappLink = useWhatsappLink();
-  usePageTitle(page.title);
+  usePageTitle(page.title, seo.contact);
   const [status, setStatus] = useState("idle");
   const [error, setError] = useState();
   const [validated, setValidated] = useState(false);

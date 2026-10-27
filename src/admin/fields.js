@@ -27,6 +27,16 @@ const LABELS = {
   about: "קצת עליי",
   steps: "איך זה עובד",
   testimonials: "המלצות",
+  quotes: "המלצות כתובות",
+  faq: "שאלות נפוצות",
+  question: "שאלה",
+  answer: "תשובה",
+  trust: "שורת אמון",
+  comingSoon: "כרטיס \"תמונות חדשות בדרך\"",
+  moreButton: "טקסט הקישור לעמוד המלא",
+  story: "הסיפור שלי",
+  pageTitle: "כותרת העמוד",
+  description: "תיאור לגוגל (משפט או שניים)",
   cta: "קריאה לפעולה (סוף העמוד)",
   whatsappButton: "טקסט כפתור הוואטסאפ",
   whatsappMessage: "ההודעה שנפתחת בוואטסאפ",
@@ -87,6 +97,7 @@ const LABELS = {
   friday: "יום שישי",
   saturday: "שבת",
   // Header / footer
+  aboutPage: "עליי",
   navigation: "תפריט",
   links: "שמות הקישורים",
   home: "בית",
@@ -113,14 +124,33 @@ const HIDDEN = [
   "categories:list.*.key",
   "categories:list.*.prices",
   "categories:list.*.pricesPath",
+  // Replaced by the single hero image; older saved content may still have it.
+  "home:carousel",
 ];
+
+// The shape of a new item for lists that can start out empty, so "add" knows
+// which fields to create.
+const LIST_TEMPLATES = {
+  "home:testimonials.quotes": { text: "", name: "", city: "", visible: true },
+  "home:faq.items": { question: "", answer: "" },
+};
 
 // Lists whose items can be reordered and hidden but not added or removed
 // (a new category also needs its own price page).
 const FIXED_LISTS = ["categories:list"];
 
 const IMAGE_KEYS = ["path", "image", "cover"];
-const MULTILINE_KEYS = ["text", "subtitle", "additionalInfo", "about", "intro", "successText"];
+const MULTILINE_KEYS = [
+  "text",
+  "subtitle",
+  "additionalInfo",
+  "about",
+  "intro",
+  "successText",
+  "story",
+  "answer",
+  "description",
+];
 
 // "list.3.title" -> "list.*.title", so patterns don't depend on positions.
 const pattern = (docKey, path) =>
@@ -132,6 +162,8 @@ const matches = (rules, docKey, path) => {
 };
 
 export const isHidden = (docKey, path) => matches(HIDDEN, docKey, path);
+
+export const listTemplate = (docKey, path) => LIST_TEMPLATES[pattern(docKey, path)];
 
 export const isFixedList = (docKey, path) => matches(FIXED_LISTS, docKey, path);
 
@@ -158,7 +190,7 @@ export const isMultiline = (path, value) =>
 // The title shown for an item in a list, e.g. a category's name.
 export const itemTitle = (item, index) => {
   if (item && typeof item === "object") {
-    return item.title || item.size || item.alt || `פריט ${index + 1}`;
+    return item.title || item.question || item.name || item.size || item.alt || `פריט ${index + 1}`;
   }
   return `${index + 1}`;
 };
@@ -180,8 +212,14 @@ export const documentList = (categories) => [
   {
     key: "home",
     title: "דף הבית",
-    description: "אזור הפתיחה, היתרונות, סוגי הצילומים, ההמלצות והקריאה לפעולה.",
+    description: "אזור הפתיחה, היתרונות, סוגי הצילומים, ההמלצות, השאלות הנפוצות והקריאה לפעולה.",
     path: "/",
+  },
+  {
+    key: "about",
+    title: "עמוד עליי",
+    description: "הסיפור שלך והתמונה בעמוד \"עליי\".",
+    path: "/about",
   },
   {
     key: "categories",
@@ -199,7 +237,7 @@ export const documentList = (categories) => [
   {
     key: "common",
     title: "תוספות, לוגו וטקסטים משותפים",
-    description: "הלוגו, הטקסטים שחוזרים בכל עמודי המחירון וטבלאות התוספות.",
+    description: "הלוגו, שורת האמון, הטקסטים שחוזרים בכל עמודי המחירון וטבלאות התוספות.",
   },
   {
     key: "contact",

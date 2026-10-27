@@ -2,15 +2,18 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import Reveal from "../components/Reveal";
+import Photo from "../components/Photo";
+import ComingSoon from "../components/ComingSoon";
 import { useCategories, coverUrl, galleryPath } from "../data/categories";
 import { useContent } from "../content/ContentProvider";
 import usePageTitle from "../hooks/usePageTitle";
+import seo from "../data/seo.json";
 import "./GalleryScreen.css";
 
 const GalleryScreen = () => {
   const { page } = useContent("categories");
   const categories = useCategories();
-  usePageTitle(page.title);
+  usePageTitle(page.title, seo.gallery);
 
   return (
     <Container className="gallery-page">
@@ -23,16 +26,22 @@ const GalleryScreen = () => {
         {categories.map((category, index) => (
           <Reveal key={category.key} delay={(index % 3) * 90}>
             <Link to={galleryPath(category)} className="gallery-card">
-              <img
-                className="gallery-card-image"
-                src={coverUrl(category)}
-                alt={category.title}
-                loading="lazy"
-                decoding="async"
-              />
+              {coverUrl(category) ? (
+                <Photo
+                  className="gallery-card-image"
+                  src={coverUrl(category)}
+                  alt={category.title}
+                  loading="lazy"
+                  decoding="async"
+                />
+              ) : (
+                <ComingSoon compact className="gallery-card-image" />
+              )}
               <div className="gallery-card-body">
                 <h2>{category.title}</h2>
-                <span>{category.images.length} תמונות · לצפייה ←</span>
+                {category.images.length > 0 && (
+                  <span>{category.images.length} תמונות · לצפייה ←</span>
+                )}
               </div>
             </Link>
           </Reveal>

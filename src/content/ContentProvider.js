@@ -59,8 +59,13 @@ const fetchRows = async () => {
   }
 };
 
+// What the last visit saw, so returning visitors get the page right away
+// while the latest content loads in the background.
+const cachedRows = isSupabaseConfigured ? readCache() : null;
+
 // Started as soon as the bundle loads, in parallel with React's first render.
-const initialRows = isSupabaseConfigured
+// Resolves to null when nothing newer than the cache is available.
+const latestRows = isSupabaseConfigured
   ? fetchRows().then(
       (rows) => {
         writeCache(rows);
@@ -68,7 +73,7 @@ const initialRows = isSupabaseConfigured
       },
       (error) => {
         console.warn("Using cached/bundled content:", error.message);
-        return readCache();
+        return cachedRows ? null : readCache();
       }
     )
   : Promise.resolve(null);
@@ -76,10 +81,14 @@ const initialRows = isSupabaseConfigured
 const ContentContext = createContext({ content: buildContent(null), setDocument: () => {} });
 
 export const ContentProvider = ({ children }) => {
-  const [content, setContent] = useState(isSupabaseConfigured ? null : buildContent(null));
+  const [content, setContent] = useState(() =>
+    !isSupabaseConfigured || cachedRows ? buildContent(cachedRows) : null
+  );
 
   useEffect(() => {
-    initialRows.then((rows) => setContent(buildContent(rows)));
+    latestRows.then((rows) => {
+      if (rows || !cachedRows) setContent(buildContent(rows));
+    });
   }, []);
 
   // Lets the admin screen show a saved change on the site without a reload.

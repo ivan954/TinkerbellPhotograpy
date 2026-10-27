@@ -2,6 +2,7 @@
 // in the Supabase "site_content" table with the same key; anything missing
 // there falls back to these files.
 import home from "../data/components/screens/home.json";
+import about from "../data/components/screens/about.json";
 import header from "../data/components/screens/header.json";
 import footer from "../data/components/screens/footer.json";
 import contact from "../data/components/screens/contact.json";
@@ -19,6 +20,7 @@ const prices = Object.fromEntries(
 
 const defaults = {
   home,
+  about,
   categories,
   ...prices,
   common,

@@ -56,3 +56,50 @@
     padding: 0 2.5rem;
   }
 }
+
+/* Written testimonials */
+.quotes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+.quote-card {
+  position: relative;
+  margin: 0;
+  padding: 2.25rem 1.75rem 1.5rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+}
+
+.quote-mark {
+  position: absolute;
+  top: 0.4rem;
+  right: 1.25rem;
+  font-family: var(--font-display);
+  font-size: 4rem;
+  line-height: 1;
+  color: var(--color-gold);
+  opacity: 0.6;
+}
+
+.quote-card blockquote {
+  margin: 0 0 1.1rem;
+  font-size: 1.05rem;
+  line-height: 1.85;
+  color: var(--color-text);
+}
+
+.quote-card figcaption {
+  font-weight: 700;
+  color: var(--color-accent-dark);
+}
+
+.quote-card figcaption::before {
+  content: "— ";
+  color: var(--color-gold);
+}
