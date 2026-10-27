@@ -21,6 +21,7 @@ const categories = read("components/categories.json");
 const about = read("components/screens/about.json");
 const contact = read("components/screens/contact.json");
 const home = read("components/screens/home.json");
+const faq = read("components/screens/faq.json");
 
 const pageTitle = (title) => `${title} | ${SITE_NAME}`;
 
@@ -36,7 +37,7 @@ const routes = [
   { path: "/", title: `${SITE_NAME} | צילומי ילדים ומשפחות במודיעין`, head: heroPreload },
   { path: "/gallery", title: pageTitle(categories.page.title), description: seo.gallery },
   { path: "/about", title: pageTitle(about.pageTitle), description: about.description },
-  { path: "/faq", title: pageTitle(home.faq.title), description: seo.faq },
+  { path: "/faq", title: pageTitle(faq.title), description: seo.faq },
   { path: "/contact", title: pageTitle(contact.page.title), description: seo.contact },
 ];
 

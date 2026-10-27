@@ -1,5 +1,6 @@
 import React, { createContext, useCallback, useContext, useEffect, useState } from "react";
 import defaults from "./defaults";
+import { withMovedContent } from "./legacy";
 import { SUPABASE_URL, SUPABASE_ANON_KEY, isSupabaseConfigured } from "./config";
 import Loader from "../components/Loader";
 
@@ -22,10 +23,12 @@ export const mergeContent = (base, saved) => {
   return merged;
 };
 
-const buildContent = (rows) =>
-  Object.fromEntries(
+export const buildContent = (savedRows) => {
+  const rows = withMovedContent(savedRows);
+  return Object.fromEntries(
     Object.entries(defaults).map(([key, value]) => [key, mergeContent(value, rows?.[key])])
   );
+};
 
 const readCache = () => {
   try {

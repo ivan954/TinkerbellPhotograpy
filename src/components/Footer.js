@@ -14,7 +14,7 @@ const Footer = () => {
   const { info } = useContent("contact");
   const { logo } = useContent("common");
   const { navigation } = useContent("header");
-  const { faq } = useContent("home");
+  const faq = useContent("faq");
   const categories = useCategories();
   const whatsappLink = useWhatsappLink();
 

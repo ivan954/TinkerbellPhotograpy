@@ -11,10 +11,8 @@ import usePageTitle from "../hooks/usePageTitle";
 import seo from "../data/seo.json";
 import "./FaqScreen.css";
 
-// The questions are edited with the home page in the admin screen ("faq"),
-// where they lived before they got a page of their own.
 const FaqScreen = () => {
-  const { faq } = useContent("home");
+  const faq = useContent("faq");
   const whatsappLink = useWhatsappLink();
   usePageTitle(faq.title, seo.faq);
 

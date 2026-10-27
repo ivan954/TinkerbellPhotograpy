@@ -11,7 +11,7 @@ const Header = () => {
   const { navigation } = useContent("header");
   const { social } = useContent("footer");
   const { logo } = useContent("common");
-  const { faq } = useContent("home");
+  const faq = useContent("faq");
   const categories = useCategories();
   const { pathname } = useLocation();
   // Controlled so the mobile menu closes after a link is tapped.

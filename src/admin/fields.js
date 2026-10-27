@@ -129,13 +129,15 @@ const HIDDEN = [
   "categories:list.*.pricesPath",
   // Replaced by the single hero image; older saved content may still have it.
   "home:carousel",
+  // Moved to its own "faq" document (see content/legacy.js).
+  "home:faq",
 ];
 
 // The shape of a new item for lists that can start out empty, so "add" knows
 // which fields to create.
 const LIST_TEMPLATES = {
   "home:testimonials.quotes": { text: "", name: "", city: "", visible: true },
-  "home:faq.items": { question: "", answer: "" },
+  "faq:items": { question: "", answer: "" },
   "home:testimonials.images": { path: "", alt: "" },
 };
 
@@ -217,7 +219,7 @@ export const documentList = (categories) => [
   {
     key: "home",
     title: "דף הבית",
-    description: "אזור הפתיחה, היתרונות, סוגי הצילומים, ההמלצות והקריאה לפעולה, וגם השאלות שבעמוד \"שאלות נפוצות\".",
+    description: "אזור הפתיחה, היתרונות, סוגי הצילומים, ההמלצות והקריאה לפעולה.",
     path: "/",
   },
   {
@@ -225,6 +227,12 @@ export const documentList = (categories) => [
     title: "עמוד עליי",
     description: "הסיפור שלך והתמונה בעמוד \"עליי\".",
     path: "/about",
+  },
+  {
+    key: "faq",
+    title: "שאלות נפוצות",
+    description: "השאלות והתשובות בעמוד \"שאלות נפוצות\", והכפתור לשאלה בוואטסאפ.",
+    path: "/faq",
   },
   {
     key: "categories",

@@ -47,3 +47,8 @@ test("an empty list of written testimonials can be added to", () => {
   renderEditor("home", { testimonials: { visible: true, quotes: [] } });
   expect(screen.getByText("הוספה")).toBeInTheDocument();
 });
+
+test("an empty list of questions can be added to", () => {
+  renderEditor("faq", { visible: true, items: [] });
+  expect(screen.getByText("הוספה")).toBeInTheDocument();
+});

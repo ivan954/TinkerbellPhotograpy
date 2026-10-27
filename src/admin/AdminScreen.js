@@ -21,13 +21,16 @@ import {
   BsMenuButtonWide,
   BsPersonCircle,
   BsTags,
+  BsQuestionCircle,
+  BsPersonHeart,
 } from "react-icons/bs";
 import supabase from "./supabaseClient";
 import FieldEditor, { SectionsCommand } from "./FieldEditor";
 import ChangePassword from "./ChangePassword";
 import { documentList } from "./fields";
 import defaults from "../content/defaults";
-import { mergeContent, useSetDocument } from "../content/ContentProvider";
+import { buildContent, useSetDocument } from "../content/ContentProvider";
+import { MOVED } from "../content/legacy";
 import usePageTitle from "../hooks/usePageTitle";
 import "./Admin.css";
 
@@ -45,6 +48,8 @@ const same = (a, b) => JSON.stringify(a) === JSON.stringify(b);
 
 const DOC_ICONS = {
   home: BsHouseDoor,
+  about: BsPersonHeart,
+  faq: BsQuestionCircle,
   categories: BsImages,
   common: BsGrid,
   contact: BsEnvelope,
@@ -192,10 +197,7 @@ const Editor = ({ user }) => {
           setLoadError(error.message);
           return;
         }
-        const rows = Object.fromEntries(data.map((row) => [row.key, row.data]));
-        const content = Object.fromEntries(
-          Object.entries(defaults).map(([key, value]) => [key, mergeContent(value, rows[key])])
-        );
+        const content = buildContent(Object.fromEntries(data.map((row) => [row.key, row.data])));
         setSaved(content);
         setDrafts(content);
       });
@@ -291,7 +293,11 @@ const Editor = ({ user }) => {
   const restoreDefault = async () => {
     setConfirmingRestore(false);
     setStatus({ busy: true });
-    const { error } = await supabase.from("site_content").delete().eq("key", current.key);
+    // A moved document is saved as the original instead of deleted; without a
+    // row it would fall back to the copy still saved in its old place.
+    const { error } = MOVED[current.key]
+      ? await supabase.from("site_content").upsert({ key: current.key, data: defaults[current.key] })
+      : await supabase.from("site_content").delete().eq("key", current.key);
     if (error) {
       setStatus({ error: `השחזור נכשל: ${error.message}` });
       return;
