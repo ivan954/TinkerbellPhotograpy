@@ -13,4 +13,5 @@
 - Never put the Supabase secret / `service_role` key anywhere in the repo.
 - No photos in the repo: all photos are in the Supabase `site-images` bucket
   (see README "Photos"). Don't add images under `public/`; new photos are
-  uploaded from the admin screen.
+  uploaded from the admin screen. The only images in the repo are the app
+  icons in `public/` and the README screenshots in `docs/screenshots/`.

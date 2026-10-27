@@ -7,6 +7,22 @@ The site presents the studio's work, its packages and prices, and makes booking 
 **Live site:** https://tinkerbell-studio.com
 **Admin screen:** https://tinkerbell-studio.com/admin
 
+## Screenshots
+
+![Home page on desktop: hero photo with the headline "כאן הרגעים הקטנים הופכים לאגדה" and the booking buttons](docs/screenshots/home-desktop.jpg)
+
+<table>
+  <tr>
+    <td><img src="docs/screenshots/home-mobile.jpg" width="260" alt="Home page on a phone"></td>
+    <td><img src="docs/screenshots/gallery-mobile.jpg" width="260" alt="Newborn gallery on a phone"></td>
+    <td><img src="docs/screenshots/faq-mobile.jpg" width="260" alt="FAQ page on a phone, one question open"></td>
+  </tr>
+</table>
+
+![Gallery page with all photography categories](docs/screenshots/gallery.jpg)
+
+![Newborn price list with three packages](docs/screenshots/prices.jpg)
+
 ## What visitors find
 
 | Page | Path | What's on it |
@@ -159,6 +175,7 @@ Since all photos are served from Supabase, keep an eye on the plan's monthly ban
 
 ```
 public/                 index.html, app icons, CNAME, robots.txt (no photos)
+docs/screenshots/       Screenshots for this README (not used by the site)
 scripts/                prerender-routes.js (runs before deploy)
 supabase/schema.sql     Database tables, policies and storage bucket
 src/
