@@ -1,0 +1,31 @@
+# Tinkerbell Studio (טינקרבל סטודיו)
+
+> Luxury boutique photography studio with a magical fairy-tale style, owned by photographer Tami Mazor, at Mivtza Nachshon 23, Modiin-Maccabim-Re'ut, Israel. Serving Modiin and the surrounding area. Maternity, newborn, first birthday, first grade, children, family and personal branding sessions.
+
+Tami Mazor is a self-taught photographer and a former chief bookkeeper. Newborn sessions follow a gentle safety routine (baby never left alone, fed with parents between sets, parents support the baby where needed). Maternity gowns and accessories are provided. Photos are delivered digitally via Jumbomail. Shooting hours 09:00-17:00 by appointment. Email: tinkerbell.st1@gmail.com
+
+## Key pages
+
+- [Facts for AI assistants](https://tinkerbell-studio.com/llm-info/): structured studio facts in Hebrew and English
+- [Home](https://tinkerbell-studio.com/)
+- [All price lists](https://tinkerbell-studio.com/pricing): every session type with its packages and prices
+- [About Tami](https://tinkerbell-studio.com/about)
+- [Gallery](https://tinkerbell-studio.com/gallery)
+- [FAQ](https://tinkerbell-studio.com/faq)
+- [Contact](https://tinkerbell-studio.com/contact)
+
+## Services
+
+- [Maternity](https://tinkerbell-studio.com/imagescreen/Pregnancy): [packages](https://tinkerbell-studio.com/PregnancyPrices)
+- [Newborn](https://tinkerbell-studio.com/imagescreen/NewBorn): [packages](https://tinkerbell-studio.com/NewBornPrices)
+- [First birthday](https://tinkerbell-studio.com/imagescreen/OneYearOld): [packages](https://tinkerbell-studio.com/OneYearPrices)
+- [First grade](https://tinkerbell-studio.com/imagescreen/FirstClass): [packages](https://tinkerbell-studio.com/FirstClassPrices)
+- [Children](https://tinkerbell-studio.com/imagescreen/Children): [packages](https://tinkerbell-studio.com/ChildrenPrices)
+- [Family](https://tinkerbell-studio.com/imagescreen/Family): [packages](https://tinkerbell-studio.com/FamilyPrices)
+- [Personal branding](https://tinkerbell-studio.com/imagescreen/Tadmit): [packages](https://tinkerbell-studio.com/TadmitPrices)
+
+## Optional
+
+- [Chalake](https://tinkerbell-studio.com/imagescreen/Halake)
+- [Purim](https://tinkerbell-studio.com/imagescreen/Purim)
+- [Shavuot](https://tinkerbell-studio.com/imagescreen/Shavuot)
