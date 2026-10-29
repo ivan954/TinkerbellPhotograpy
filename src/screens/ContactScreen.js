@@ -4,6 +4,7 @@ import { Container, Row, Col, Form, Spinner } from "react-bootstrap";
 import { BsWhatsapp, BsTelephone, BsEnvelope, BsClock, BsGeoAlt, BsCheckCircle } from "react-icons/bs";
 import { FaWaze } from "react-icons/fa";
 import Message from "../components/Message";
+import GoogleReviews from "../components/GoogleReviews";
 import { useContent } from "../content/ContentProvider";
 import { useCategories } from "../data/categories";
 import { useWhatsappLink } from "../data/whatsapp";
@@ -158,6 +159,7 @@ const ContactScreen = () => {
             >
               <BsWhatsapp /> {whatsapp.button}
             </a>
+            <GoogleReviews className="contact-reviews" />
             <ul className="contact-list">
               <li>
                 <BsTelephone />

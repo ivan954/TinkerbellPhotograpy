@@ -34,7 +34,7 @@ const Header = () => {
     name: category.title,
     to: category.pricesPath,
   }));
-  const onPricesPage = priceRoutes.some((route) => route.to === pathname);
+  const onPricesPage = pathname === "/pricing" || priceRoutes.some((route) => route.to === pathname);
 
   return (
     <Navbar
@@ -71,6 +71,10 @@ const Header = () => {
               id="prices-nav-dropdown"
               className={onPricesPage ? "active" : ""}
             >
+              <NavDropdown.Item as={NavLink} to="/pricing" end onClick={closeMenu} className="dropdown-all">
+                {navigation.links.allPrices}
+              </NavDropdown.Item>
+              <NavDropdown.Divider />
               {priceRoutes.map((route) => (
                 <NavDropdown.Item
                   key={route.to}

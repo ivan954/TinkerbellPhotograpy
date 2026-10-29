@@ -35,6 +35,11 @@ const LABELS = {
   question: "שאלה",
   answer: "תשובה",
   trust: "שורת אמון",
+  googleReviews: "כפתור הביקורות בגוגל (מופיע כשיש קישור לגוגל בפרטי הקשר)",
+  rating: "דירוג (למשל 5.0)",
+  count: "מספר הביקורות",
+  instagramFeed: "פיד אינסטגרם (6 התמונות האחרונות)",
+  feedUrl: "כתובת הפיד מ-Behold (מתחילה ב-https://feeds.behold.so/)",
   comingSoon: "כרטיס \"תמונות חדשות בדרך\"",
   moreButton: "טקסט הקישור לעמוד המלא",
   story: "הסיפור שלי",
@@ -66,6 +71,7 @@ const LABELS = {
   galleryLink: "טקסט הקישור לגלריה",
   featuredBadge: "תווית החבילה המומלצת",
   orderButton: "טקסט כפתור ההזמנה",
+  orderMessage: "ההודעה שנפתחת בוואטסאפ ({package} = שם החבילה, {service} = סוג הצילום)",
   extrasEyebrow: "כותרת קטנה לתוספות",
   extras: "תוספות",
   tables: "טבלאות מחירים",
@@ -107,8 +113,10 @@ const LABELS = {
   gallery: "גלריה",
   contact: "צור קשר",
   pricesDropdown: "מחירונים",
+  allPrices: "קישור לכל המחירונים",
   book: "כפתור תיאום צילום",
   copyright: "שורת זכויות יוצרים",
+  factsLink: "קישור קטן לעמוד העובדות (לגוגל ול-AI)",
   floatingWhatsapp: "כפתור וואטסאפ צף",
   social: "רשתות ופרטי קשר",
   url: "קישור",
@@ -117,6 +125,7 @@ const LABELS = {
   instagram: "אינסטגרם",
   facebook: "פייסבוק",
   waze: "Waze",
+  google: "גוגל (הקישור לפרופיל העסק בגוגל)",
 };
 
 // Technical fields the site depends on; editing them could break pages.
@@ -129,7 +138,7 @@ const HIDDEN = [
   "categories:list.*.pricesPath",
   // Replaced by the single hero image; older saved content may still have it.
   "home:carousel",
-  // Moved to its own "faq" document (see content/legacy.js).
+  // Moved to its own "faq" document (see content/merge.js).
   "home:faq",
 ];
 

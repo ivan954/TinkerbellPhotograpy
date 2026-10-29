@@ -10,7 +10,7 @@ import { useWhatsappLink } from "../data/whatsapp";
 import "./Footer.css";
 
 const Footer = () => {
-  const { social, copyright, about, floatingWhatsapp } = useContent("footer");
+  const { social, copyright, about, floatingWhatsapp, factsLink } = useContent("footer");
   const { info } = useContent("contact");
   const { logo } = useContent("common");
   const { navigation } = useContent("header");
@@ -94,6 +94,14 @@ const Footer = () => {
 
         <div className="footer-bottom">
           {copyright} {new Date().getFullYear()}
+          {factsLink && (
+            <>
+              {" · "}
+              <Link to="/llm-info/" className="footer-facts">
+                {factsLink}
+              </Link>
+            </>
+          )}
         </div>
       </Container>
 

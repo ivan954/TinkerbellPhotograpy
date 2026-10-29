@@ -169,3 +169,13 @@
     padding-bottom: 5.5rem;
   }
 }
+
+.footer-facts {
+  color: var(--color-muted);
+  text-decoration: none;
+}
+
+.footer-facts:hover {
+  color: var(--color-accent-dark);
+  text-decoration: underline;
+}

@@ -7,6 +7,8 @@ import Reveal from "../components/Reveal";
 import Photo from "../components/Photo";
 import ComingSoon from "../components/ComingSoon";
 import TrustRow from "../components/TrustRow";
+import GoogleReviews from "../components/GoogleReviews";
+import InstagramFeed from "../components/InstagramFeed";
 import { useCategories, coverUrl, galleryPath } from "../data/categories";
 import { useWhatsappLink } from "../data/whatsapp";
 import { useContent } from "../content/ContentProvider";
@@ -196,9 +198,14 @@ const HomeScreen = () => {
               <h2>{testimonials.title}</h2>
             </Reveal>
             <Recommendations quotes={testimonials.quotes} images={testimonials.images} />
+            <div className="google-reviews-wrap">
+              <GoogleReviews />
+            </div>
           </Container>
         </section>
       )}
+
+      <InstagramFeed />
 
       <TrustRow />
 

@@ -8,6 +8,7 @@ import NotFound from "./NotFound";
 import { useContent } from "../content/ContentProvider";
 import { useWhatsappLink } from "../data/whatsapp";
 import usePageTitle from "../hooks/usePageTitle";
+import useJsonLd from "../hooks/useJsonLd";
 import seo from "../data/seo.json";
 import "./FaqScreen.css";
 
@@ -15,9 +16,25 @@ const FaqScreen = () => {
   const faq = useContent("faq");
   const whatsappLink = useWhatsappLink();
   usePageTitle(faq.title, seo.faq);
+  const items = faq.items.filter((item) => item.question && item.answer);
+
+  // The same questions and answers as on the page, for Google.
+  useJsonLd(
+    "faq-schema",
+    faq.visible && items.length
+      ? {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: items.map((item) => ({
+            "@type": "Question",
+            name: item.question,
+            acceptedAnswer: { "@type": "Answer", text: item.answer },
+          })),
+        }
+      : null
+  );
 
   if (!faq.visible) return <NotFound />;
-  const items = faq.items.filter((item) => item.question && item.answer);
 
   return (
     <div className="faq-page">

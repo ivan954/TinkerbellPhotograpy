@@ -1,6 +1,6 @@
 import React, { createContext, useCallback, useContext, useEffect, useState } from "react";
 import defaults from "./defaults";
-import { withMovedContent } from "./legacy";
+import { combineContent, mergeContent } from "./merge";
 import { SUPABASE_URL, SUPABASE_ANON_KEY, isSupabaseConfigured } from "./config";
 import Loader from "../components/Loader";
 
@@ -8,27 +8,9 @@ const CACHE_KEY = "site-content";
 // How long the first render waits for Supabase before falling back.
 const FETCH_TIMEOUT_MS = 3000;
 
-const isPlainObject = (value) =>
-  value !== null && typeof value === "object" && !Array.isArray(value);
+export { mergeContent };
 
-// Saved values win; fields that exist only in the bundled defaults (e.g. ones
-// added to the site later) are kept. Arrays are replaced as a whole.
-export const mergeContent = (base, saved) => {
-  if (saved === undefined) return base;
-  if (!isPlainObject(base) || !isPlainObject(saved)) return saved;
-  const merged = { ...base };
-  for (const [key, value] of Object.entries(saved)) {
-    merged[key] = mergeContent(base[key], value);
-  }
-  return merged;
-};
-
-export const buildContent = (savedRows) => {
-  const rows = withMovedContent(savedRows);
-  return Object.fromEntries(
-    Object.entries(defaults).map(([key, value]) => [key, mergeContent(value, rows?.[key])])
-  );
-};
+export const buildContent = (savedRows) => combineContent(defaults, savedRows);
 
 const readCache = () => {
   try {
@@ -107,5 +89,8 @@ export const ContentProvider = ({ children }) => {
 };
 
 export const useContent = (key) => useContext(ContentContext).content[key];
+
+// All documents at once, for pages that combine several (e.g. every price list).
+export const useAllContent = () => useContext(ContentContext).content;
 
 export const useSetDocument = () => useContext(ContentContext).setDocument;

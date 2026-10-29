@@ -2,8 +2,10 @@ import { lazy, Suspense, useEffect } from "react";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Loader from "./components/Loader";
+import SiteSchema from "./components/SiteSchema";
 import {
   BrowserRouter as Router,
+  Navigate,
   Outlet,
   Route,
   Routes,
@@ -16,6 +18,8 @@ import { useCategories } from "./data/categories";
 const GalleryScreen = lazy(() => import("./screens/GalleryScreen"));
 const AboutScreen = lazy(() => import("./screens/AboutScreen"));
 const FaqScreen = lazy(() => import("./screens/FaqScreen"));
+const PricingScreen = lazy(() => import("./screens/PricingScreen"));
+const LlmInfoScreen = lazy(() => import("./screens/LlmInfoScreen"));
 const ContactScreen = lazy(() => import("./screens/ContactScreen"));
 const ImagesScreen = lazy(() => import("./screens/ImagesScreen"));
 const PricePackage = lazy(() => import("./components/PricePackage"));
@@ -33,6 +37,7 @@ const ScrollToTop = () => {
 
 const SiteLayout = () => (
   <>
+    <SiteSchema />
     <Header />
     <main>
       <Suspense fallback={<Loader />}>
@@ -63,6 +68,9 @@ function App() {
           <Route path="/gallery" element={<GalleryScreen />} />
           <Route path="/about" element={<AboutScreen />} />
           <Route path="/faq" element={<FaqScreen />} />
+          <Route path="/pricing" element={<PricingScreen />} />
+          <Route path="/llm-info" element={<LlmInfoScreen />} />
+          <Route path="/packages" element={<Navigate to="/pricing" replace />} />
           <Route path="/contact" element={<ContactScreen />} />
           <Route path="/imagescreen/:name" element={<ImagesScreen />} />
           {/* One price page per category, at the path set in its content. */}

@@ -12,30 +12,26 @@ import { useWhatsappLink } from "../data/whatsapp";
 import { useContent } from "../content/ContentProvider";
 import { thumbUrl } from "../content/images";
 import usePageTitle from "../hooks/usePageTitle";
-import seo from "../data/seo.json";
+import { packageName, pricesDescription, pricesTitle, serviceName, visibleTiers, filled } from "../data/pageText";
 import "./PricesScreen.css";
 
 // Shown from the cheapest to the fullest package; in RTL the first is on the right.
-const TIERS = [
-  { key: "basic" },
-  { key: "extra" },
-  { key: "premium", featured: true },
-];
-
-const filled = (text) => String(text ?? "").trim() !== "";
+const FEATURED = "premium";
 
 const PricePackage = ({ category }) => {
   const packageData = useContent(`prices/${category.prices}`);
   const { pricesPage } = useContent("common");
   const whatsappLink = useWhatsappLink();
-  usePageTitle(packageData.mainTitle, seo.prices.replace("{title}", packageData.mainTitle));
+  usePageTitle(pricesTitle(category), pricesDescription(category, packageData));
 
   // A package with neither a price nor anything listed in it is not shown.
-  const tiers = TIERS.filter(
-    (tier) =>
-      filled(packageData.prices[tier.key]) ||
-      (packageData.features[tier.key] || []).some(filled)
-  );
+  const tiers = visibleTiers(packageData).map((key) => ({ key, featured: key === FEATURED }));
+
+  // The ready-to-send WhatsApp message for booking a package.
+  const orderMessage = (title) =>
+    pricesPage.orderMessage
+      .replace("{package}", packageName(title))
+      .replace("{service}", serviceName(category));
 
   return (
     <div className="prices-page">
@@ -112,7 +108,7 @@ const PricePackage = ({ category }) => {
                   <div className="price-card-footer">
                     <a
                       className={tier.featured ? "btn-brand" : "btn-outline-brand"}
-                      href={whatsappLink(`היי, אשמח לתאם ${title} - ${packageData.mainTitle.replace("מחירון ", "")}`)}
+                      href={whatsappLink(orderMessage(title))}
                       target="_blank"
                       rel="noopener noreferrer"
                     >

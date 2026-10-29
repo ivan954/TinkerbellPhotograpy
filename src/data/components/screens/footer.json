@@ -1,6 +1,7 @@
 {
   "about": "צילומי ניובורן, הריון, ילדים ומשפחות בסטודיו ובלוקיישן, באווירה רגועה וכיפית.",
   "copyright": "Copyright © Tinkerbell Studio",
+  "factsLink": "עובדות על הסטודיו",
   "floatingWhatsapp": {
     "visible": true,
     "label": "לתיאום צילום קסום",
@@ -31,6 +32,10 @@
       "number": "+972504230342",
       "order": 6,
       "display": "050-423-0342"
+    },
+    "google": {
+      "url": "",
+      "order": 7
     }
   }
 }

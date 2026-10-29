@@ -31,9 +31,11 @@ The site presents the studio's work, its packages and prices, and makes booking 
 | About | `/about` | The photographer's story and family photo |
 | Gallery | `/gallery` | All photography categories |
 | Category gallery | `/imagescreen/<Category>` (e.g. `/imagescreen/NewBorn`) | Masonry grid with a full-screen viewer (arrows, keyboard, swipe on phones) |
+| All price lists | `/pricing` (also `/packages`) | Every session type with its starting price |
 | Price lists | `/NewBornPrices`, `/PregnancyPrices`, ... | One page per category: packages, what each includes, extras (canvases, prints) and a WhatsApp "book this package" button |
 | FAQ | `/faq` | Common questions, plus a WhatsApp button for anything else |
 | Contact | `/contact` | Contact form (EmailJS), phone, WhatsApp, Waze, opening hours and a map |
+| Facts for AI assistants | `/llm-info/` and `/llms.txt` | The studio's facts in plain text (linked only from the footer); the text is in `src/data/llmInfo.js` and `public/llms.txt` |
 
 A floating "לתיאום צילום קסום" WhatsApp button is on every page. Galleries or packages that have no photos yet show a "תמונות חדשות בדרך ✨" card, and packages with no price and no items are hidden.
 
@@ -46,6 +48,7 @@ The admin screen (`/admin`) covers every page of the site:
 - upload, replace and reorder photos (several at once, or by dragging them in)
 - reorder, add and delete list items
 - discard unsaved changes, or restore a page to its built-in content
+- set the Google business profile link with its rating (shows a "ראו ביקורות בגוגל" button) and an Instagram feed address (shows the 6 latest posts)
 - change the admin password
 
 Changes appear on the site as soon as they are saved.

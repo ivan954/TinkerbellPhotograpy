@@ -143,6 +143,12 @@
     grid-template-columns: 1fr 1fr;
   }
 
+  /* "All price lists" and the line under it span both columns */
+  .main-nav .dropdown-all,
+  .main-nav .dropdown-menu .dropdown-divider {
+    grid-column: 1 / -1;
+  }
+
   .main-nav .dropdown-menu:not(.show) {
     display: none;
   }
@@ -151,4 +157,8 @@
     justify-content: center;
     margin-top: 1rem;
   }
+}
+
+.main-nav .dropdown-item.dropdown-all {
+  font-weight: 700;
 }

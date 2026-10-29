@@ -30,7 +30,7 @@ import ChangePassword from "./ChangePassword";
 import { documentList } from "./fields";
 import defaults from "../content/defaults";
 import { buildContent, useSetDocument } from "../content/ContentProvider";
-import { MOVED } from "../content/legacy";
+import { MOVED } from "../content/merge";
 import usePageTitle from "../hooks/usePageTitle";
 import "./Admin.css";
 

@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import seo from "../data/seo.json";
 
 const SITE_NAME = "טינקרבל סטודיו";
 export const DEFAULT_DESCRIPTION =
@@ -14,7 +15,7 @@ const setMeta = (selector, attribute, value) => {
 // into the HTML of each page, for crawlers that don't run JavaScript.
 const usePageTitle = (title, description = DEFAULT_DESCRIPTION) => {
   useEffect(() => {
-    const fullTitle = title ? `${title} | ${SITE_NAME}` : `${SITE_NAME} | צילומי ילדים ומשפחות במודיעין`;
+    const fullTitle = title ? `${title} | ${SITE_NAME}` : seo.homeTitle;
     const url = `${window.location.origin}${window.location.pathname}`;
     document.title = fullTitle;
     setMeta('meta[name="description"]', "content", description);
