@@ -3,7 +3,8 @@ import { Link, NavLink, useLocation } from "react-router-dom";
 import { BsInstagram, BsFacebook } from "react-icons/bs";
 import { Container, Navbar, Nav, NavDropdown } from "react-bootstrap";
 import { useContent } from "../content/ContentProvider";
-import { imageUrl } from "../content/images";
+import Photo from "./Photo";
+import { useWhatsappLink } from "../data/whatsapp";
 import { useCategories } from "../data/categories";
 import "./Header.css";
 
@@ -13,6 +14,7 @@ const Header = () => {
   const { logo } = useContent("common");
   const faq = useContent("faq");
   const categories = useCategories();
+  const whatsappLink = useWhatsappLink();
   const { pathname } = useLocation();
   // Controlled so the mobile menu closes after a link is tapped.
   const [expanded, setExpanded] = useState(false);
@@ -45,12 +47,8 @@ const Header = () => {
     >
       <Container>
         <Navbar.Brand as={Link} to="/" className="brand-logo" onClick={closeMenu}>
-          <img
-            src={imageUrl(logo.path)}
-            alt={logo.alt}
-            width={130}
-            height="auto"
-          />
+          {/* The logo is 600×311; the 400px WebP copy is plenty at this size. */}
+          <Photo path={logo.path} sizes="130px" thumbOnly alt={logo.alt} width="130" height="67" fetchpriority="high" />
         </Navbar.Brand>
 
         <Navbar.Toggle aria-controls="main-navbar-nav" aria-label="פתיחת תפריט" />
@@ -115,9 +113,15 @@ const Header = () => {
             >
               <BsFacebook />
             </a>
-            <Link to="/contact" className="btn-brand" onClick={closeMenu}>
+            <a
+              href={whatsappLink(navigation.links.bookMessage)}
+              className="btn-brand"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={closeMenu}
+            >
               {navigation.links.book}
-            </Link>
+            </a>
           </div>
         </Navbar.Collapse>
       </Container>

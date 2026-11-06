@@ -1,5 +1,7 @@
 import React, { useCallback, useEffect, useRef } from "react";
 import { BsChevronLeft, BsChevronRight, BsX } from "react-icons/bs";
+import Photo from "./Photo";
+import { webpSrcSet, imageUrl } from "../content/images";
 import "./Lightbox.css";
 
 const SWIPE_DISTANCE = 50;
@@ -41,7 +43,11 @@ const Lightbox = ({ images, index, onClose, onChange }) => {
   useEffect(() => {
     if (count < 2) return;
     [index - 1, index + 1].forEach((i) => {
-      new window.Image().src = images[(i + count) % count].path;
+      const { path } = images[(i + count) % count];
+      const preload = new window.Image();
+      preload.sizes = "100vw";
+      preload.srcset = webpSrcSet(path) || "";
+      if (!preload.srcset) preload.src = imageUrl(path);
     });
   }, [index, count, images]);
 
@@ -78,7 +84,7 @@ const Lightbox = ({ images, index, onClose, onChange }) => {
         </button>
       </div>
 
-      <img key={image.path} className="lightbox-image" src={image.path} alt={image.alt} />
+      <Photo key={image.path} className="lightbox-image" path={image.path} sizes="100vw" alt={image.alt} />
 
       {count > 1 && (
         <>

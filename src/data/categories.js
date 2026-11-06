@@ -1,13 +1,12 @@
 // Photography categories come from the "categories" content document: each one
 // links its gallery folder, its price list and the route of its price page.
 import { useContent } from "../content/ContentProvider";
-import { thumbUrl } from "../content/images";
 
 // Categories marked as hidden in the admin screen are left out everywhere.
 export const useCategories = () =>
   useContent("categories").list.filter((category) => category.visible !== false);
 
 // The cover photo, or the gallery's first photo; empty when it has neither.
-export const coverUrl = (category) => thumbUrl(category.cover || category.images?.[0]);
+export const coverPath = (category) => category.cover || category.images?.[0] || "";
 
 export const galleryPath = (category) => `/imagescreen/${category.key}`;

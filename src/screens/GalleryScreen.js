@@ -5,7 +5,8 @@ import Reveal from "../components/Reveal";
 import InstagramFeed from "../components/InstagramFeed";
 import Photo from "../components/Photo";
 import ComingSoon from "../components/ComingSoon";
-import { useCategories, coverUrl, galleryPath } from "../data/categories";
+import { useCategories, coverPath, galleryPath } from "../data/categories";
+import { serviceName } from "../data/pageText";
 import { useContent } from "../content/ContentProvider";
 import usePageTitle from "../hooks/usePageTitle";
 import seo from "../data/seo.json";
@@ -14,7 +15,7 @@ import "./GalleryScreen.css";
 const GalleryScreen = () => {
   const { page } = useContent("categories");
   const categories = useCategories();
-  usePageTitle(page.title, seo.gallery);
+  usePageTitle(seo.galleryTitle, seo.gallery);
 
   return (
     <>
@@ -28,11 +29,15 @@ const GalleryScreen = () => {
           {categories.map((category, index) => (
             <Reveal key={category.key} delay={(index % 3) * 90}>
               <Link to={galleryPath(category)} className="gallery-card">
-                {coverUrl(category) ? (
+                {coverPath(category) ? (
                   <Photo
                     className="gallery-card-image"
-                    src={coverUrl(category)}
-                    alt=""
+                    path={coverPath(category)}
+                    sizes="(max-width: 991px) 50vw, 380px"
+                    thumbOnly
+                    width="400"
+                    height="500"
+                    alt={serviceName(category)}
                     // The first row is on screen right away, so it isn't lazy.
                     loading={index < 3 ? "eager" : "lazy"}
                     fetchpriority={index < 2 ? "high" : undefined}

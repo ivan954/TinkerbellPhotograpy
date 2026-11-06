@@ -115,6 +115,7 @@ const LABELS = {
   pricesDropdown: "מחירונים",
   allPrices: "קישור לכל המחירונים",
   book: "כפתור תיאום צילום",
+  bookMessage: "ההודעה שהכפתור פותח בוואטסאפ",
   copyright: "שורת זכויות יוצרים",
   factsLink: "קישור קטן לעמוד העובדות (לגוגל ול-AI)",
   floatingWhatsapp: "כפתור וואטסאפ צף",

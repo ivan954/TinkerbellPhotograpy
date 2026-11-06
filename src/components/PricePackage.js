@@ -10,7 +10,6 @@ import TrustRow from "./TrustRow";
 import { galleryPath } from "../data/categories";
 import { useWhatsappLink } from "../data/whatsapp";
 import { useContent } from "../content/ContentProvider";
-import { thumbUrl } from "../content/images";
 import usePageTitle from "../hooks/usePageTitle";
 import { packageName, pricesDescription, pricesTitle, serviceName, visibleTiers, filled } from "../data/pageText";
 import "./PricesScreen.css";
@@ -79,7 +78,11 @@ const PricePackage = ({ category }) => {
                   <div className="price-card-image">
                     {image ? (
                       <Photo
-                        src={thumbUrl(image)}
+                        path={image}
+                        sizes="(max-width: 767px) 100vw, (max-width: 991px) 50vw, 380px"
+                        thumbOnly
+                        width="400"
+                        height="267"
                         alt={`${title} - ${category.title}`}
                         loading={index === 0 ? "eager" : "lazy"}
                         decoding="async"

@@ -6,7 +6,7 @@ import Reveal from "../components/Reveal";
 import Photo from "../components/Photo";
 import ComingSoon from "../components/ComingSoon";
 import TrustRow from "../components/TrustRow";
-import { coverUrl } from "../data/categories";
+import { coverPath } from "../data/categories";
 import { priceSpan, usePriceLists } from "../data/priceLists";
 import { formatPrice, serviceName } from "../data/pageText";
 import { useWhatsappLink } from "../data/whatsapp";
@@ -42,8 +42,17 @@ const PricingScreen = () => {
             <Reveal key={category.key} delay={(index % 3) * 80}>
               <Link to={category.pricesPath} className="pricing-card">
                 <div className="pricing-card-image">
-                  {coverUrl(category) ? (
-                    <Photo src={coverUrl(category)} alt="" loading={index < 3 ? "eager" : "lazy"} decoding="async" />
+                  {coverPath(category) ? (
+                    <Photo
+                      path={coverPath(category)}
+                      sizes="(max-width: 575px) 100vw, 300px"
+                      thumbOnly
+                      width="400"
+                      height="267"
+                      alt={serviceName(category)}
+                      loading={index < 3 ? "eager" : "lazy"}
+                      decoding="async"
+                    />
                   ) : (
                     <ComingSoon compact />
                   )}

@@ -94,7 +94,7 @@ Adding a new gallery category is not possible from the admin screen yet, because
 
 ### Photos
 
-All photos live in the Supabase `site-images` bucket; none are stored in this repository. They are added from the admin screen: each upload is resized in the browser to at most 1920px (JPEG at 82% quality, or PNG for images with transparency), its EXIF data (including GPS) is removed, and it gets an 800px-wide thumbnail at the same path under `thumbs/`. Only the resized version is stored, so keep the originals elsewhere.
+All photos live in the Supabase `site-images` bucket; none are stored in this repository. They are added from the admin screen: each upload is resized in the browser to at most 1920px (JPEG at 82% quality, or PNG for images with transparency), its EXIF data (including GPS) is removed, and it gets an 800px-wide thumbnail at the same path under `thumbs/`. In browsers that can write WebP (Chrome, Edge, Firefox; not Safari) it also gets WebP copies 400, 800 and 1600px wide under `w400/`, `w800/` and `w1600/`, which pages load at the size they need. A photo without WebP copies falls back to its JPEG copies; when some are missing, the admin screen offers "יצירת גרסאות WebP" to make them (from Chrome on a computer). Only the resized version is stored, so keep the originals elsewhere.
 
 The content stores a photo either as a full URL (uploads) or as a path inside the bucket (the built-in content, e.g. `bundled/Gallery/NewBorn/1.jpg`); `src/content/images.js` turns both into addresses.
 

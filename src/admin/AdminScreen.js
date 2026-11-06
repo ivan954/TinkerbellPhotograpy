@@ -27,6 +27,7 @@ import {
 import supabase from "./supabaseClient";
 import FieldEditor, { SectionsCommand } from "./FieldEditor";
 import ChangePassword from "./ChangePassword";
+import WebpCard from "./WebpCard";
 import { documentList } from "./fields";
 import defaults from "../content/defaults";
 import { buildContent, useSetDocument } from "../content/ContentProvider";
@@ -397,6 +398,8 @@ const Editor = ({ user }) => {
         </nav>
 
         <section className="admin-main">
+          <WebpCard saved={saved} />
+
           <div className="admin-page-header">
             <span className="admin-page-icon"><CurrentIcon /></span>
             <div className="admin-page-heading">

@@ -6,16 +6,16 @@ import Reveal from "../components/Reveal";
 import Photo from "../components/Photo";
 import TrustRow from "../components/TrustRow";
 import { useContent } from "../content/ContentProvider";
-import { imageUrl, thumbUrl } from "../content/images";
 import { useWhatsappLink } from "../data/whatsapp";
 import usePageTitle from "../hooks/usePageTitle";
+import seo from "../data/seo.json";
 import "./AboutScreen.css";
 
 const AboutScreen = () => {
   const about = useContent("about");
   const { floatingWhatsapp } = useContent("footer");
   const whatsappLink = useWhatsappLink();
-  usePageTitle(about.pageTitle, about.description);
+  usePageTitle(seo.aboutTitle, about.description);
 
   // Blank lines in the story start a new paragraph.
   const paragraphs = about.story
@@ -38,8 +38,7 @@ const AboutScreen = () => {
           <Col lg={5}>
             <Reveal className="about-page-photo">
               <Photo
-                src={imageUrl(about.image)}
-                thumb={thumbUrl(about.image)}
+                path={about.image}
                 sizes="(max-width: 991px) 100vw, 480px"
                 alt={about.imageAlt}
                 decoding="async"

@@ -17,7 +17,7 @@ const ContactScreen = () => {
   const { social } = useContent("footer");
   const categories = useCategories();
   const whatsappLink = useWhatsappLink();
-  usePageTitle(page.title, seo.contact);
+  usePageTitle(seo.contactTitle, seo.contact);
   const [status, setStatus] = useState("idle");
   const [error, setError] = useState();
   const [validated, setValidated] = useState(false);

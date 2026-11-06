@@ -8,8 +8,8 @@ import Photo from "../components/Photo";
 import ComingSoon from "../components/ComingSoon";
 import { useCategories } from "../data/categories";
 import { useWhatsappLink } from "../data/whatsapp";
-import { imageUrl, thumbUrl } from "../content/images";
 import usePageTitle from "../hooks/usePageTitle";
+import { serviceName } from "../data/pageText";
 import seo from "../data/seo.json";
 import "./ImagesScreen.css";
 
@@ -21,7 +21,7 @@ const ImagesScreen = () => {
 
   const category = categories.find((item) => item.key.toLowerCase() === name?.toLowerCase());
   usePageTitle(
-    category ? `צילומי ${category.title}` : "גלריה",
+    category ? seo.categoryTitle.replace("{service}", serviceName(category)) : seo.galleryTitle,
     category ? seo.category.replace("{title}", category.title) : seo.gallery
   );
 
@@ -29,9 +29,8 @@ const ImagesScreen = () => {
     () =>
       category
         ? category.images.map((path, index) => ({
-            path: imageUrl(path),
-            thumb: thumbUrl(path),
-            alt: `צילומי ${category.title} - תמונה ${index + 1}`,
+            path,
+            alt: `${serviceName(category)} בסטודיו במודיעין – תמונה ${index + 1}`,
           }))
         : [],
     [category]
@@ -76,18 +75,26 @@ const ImagesScreen = () => {
 
       {!images.length && <ComingSoon className="images-coming-soon" />}
 
-      <div className="masonry">
+      {/* Square tiles of a known size, so nothing moves while photos load;
+          the full photo opens in the viewer. */}
+      <div className="photo-grid">
         {images.map((image, index) => (
           <button
             key={index}
-            className="masonry-item"
+            className="photo-tile"
             onClick={() => setSelectedIndex(index)}
             aria-label={`הגדלת ${image.alt}`}
           >
             <Photo
-              src={image.thumb}
+              path={image.path}
+              sizes="(max-width: 991px) 50vw, 380px"
+              thumbOnly
+              width="400"
+              height="400"
               alt={image.alt}
+              // The first row (two tiles on phones, three on computers) is on screen at once.
               loading={index < 3 ? "eager" : "lazy"}
+              fetchpriority={index < 2 ? "high" : undefined}
               decoding="async"
             />
           </button>

@@ -32,7 +32,8 @@ const SiteSchema = () => {
     "business-schema",
     {
       "@context": "https://schema.org",
-      "@type": "ProfessionalService",
+      "@type": ["LocalBusiness", "ProfessionalService"],
+      "@id": `${seo.siteUrl}/#business`,
       name: "טינקרבל סטודיו",
       alternateName: "Tinkerbell Studio",
       description: "סטודיו לצילומי ניובורן, הריון, גיל שנה, ילדים ומשפחות במודיעין",

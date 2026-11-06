@@ -4,7 +4,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import { BsWhatsapp, BsInstagram, BsFacebook, BsTelephone, BsEnvelope } from "react-icons/bs";
 import { FaWaze } from "react-icons/fa";
 import { useContent } from "../content/ContentProvider";
-import { imageUrl } from "../content/images";
+import Photo from "./Photo";
 import { useCategories } from "../data/categories";
 import { useWhatsappLink } from "../data/whatsapp";
 import "./Footer.css";
@@ -23,11 +23,14 @@ const Footer = () => {
       <Container>
         <Row className="gy-4">
           <Col lg={4} md={6}>
-            <img
+            <Photo
               className="footer-logo"
-              src={imageUrl(logo.path)}
+              path={logo.path}
+              sizes="160px"
+              thumbOnly
               alt={logo.alt}
-              width={160}
+              width="160"
+              height="83"
               loading="lazy"
             />
             <p className="footer-about">

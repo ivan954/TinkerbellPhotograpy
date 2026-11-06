@@ -9,10 +9,9 @@ import ComingSoon from "../components/ComingSoon";
 import TrustRow from "../components/TrustRow";
 import GoogleReviews from "../components/GoogleReviews";
 import InstagramFeed from "../components/InstagramFeed";
-import { useCategories, coverUrl, galleryPath } from "../data/categories";
+import { useCategories, coverPath, galleryPath } from "../data/categories";
 import { useWhatsappLink } from "../data/whatsapp";
 import { useContent } from "../content/ContentProvider";
-import { imageUrl, thumbUrl } from "../content/images";
 import usePageTitle from "../hooks/usePageTitle";
 import "./HomeScreen.css";
 
@@ -41,8 +40,7 @@ const HomeScreen = () => {
       <section className="hero">
         <Photo
           className="hero-image"
-          src={imageUrl(hero.image)}
-          thumb={thumbUrl(hero.image)}
+          path={hero.image}
           sizes="100vw"
           alt={hero.imageAlt}
           fetchpriority="high"
@@ -122,8 +120,15 @@ const HomeScreen = () => {
               {categories.map((category, index) => (
                 <Reveal key={category.key} className="service-card" delay={(index % 4) * 80}>
                   <Link to={galleryPath(category)} className="service-card-link">
-                    {coverUrl(category) ? (
-                      <Photo src={coverUrl(category)} alt="" loading="lazy" decoding="async" />
+                    {coverPath(category) ? (
+                      <Photo
+                        path={coverPath(category)}
+                        sizes="(max-width: 1199px) 50vw, 230px"
+                        thumbOnly
+                        alt=""
+                        loading="lazy"
+                        decoding="async"
+                      />
                     ) : (
                       <ComingSoon compact />
                     )}
@@ -145,7 +150,14 @@ const HomeScreen = () => {
             <Row className="align-items-center g-4 g-lg-5">
               <Col lg={6}>
                 <Reveal className="about-image-wrap">
-                  <Photo src={thumbUrl(about.image)} alt={about.imageAlt} loading="lazy" decoding="async" />
+                  <Photo
+                    path={about.image}
+                    sizes="(max-width: 991px) 100vw, 480px"
+                    thumbOnly
+                    alt={about.imageAlt}
+                    loading="lazy"
+                    decoding="async"
+                  />
                 </Reveal>
               </Col>
               <Col lg={6}>

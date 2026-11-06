@@ -16,7 +16,7 @@
 const fs = require("fs");
 const path = require("path");
 const { combineContent } = require("../src/content/merge");
-const { pricesTitle, pricesDescription, formatPrice, fromPrice } = require("../src/data/pageText");
+const { pricesTitle, pricesDescription, formatPrice, fromPrice, serviceName } = require("../src/data/pageText");
 const llmInfo = require("../src/data/llmInfo");
 
 const ROOT = path.join(__dirname, "..");
@@ -125,16 +125,16 @@ const main = async () => {
         lowest.length ? formatPrice(Math.min(...lowest)) : seo.priceRange.split("–")[0]
       ),
     },
-    { path: "/gallery", title: pageTitle(content.categories.page.title), description: seo.gallery },
-    { path: "/about", title: pageTitle(content.about.pageTitle), description: content.about.description },
-    ...(content.faq.visible ? [{ path: "/faq", title: pageTitle(content.faq.title), description: seo.faq }] : []),
-    { path: "/contact", title: pageTitle(content.contact.page.title), description: seo.contact },
+    { path: "/gallery", title: pageTitle(seo.galleryTitle), description: seo.gallery },
+    { path: "/about", title: pageTitle(seo.aboutTitle), description: content.about.description },
+    ...(content.faq.visible ? [{ path: "/faq", title: pageTitle(seo.faqTitle), description: seo.faq }] : []),
+    { path: "/contact", title: pageTitle(seo.contactTitle), description: seo.contact },
   ];
 
   for (const category of categories) {
     routes.push({
       path: `/imagescreen/${category.key}`,
-      title: pageTitle(`צילומי ${category.title}`),
+      title: pageTitle(seo.categoryTitle.replace("{service}", serviceName(category))),
       description: seo.category.replace("{title}", category.title),
     });
     const prices = content[`prices/${category.prices}`];

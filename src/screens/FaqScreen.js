@@ -15,7 +15,7 @@ import "./FaqScreen.css";
 const FaqScreen = () => {
   const faq = useContent("faq");
   const whatsappLink = useWhatsappLink();
-  usePageTitle(faq.title, seo.faq);
+  usePageTitle(seo.faqTitle, seo.faq);
   const items = faq.items.filter((item) => item.question && item.answer);
 
   // The same questions and answers as on the page, for Google.
